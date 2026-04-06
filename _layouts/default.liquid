@@ -21,7 +21,7 @@
     {% include header.liquid %}
 
     <!-- Content -->
-    <div class="container mt-5" role="main">
+    <div class="container {% unless page.layout == 'about' %}mt-5{% endunless %}" role="main">
       {% if page.toc and page.toc.sidebar %}
         {% if page.toc.sidebar == 'right' %}
           <div class="row">
@@ -46,6 +46,29 @@
         {{ content }}
       {% endif %}
     </div>
+
+    {% assign cycle_prev = '' %}
+    {% assign cycle_next = '' %}
+    {% assign current_url = page.url | default: page.permalink %}
+
+    {% if current_url == '/' %}
+      {% assign cycle_prev = '/cv/' %}
+      {% assign cycle_next = '/blog/' %}
+    {% elsif current_url contains '/blog/' %}
+      {% assign cycle_prev = '/' %}
+      {% assign cycle_next = '/projects/' %}
+    {% elsif current_url contains '/projects/' %}
+      {% assign cycle_prev = '/blog/' %}
+      {% assign cycle_next = '/cv/' %}
+    {% elsif current_url contains '/cv/' %}
+      {% assign cycle_prev = '/projects/' %}
+      {% assign cycle_next = '/' %}
+    {% endif %}
+
+    {% if cycle_prev != '' and cycle_next != '' %}
+      <a class="page-cycle-arrow page-cycle-left" href="{{ cycle_prev | relative_url }}" aria-label="Go to previous page"> &#8249; </a>
+      <a class="page-cycle-arrow page-cycle-right" href="{{ cycle_next | relative_url }}" aria-label="Go to next page"> &#8250; </a>
+    {% endif %}
 
     <!-- Footer -->
     {% include footer.liquid %}

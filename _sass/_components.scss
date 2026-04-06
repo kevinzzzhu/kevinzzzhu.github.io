@@ -78,6 +78,109 @@ ul.task-list input[type="checkbox"] {
   margin-right: 1rem;
 }
 
+// About page
+
+.about-page {
+  min-height: calc(100dvh - 57px - 70px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1rem 0;
+  font-family: "Inter", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+
+  .about-header {
+    margin-bottom: 1.5rem;
+
+    .post-title {
+      font-family: "Unbounded", "Inter", "Segoe UI", sans-serif;
+      font-weight: 500;
+      letter-spacing: 0.015em;
+    }
+
+    .desc {
+      font-size: 1rem;
+      line-height: 1.35;
+    }
+  }
+
+  .about-content {
+    padding: 0.5rem 0;
+  }
+
+  .about-intro {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .about-body {
+    line-height: 1.85;
+    flex: 1;
+
+    h2 {
+      font-family: "Unbounded", "Inter", "Segoe UI", sans-serif;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      font-size: 1.3rem;
+    }
+  }
+
+  .profile.float-right {
+    margin-left: 0;
+    order: 2;
+  }
+
+  .profile.float-left {
+    margin-right: 0;
+    order: 1;
+  }
+
+  .profile {
+    flex: 0 0 30%;
+  }
+
+  .profile img {
+    box-shadow: 0 14px 32px rgba(0, 0, 0, 0.28);
+  }
+
+  .about-social {
+    margin-top: 2.25rem;
+  }
+
+  .social .contact-icons {
+    font-size: 2.7rem;
+
+    a {
+      img {
+        width: 2.2rem;
+        height: 2.2rem;
+      }
+
+      svg {
+        width: 2.4rem;
+        height: 2.8rem;
+
+        image {
+          width: 2.4rem;
+          height: 2.4rem;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .about-page {
+    min-height: auto;
+    justify-content: flex-start;
+    padding: 1.5rem 0 2rem;
+
+    .about-intro {
+      display: block;
+    }
+  }
+}
+
 @media (min-width: 576px) {
   .profile {
     width: 30%;
@@ -258,4 +361,53 @@ ul.task-list input[type="checkbox"] {
 
 .d2h-diff-table {
   position: relative;
+}
+
+// Page cycle arrows
+
+.page-cycle-arrow {
+  position: fixed;
+  top: 50%;
+  bottom: auto;
+  transform: translateY(-50%);
+  height: 25vh;
+  z-index: 1020;
+  width: clamp(52px, 8vw, 92px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(2rem, 3vw, 2.8rem);
+  line-height: 1;
+  text-decoration: none;
+  color: var(--global-text-color);
+  background: transparent;
+  opacity: 0.18;
+  transition:
+    opacity 0.2s ease-in-out,
+    background-color 0.2s ease-in-out;
+}
+
+.page-cycle-left {
+  left: 0;
+  border-radius: 0 1024px 1024px 0;
+}
+
+.page-cycle-right {
+  right: 0;
+  border-radius: 1024px 0 0 1024px;
+}
+
+.page-cycle-arrow:hover {
+  opacity: 0.5;
+  background-color: rgba(0, 0, 0, 0.06);
+  text-decoration: none;
+}
+
+@media (max-width: 767px) {
+  .page-cycle-arrow {
+    width: 44px;
+    height: 42vh;
+    font-size: 1.7rem;
+    opacity: 0.24;
+  }
 }
