@@ -30,6 +30,6 @@ social: true # includes social icons at the bottom of the page
 
 Hi, I am Hongzhe Zhu (朱宏哲), or just call me Kevin in short.
 
-I am currently an ANU student and is taking my Master degree. I completed my Bachelor Honours degree right here in ANU as well. At the same time I am tutoring as an casual seasonal academic for courses including HCI, Programming Fundamentals, and Software Construction.
+I am currently an ANU student undertaking my Master degree. I completed my Bachelor Honours degree right here in ANU as well. At the same time I am tutoring as an casual seasonal academic for courses including HCI, Programming Fundamentals, and Software Construction.
 
 My passion and interest lies in the area of Human Computer Interaction, Sound and Art Computing, Interaction/Interface Design, UX Design, Social Choice Problems, and Artificial Intelligence.

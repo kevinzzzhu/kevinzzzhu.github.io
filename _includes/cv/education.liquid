@@ -72,6 +72,12 @@
             <h6 class="ml-1 ml-md-4" style="font-size: 0.95rem; font-style: italic">{{ entry.area }}</h6>
           {% endif %}
 
+          {% if entry.score %}
+            <p class="ml-1 ml-md-4" style="font-size: 0.9rem; margin-bottom: 0.5rem">
+              <strong>Score:</strong> {{ entry.score }}
+            </p>
+          {% endif %}
+
           {% if entry.courses or entry.highlights %}
             <ul class="items">
               {% for item in entry.courses %}

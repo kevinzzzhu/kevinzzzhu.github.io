@@ -1,81 +1,57 @@
 ---
 layout: page
-title: project 1
-description: with background image
-img: assets/img/12.jpg
+title: PickNPlay
+description: from social choice theory to real board game decisions
 importance: 1
 category: work
-related_publications: true
+related_publications: false
 ---
 
-Every project has a beautiful feature showcase page.
-It's easy to include images in a flexible 3-column grid format.
-Make your photos 1/3, 2/3, or full width.
+I started this project from a very practical frustration: choosing a board game with a group sounds simple, but in reality it is often slow, messy, and sometimes unfair. People have different preferences, different energy levels, and different constraints (time, player count, complexity), and a lot of decisions are made by whoever speaks first or loudest.
 
-To give your project a background in the portfolio page, just add the img tag to the front matter like so:
+At the same time, I have been working in HCI and computational social choice, so I keep asking the same question: can we make group decisions feel fairer and easier without removing human control?
 
-    ---
-    layout: page
-    title: project
-    description: a project with a background image
-    img: /assets/img/12.jpg
-    ---
+## Why this project
 
-<div class="row">
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/1.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/3.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/5.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-</div>
-<div class="caption">
-    Caption photos easily. On the left, a road goes through a tunnel. Middle, leaves artistically fall in a hipster photoshoot. Right, in another hipster photoshoot, a lumberjack grasps a handful of pine needles.
-</div>
-<div class="row">
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/5.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-</div>
-<div class="caption">
-    This image can also have a caption. It's like magic.
-</div>
+Board game selection is a good micro world for collective decision-making. It is social, fast, and full of trade-offs. Existing tools usually focus on filtering and recommendation, while algorithm-focused systems often optimise outcomes but do not help people understand the process.
 
-You can also put regular text between your rows of images, even citations {% cite einstein1950meaning %}.
-Say you wanted to write a bit about your project before you posted the rest of the images.
-You describe how you toiled, sweated, _bled_ for your project, and then... you reveal its glory in the next row of images.
+I want something in the middle: a system that is computationally strong, but still human-centred, transparent, and socially comfortable to use.
 
-<div class="row justify-content-sm-center">
-    <div class="col-sm-8 mt-3 mt-md-0">
-        {% include figure.liquid path="assets/img/6.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-    <div class="col-sm-4 mt-3 mt-md-0">
-        {% include figure.liquid path="assets/img/11.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-</div>
-<div class="caption">
-    You can also have artistically styled 2/3 + 1/3 images, like these.
-</div>
+## What I am building
 
-The code is simple.
-Just wrap your images with `<div class="col-sm">` and place them inside `<div class="row">` (read more about the <a href="https://getbootstrap.com/docs/4.4/layout/grid/">Bootstrap Grid</a> system).
-To make images responsive, add `img-fluid` class to each; for rounded corners and shadows use `rounded` and `z-depth-1` classes.
-Here's the code for the last row of images above:
+This project has two connected systems with different interaction styles:
 
-{% raw %}
+- **PickNPlay (active interaction):** a web interface where participants can explore preferences and outcomes directly, and see how small input changes affect group decisions in real time.
+- **Boardot (passive interaction):** an AI-host style facilitator that helps pace the session, summarise options, and reduce coordination burden when people do not want to micromanage every step.
 
-```html
-<div class="row justify-content-sm-center">
-  <div class="col-sm-8 mt-3 mt-md-0">
-    {% include figure.liquid path="assets/img/6.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-  </div>
-  <div class="col-sm-4 mt-3 mt-md-0">
-    {% include figure.liquid path="assets/img/11.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-  </div>
-</div>
-```
+Together, they form a framework for structured information flow between people and algorithms.
 
-{% endraw %}
+## Research direction
+
+My goal is to improve usability and accessibility of social choice in casual group settings, with a focus on:
+
+- understanding of mechanism logic,
+- trust in outcomes,
+- perceived procedural fairness,
+- and social cohesion while deciding as a group.
+
+Current research questions include:
+
+1. How can interactive visualisation improve engagement and understanding in social-choice-supported group decisions?
+2. How do active and passive interaction modes change trust, fairness perception, and social experience?
+3. How should social choice results be communicated so people feel informed rather than controlled?
+4. How far can AI facilitation go while still preserving participants' sense of control?
+
+## Project structure
+
+The work is currently organised as:
+
+1. Background and related work (social choice, fair allocation, visualisation, human-centred AI)
+2. Requirement analysis and overall system concept
+3. System design and architecture (PickNPlay + Boardot)
+4. User study and evaluation (usability, fairness, trust, cohesion)
+5. Conclusions, limitations, and future directions
+
+## Current status
+
+This is an ongoing thesis project. The core idea and framework are stable, and the next big milestone is tightening the prototype and running deeper evaluation with users in realistic group scenarios.
