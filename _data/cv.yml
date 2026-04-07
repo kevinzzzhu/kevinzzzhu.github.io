@@ -108,3 +108,9 @@ cv:
 
       - name: Chinese
         summary: Native
+
+      - name: Japanese
+        summary: Beginner
+
+      - name: French
+        summary: Beginner

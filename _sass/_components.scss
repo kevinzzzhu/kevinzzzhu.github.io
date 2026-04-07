@@ -428,10 +428,7 @@ ul.task-list input[type="checkbox"] {
 
 @media (max-width: 767px) {
   .page-cycle-arrow {
-    width: 44px;
-    height: 42vh;
-    font-size: 1.7rem;
-    opacity: 0.24;
+    display: none;
   }
 
   .page-cycle-nav-delayed .page-cycle-label {
