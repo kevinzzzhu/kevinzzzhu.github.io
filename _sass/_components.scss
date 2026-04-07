@@ -387,6 +387,29 @@ ul.task-list input[type="checkbox"] {
     background-color 0.2s ease-in-out;
 }
 
+.page-cycle-glyph {
+  font-size: inherit;
+  line-height: 1;
+}
+
+.page-cycle-label {
+  display: none;
+}
+
+.page-cycle-nav-delayed .page-cycle-arrow {
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.page-cycle-nav-delayed .page-cycle-label {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  opacity: 0.95;
+}
+
 .page-cycle-left {
   left: 0;
   border-radius: 0 1024px 1024px 0;
@@ -409,5 +432,9 @@ ul.task-list input[type="checkbox"] {
     height: 42vh;
     font-size: 1.7rem;
     opacity: 0.24;
+  }
+
+  .page-cycle-nav-delayed .page-cycle-label {
+    font-size: 0.62rem;
   }
 }

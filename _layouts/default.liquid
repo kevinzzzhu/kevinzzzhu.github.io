@@ -51,7 +51,65 @@
     {% assign cycle_next = '' %}
     {% assign current_url = page.url | default: page.permalink %}
 
-    {% if current_url == '/' %}
+    {% comment %}
+      Collection-specific navigation for individual entries:
+      - posts: navigate between blog posts
+      - projects: navigate between project entries
+      Fallback: section navigation between about/blog/projects/cv.
+    {% endcomment %}
+    {% if page.collection == 'posts' %}
+      {% assign sorted_posts = site.posts | sort: 'date' | reverse %}
+      {% assign current_index = -1 %}
+      {% for item in sorted_posts %}
+        {% if item.url == page.url %}
+          {% assign current_index = forloop.index0 %}
+        {% endif %}
+      {% endfor %}
+      {% if current_index != -1 %}
+        {% assign prev_index = current_index | minus: 1 %}
+        {% assign next_index = current_index | plus: 1 %}
+        {% if prev_index < 0 %}
+          {% assign prev_index = sorted_posts.size | minus: 1 %}
+        {% endif %}
+        {% if next_index >= sorted_posts.size %}
+          {% assign next_index = 0 %}
+        {% endif %}
+        {% for item in sorted_posts %}
+          {% if forloop.index0 == prev_index %}
+            {% assign cycle_prev = item.url %}
+          {% endif %}
+          {% if forloop.index0 == next_index %}
+            {% assign cycle_next = item.url %}
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+    {% elsif page.collection == 'projects' %}
+      {% assign sorted_projects = site.projects | sort: 'importance' %}
+      {% assign current_index = -1 %}
+      {% for item in sorted_projects %}
+        {% if item.url == page.url %}
+          {% assign current_index = forloop.index0 %}
+        {% endif %}
+      {% endfor %}
+      {% if current_index != -1 %}
+        {% assign prev_index = current_index | minus: 1 %}
+        {% assign next_index = current_index | plus: 1 %}
+        {% if prev_index < 0 %}
+          {% assign prev_index = sorted_projects.size | minus: 1 %}
+        {% endif %}
+        {% if next_index >= sorted_projects.size %}
+          {% assign next_index = 0 %}
+        {% endif %}
+        {% for item in sorted_projects %}
+          {% if forloop.index0 == prev_index %}
+            {% assign cycle_prev = item.url %}
+          {% endif %}
+          {% if forloop.index0 == next_index %}
+            {% assign cycle_next = item.url %}
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+    {% elsif current_url == '/' %}
       {% assign cycle_prev = '/cv/' %}
       {% assign cycle_next = '/blog/' %}
     {% elsif current_url contains '/blog/' %}
@@ -65,13 +123,65 @@
       {% assign cycle_next = '/' %}
     {% endif %}
 
+    {% assign delayed_cycle_nav = false %}
+    {% assign cycle_item_label = '' %}
+    {% if page.collection == 'posts' %}
+      {% assign delayed_cycle_nav = true %}
+      {% assign cycle_item_label = 'blog' %}
+    {% elsif page.collection == 'projects' %}
+      {% assign delayed_cycle_nav = true %}
+      {% assign cycle_item_label = 'project' %}
+    {% endif %}
+
     {% if cycle_prev != '' and cycle_next != '' %}
-      <a class="page-cycle-arrow page-cycle-left" href="{{ cycle_prev | relative_url }}" aria-label="Go to previous page"> &#8249; </a>
-      <a class="page-cycle-arrow page-cycle-right" href="{{ cycle_next | relative_url }}" aria-label="Go to next page"> &#8250; </a>
+      <div id="page-cycle-nav" {% if delayed_cycle_nav %}class="page-cycle-nav-delayed"{% endif %}>
+        <a class="page-cycle-arrow page-cycle-left" href="{{ cycle_prev | relative_url }}" aria-label="Go to previous page">
+          <span class="page-cycle-glyph">&#8249;</span>
+          {% if delayed_cycle_nav %}
+            <span class="page-cycle-label">Prev {{ cycle_item_label }}</span>
+          {% endif %}
+        </a>
+        <a class="page-cycle-arrow page-cycle-right" href="{{ cycle_next | relative_url }}" aria-label="Go to next page">
+          <span class="page-cycle-glyph">&#8250;</span>
+          {% if delayed_cycle_nav %}
+            <span class="page-cycle-label">Next {{ cycle_item_label }}</span>
+          {% endif %}
+        </a>
+      </div>
     {% endif %}
 
     <!-- Footer -->
     {% include footer.liquid %}
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const nav = document.getElementById("page-cycle-nav");
+        if (!nav || !nav.classList.contains("page-cycle-nav-delayed")) {
+          return;
+        }
+
+        const arrows = nav.querySelectorAll(".page-cycle-arrow");
+        const revealStart = 0.82;
+        const revealEnd = 0.98;
+
+        function updateCycleReveal() {
+          const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+          const ratio = maxScroll <= 0 ? 1 : window.scrollY / maxScroll;
+          const progress = Math.max(0, Math.min(1, (ratio - revealStart) / (revealEnd - revealStart)));
+
+          arrows.forEach((arrow) => {
+            const baseOpacity = 0.12;
+            const fullOpacity = 0.55;
+            arrow.style.opacity = (baseOpacity + (fullOpacity - baseOpacity) * progress).toString();
+            arrow.style.pointerEvents = progress > 0.05 ? "auto" : "none";
+          });
+        }
+
+        updateCycleReveal();
+        window.addEventListener("scroll", updateCycleReveal, { passive: true });
+        window.addEventListener("resize", updateCycleReveal);
+      });
+    </script>
 
     <!-- JavaScripts -->
     {% include scripts.liquid %}
