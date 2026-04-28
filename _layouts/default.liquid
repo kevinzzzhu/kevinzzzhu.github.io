@@ -16,7 +16,7 @@
   </head>
 
   <!-- Body -->
-  <body class="{% if site.navbar_fixed %}fixed-top-nav{% endif %} {% unless site.footer_fixed %}sticky-bottom-footer{% endunless %}">
+  <body class="{% if site.navbar_fixed %}fixed-top-nav{% endif %} {% unless site.footer_fixed %}sticky-bottom-footer{% endunless %} {% if page.fullscreen_layout %}fullscreen-layout{% endif %}">
     <!-- Header -->
     {% include header.liquid %}
 
@@ -133,7 +133,7 @@
       {% assign cycle_item_label = 'project' %}
     {% endif %}
 
-    {% if cycle_prev != '' and cycle_next != '' %}
+    {% if cycle_prev != '' and cycle_next != '' and page.hide_cycle_nav != true %}
       <div id="page-cycle-nav" {% if delayed_cycle_nav %}class="page-cycle-nav-delayed"{% endif %}>
         <a class="page-cycle-arrow page-cycle-left" href="{{ cycle_prev | relative_url }}" aria-label="Go to previous page">
           <span class="page-cycle-glyph">&#8249;</span>

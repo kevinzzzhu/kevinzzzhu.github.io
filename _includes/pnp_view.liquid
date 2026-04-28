@@ -1,0 +1,167 @@
+{%- comment -%}
+  Recursively renders ONE folder/phase view, plus views for any
+  nested folder children. Expected params:
+    include.node        - phase/folder node (must have children)
+    include.path        - slash-separated id path (e.g. "lobby/private-pool")
+    include.phase       - ancestor phase node (for color + next phase)
+    include.crumbs_ids  - comma-joined ids of breadcrumb ancestors
+    include.crumbs_names- pipe-joined display names of breadcrumb ancestors
+    include.is_phase_root - "true" if this view is the phase root
+{%- endcomment -%}
+
+{%- assign data = site.data.picknplay_wireframe -%}
+{%- assign node = include.node -%}
+{%- assign phase = include.phase -%}
+{%- assign path = include.path -%}
+{%- assign crumbs_ids = include.crumbs_ids | default: "" -%}
+{%- assign crumbs_names = include.crumbs_names | default: "" -%}
+{%- assign is_phase_root = include.is_phase_root -%}
+
+{%- assign next_phase = nil -%}
+{%- for p in data.phases -%}
+  {%- if p.id == phase.next -%}{%- assign next_phase = p -%}{%- endif -%}
+{%- endfor -%}
+
+<div class="pnp-view" data-view-path="{{ path }}" data-phase="{{ phase.id }}" style="--pnp-phase-color: {{ phase.color }}; --pnp-next-color: {{ next_phase.color }};">
+
+  <div class="pnp-nav">
+    <div style="display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap;">
+      <button type="button" class="pnp-pill pnp-back" aria-label="Back">
+        <span>&lsaquo;</span> Back
+      </button>
+      <nav class="pnp-crumbs" aria-label="Breadcrumb">
+        <button type="button" class="pnp-crumb" data-nav="">World</button>
+        <span class="pnp-crumb-sep">/</span>
+
+        {%- assign cids = crumbs_ids | split: "," -%}
+        {%- assign cnames = crumbs_names | split: "|" -%}
+        {%- for i in (0..cids.size) -%}
+          {%- assign cid = cids[i] -%}
+          {%- if cid and cid != "" -%}
+            {%- assign prefix_count = i | plus: 1 -%}
+            {%- assign sub_path = cids | slice: 0, prefix_count | join: "/" -%}
+            <button type="button" class="pnp-crumb" data-nav="{{ sub_path }}">{{ cnames[i] }}</button>
+            <span class="pnp-crumb-sep">/</span>
+          {%- endif -%}
+        {%- endfor -%}
+
+        <span class="pnp-crumb is-current">{{ node.name }}</span>
+      </nav>
+    </div>
+    <button type="button" class="pnp-pill pnp-home" aria-label="Home">
+      <span>🏠</span> Home
+    </button>
+  </div>
+
+  {%- comment -%} Build edges JSON for this view's JS consumer. {%- endcomment -%}
+  {%- assign edges_json = "" -%}
+  {%- if node.edges -%}
+    {%- assign edge_parts = "" | split: "" -%}
+    {%- for e in node.edges -%}
+      {%- assign lbl = e.label | default: "" | replace: '"', '\"' -%}
+      {%- assign estyle = e.style | default: "arrow" -%}
+      {%- capture edge_piece -%}{"from":"{{ e.from }}","to":"{{ e.to }}","style":"{{ estyle }}","label":"{{ lbl }}"}{%- endcapture -%}
+      {%- assign edge_parts = edge_parts | push: edge_piece -%}
+    {%- endfor -%}
+    {%- assign edges_json = edge_parts | join: "," -%}
+  {%- endif -%}
+
+  {%- comment -%}
+    Single flow grid: folders and screens render together in source
+    order so the YAML controls visual sequence. Cards are floating
+    objects (flex-wrap, centered); arrows route between them freely.
+  {%- endcomment -%}
+  <div class="pnp-flow-wrap" data-edges='[{{ edges_json }}]'>
+    <div class="pnp-flow-fit">
+      <div class="pnp-flow-fit-inner">
+        <div class="pnp-flow-grid pnp-flow-grid--flat">
+          {%- for child in node.children -%}
+            {%- if child.type == "folder" -%}
+              {%- assign folder = child -%}
+              {%- assign folder_path = path | append: "/" | append: folder.id -%}
+              {%- assign sub_count = 0 -%}
+              {%- for c in folder.children -%}
+                {%- if c.type == "folder" -%}
+                  {%- for gc in c.children -%}
+                    {%- if gc.type == "screen" -%}{%- assign sub_count = sub_count | plus: 1 -%}{%- endif -%}
+                    {%- if gc.type == "folder" -%}
+                      {%- for ggc in gc.children -%}
+                        {%- if ggc.type == "screen" -%}{%- assign sub_count = sub_count | plus: 1 -%}{%- endif -%}
+                      {%- endfor -%}
+                    {%- endif -%}
+                  {%- endfor -%}
+                {%- else -%}
+                  {%- assign sub_count = sub_count | plus: 1 -%}
+                {%- endif -%}
+              {%- endfor -%}
+              {%- assign wrap_class = "" -%}
+              {%- if node.wraps == folder.id -%}{%- assign wrap_class = " is-wrapped" -%}{%- endif -%}
+              <button type="button" class="pnp-folder-card{{ wrap_class }}" data-nav="{{ folder_path }}" data-card-id="{{ folder.id }}">
+                <div class="pnp-folder-icon"><i class="fas fa-folder-open"></i></div>
+                <span class="pnp-folder-count">{{ sub_count }} screens</span>
+                <h3 class="pnp-folder-name">{{ folder.name }}</h3>
+                {%- if folder.description -%}<p class="pnp-folder-desc">{{ folder.description }}</p>{%- endif -%}
+                <div class="pnp-folder-zoom">Zoom in</div>
+                {%- if node.wraps == folder.id -%}
+                  <span class="pnp-wrap-hint" aria-hidden="true">nested in this pool</span>
+                {%- endif -%}
+              </button>
+            {%- else -%}
+              {%- assign screen = child -%}
+              <button type="button" class="pnp-screen-card"
+                      data-card-id="{{ screen.id }}"
+                      data-screen-name="{{ screen.name | escape }}"
+                      data-screen-image="{{ '/' | append: data.asset_base | append: '/' | append: screen.image | relative_url }}">
+                <div class="pnp-phone-frame">
+                  <img src="{{ '/' | append: data.asset_base | append: '/' | append: screen.image | relative_url }}" alt="{{ screen.name }}" loading="lazy">
+                </div>
+                <p class="pnp-screen-name">{{ screen.name }}</p>
+              </button>
+            {%- endif -%}
+          {%- endfor -%}
+          {%- if is_phase_root and next_phase -%}
+            <button type="button" class="pnp-exit" data-exit-to="{{ next_phase.id }}">
+              <div class="pnp-exit-icon">{{ next_phase.icon }}</div>
+              <div class="pnp-exit-body">
+                <div class="pnp-exit-eyebrow">Exit this phase & continue to</div>
+                <p class="pnp-exit-name">{{ next_phase.name }}</p>
+                <p class="pnp-exit-desc">{{ next_phase.description }}</p>
+              </div>
+              <div class="pnp-exit-arrow">&rarr;</div>
+            </button>
+          {%- endif -%}
+        </div>
+        <svg class="pnp-flow-svg" aria-hidden="true"></svg>
+      </div><!-- /.pnp-flow-fit-inner -->
+    </div><!-- /.pnp-flow-fit -->
+  </div><!-- /.pnp-flow-wrap -->
+
+</div>
+
+{%- comment -%}
+  Recurse into sub-folders — each becomes its own view.
+  Liquid's `assign` leaks from child includes back into our scope, so any
+  local we set (including `node`, `path`, `crumbs_*`) may be clobbered by the
+  first child's recursion before the second sibling runs. `include.X`, on the
+  other hand, is scoped to each invocation — so we key the recursion off
+  include.node directly.
+{%- endcomment -%}
+{%- for child in include.node.children -%}
+  {%- if child.type == "folder" -%}
+    {%- assign child_path = include.path | append: "/" | append: child.id -%}
+    {%- if include.crumbs_ids == "" or include.crumbs_ids == nil -%}
+      {%- assign child_crumbs_ids = include.node.id -%}
+      {%- assign child_crumbs_names = include.node.name -%}
+    {%- else -%}
+      {%- assign child_crumbs_ids = include.crumbs_ids | append: "," | append: include.node.id -%}
+      {%- assign child_crumbs_names = include.crumbs_names | append: "|" | append: include.node.name -%}
+    {%- endif -%}
+    {%- include pnp_view.liquid
+        node=child
+        path=child_path
+        phase=phase
+        crumbs_ids=child_crumbs_ids
+        crumbs_names=child_crumbs_names
+        is_phase_root=false -%}
+  {%- endif -%}
+{%- endfor -%}

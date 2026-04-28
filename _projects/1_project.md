@@ -26,6 +26,15 @@ This project has two connected systems with different interaction styles:
 
 Together, they form a framework for structured information flow between people and algorithms.
 
+<a class="pnp-teaser" href="{{ '/projects/picknplay-wireframe/' | relative_url }}">
+  <span class="pnp-teaser-icon">🗺️</span>
+  <span class="pnp-teaser-body">
+    <strong>Explore the interactive wireframe</strong>
+    <span>Full mobile app flow — four phases, ~36 screens, click to zoom in</span>
+  </span>
+  <span class="pnp-teaser-arrow">&rarr;</span>
+</a>
+
 ## Research direction
 
 My goal is to improve usability and accessibility of social choice in casual group settings, with a focus on:
