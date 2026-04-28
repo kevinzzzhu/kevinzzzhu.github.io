@@ -1,0 +1,227 @@
+# PickNPlay interactive wireframe map
+# Tree of: phases → (folders | screens), arbitrarily nested.
+# - type: screen  → image: path relative to assets/img/picknplay-wireframe/
+# - type: folder  → contains children (any mix of folders + screens)
+# Phase `next` wires the auto-transition on the Exit card.
+
+title: "App Flow Map"
+subtitle: "Interactive Wireframe"
+asset_base: "assets/img/picknplay-wireframe"
+
+phases:
+  - id: home
+    name: "Home Phase"
+    icon: "🏠"
+    color: "#5b8def"
+    description: "Onboarding, room discovery & navigation"
+    next: lobby
+    children:
+      - type: screen
+        id: homepage
+        name: "Home Page"
+        image: "Home/homepage.png"
+      - type: screen
+        id: homepage-scrolled
+        name: "Home Page Continued"
+        image: "Home/homepage-scrolled.png"
+      - type: screen
+        id: menu
+        name: "Menu"
+        image: "Home/menu.png"
+      - type: screen
+        id: createroom
+        name: "Create Room"
+        image: "Home/createroom.png"
+      - type: screen
+        id: findroom
+        name: "Find Room"
+        image: "Home/findroom.png"
+      - type: screen
+        id: history
+        name: "History"
+        image: "Home/history.png"
+    edges:
+      - { from: homepage,         to: homepage-scrolled, style: bidir }
+      - { from: homepage-scrolled, to: menu }
+      - { from: menu, to: createroom }
+      - { from: menu, to: findroom }
+      - { from: menu, to: history, style: bidir }
+
+  - id: lobby
+    name: "Lobby Phase"
+    icon: "🚪"
+    color: "#3ea676"
+    description: "Public & private game pools, room setup"
+    next: voting
+    children:
+      - type: screen
+        id: publicpool-empty
+        name: "Public Pool (Empty)"
+        image: "Lobby/publicpool-empty.png"
+      - type: folder
+        id: private-pool
+        name: "Private Pool"
+        description: "User-curated pool — nested inside the Public Pool"
+        children:
+          - type: screen
+            id: privatepool-empty
+            name: "Private Pool (Empty)"
+            image: "Lobby/private-pool/privatepool-empty.png"
+          - type: folder
+            id: add-collection
+            name: "Add Collection"
+            description: "Bulk-add via external sources"
+            children:
+              - type: screen
+                id: addbybggacc
+                name: "Add by BGG Account"
+                image: "Lobby/private-pool/add-collection/addbybggacc.png"
+              - type: screen
+                id: addfromhistory
+                name: "Add from History"
+                image: "Lobby/private-pool/add-collection/addfromhistory.png"
+            edges:
+              - { from: addbybggacc, to: addfromhistory, style: bidir }
+          - type: folder
+            id: add-individuals
+            name: "Add Individuals"
+            description: "Add single games manually"
+            children:
+              - type: screen
+                id: scanbarcode
+                name: "Scan Barcode"
+                image: "Lobby/private-pool/add-individuals/scanbarcode.png"
+              - type: screen
+                id: addbybggid
+                name: "Add by BGG ID"
+                image: "Lobby/private-pool/add-individuals/addbybggid.png"
+              - type: screen
+                id: manualadd
+                name: "Manual Add"
+                image: "Lobby/private-pool/add-individuals/manualadd.png"
+            edges:
+              - { from: scanbarcode, to: addbybggid }
+              - { from: addbybggid, to: manualadd }
+          - type: screen
+            id: barcodemanagement
+            name: "Barcode Management"
+            image: "Lobby/private-pool/barcodemanagement.png"
+          - type: screen
+            id: privatepoolfilled
+            name: "Private Pool (Filled)"
+            image: "Lobby/private-pool/privatepoolfilled.png"
+          - type: screen
+            id: privatepoolselected
+            name: "Private Pool (Selected)"
+            image: "Lobby/private-pool/privatepoolselected.png"
+          - type: screen
+            id: addgameselected
+            name: "Add Games Selected"
+            image: "Lobby/private-pool/addgameselected.png"
+          - type: screen
+            id: gameinfo
+            name: "Game Information"
+            image: "Lobby/private-pool/gameinfo.png"
+        edges:
+          - { from: privatepool-empty, to: add-collection }
+          - { from: privatepool-empty, to: add-individuals }
+          - { from: add-collection, to: barcodemanagement }
+          - { from: add-individuals, to: barcodemanagement }
+          - { from: barcodemanagement, to: privatepoolfilled }
+          - { from: privatepoolfilled, to: privatepoolselected }
+          - { from: privatepoolselected, to: addgameselected }
+          - { from: privatepoolselected, to: gameinfo }
+      - type: screen
+        id: publicpoolfilled
+        name: "Public Pool (Filled)"
+        image: "Lobby/publicpoolfilled.png"
+      - type: screen
+        id: loadinggamedata
+        name: "Loading Game Data"
+        image: "Lobby/loadinggamedata.png"
+    edges:
+      - { from: publicpool-empty, to: private-pool, label: "add private games" }
+      - { from: private-pool, to: publicpoolfilled, label: "games appear here" }
+      - { from: publicpoolfilled, to: loadinggamedata }
+
+  - id: voting
+    name: "Voting Phase"
+    icon: "📦"
+    color: "#e39a3c"
+    description: "Preference capture, tie-breaking & analysis"
+    next: resolve
+    children:
+      - type: screen
+        id: entername
+        name: "Enter Name"
+        image: "Voting/entername.png"
+      - type: screen
+        id: gameinfo-vote
+        name: "Game Info & Vote"
+        image: "Voting/gameinfo-vote.png"
+      - type: screen
+        id: aianalysis
+        name: "AI Short Analysis"
+        image: "Voting/aianalysis.png"
+      - type: screen
+        id: gameinforeview
+        name: "Game Info Review"
+        image: "Voting/gameinforeview.png"
+      - type: screen
+        id: preferencepage
+        name: "Game Preference Page"
+        image: "Voting/preferencepage.png"
+      - type: screen
+        id: full-preference
+        name: "Full Screen Preferences"
+        image: "Voting/full-preference.png"
+      - type: folder
+        id: linkplayer
+        name: "Link Players"
+        description: "Pair up two players' ballots"
+        children:
+          - type: screen
+            id: atob
+            name: "Player A Links Player B"
+            image: "Voting/linkplayer/atob.png"
+          - type: screen
+            id: breceived
+            name: "Player B Received Notification"
+            image: "Voting/linkplayer/breceived.png"
+        edges:
+          - { from: atob, to: breceived }
+      - type: screen
+        id: awaitpage
+        name: "Await Page"
+        image: "Voting/awaitpage.png"
+      - type: screen
+        id: algorithmvis
+        name: "Algo Visualization"
+        image: "Voting/algorithmvis.png"
+    edges:
+      - { from: entername, to: gameinfo-vote }
+      - { from: gameinfo-vote, to: aianalysis }
+      - { from: gameinfo-vote, to: preferencepage }
+      - { from: preferencepage, to: full-preference }
+      - { from: preferencepage, to: linkplayer }
+      - { from: preferencepage, to: awaitpage }
+      - { from: awaitpage, to: gameinforeview }
+      - { from: gameinforeview, to: algorithmvis }
+
+  - id: resolve
+    name: "Resolve Phase"
+    icon: "🏆"
+    color: "#9370c7"
+    description: "Final match result & loop back home"
+    next: home
+    children:
+      - type: screen
+        id: resolvepage
+        name: "Resolved Page"
+        image: "Resolve/resolvepage.png"
+      - type: screen
+        id: detailresolve
+        name: "Assigned Result Each Game"
+        image: "Resolve/detailresolve.png"
+    edges:
+      - { from: resolvepage, to: detailresolve, style: bidir }

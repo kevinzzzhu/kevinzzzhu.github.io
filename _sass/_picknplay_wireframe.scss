@@ -1,0 +1,1083 @@
+/*******************************************************************************
+ * PickNPlay interactive wireframe map
+ * Light theme, al-folio-native. All color tokens route through existing vars.
+ ******************************************************************************/
+
+// Fullscreen layout: lock page scroll, strip container chrome, let the
+// wireframe own the viewport. Only applies to pages that opt in via
+// `fullscreen_layout: true` in frontmatter.
+html:has(body.fullscreen-layout) {
+  overflow: hidden;
+  height: 100vh;
+}
+
+body.fullscreen-layout {
+  overflow: hidden;
+  box-sizing: border-box;
+  height: 100vh;
+  // Override al-folio's default body padding-bottom: 70px — otherwise it
+  // reserves a 70px gap below the wireframe even when the footer is hidden.
+  padding-bottom: 0 !important;
+
+  // Hide the sticky footer on fullscreen pages so the wireframe can own
+  // the full viewport below the navbar.
+  > footer {
+    display: none !important;
+  }
+
+  > .container {
+    margin-top: 0 !important;
+    padding-top: 0;
+    padding-bottom: 0;
+    max-width: 100vw;
+    height: 100%;
+
+    > .post.post-fullscreen {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+
+      > article {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+      }
+    }
+  }
+
+  // fixed-top-nav adds padding-top: 57px to the body, so height: 100vh on
+  // body includes the nav gap (with border-box). Children fill what remains.
+  &.fixed-top-nav .pnp-wireframe {
+    height: 100%;
+    min-height: 0;
+    margin-top: 0;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+
+    .pnp-header {
+      flex: 0 0 auto;
+      margin-bottom: 1rem;
+    }
+
+    .pnp-stage {
+      flex: 1 1 auto;
+      min-height: 0 !important;
+      display: flex;
+      flex-direction: column;
+
+      .pnp-view.is-active {
+        flex: 1 1 auto;
+        min-height: 0;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .pnp-world {
+        flex: 1 1 auto;
+        min-height: 0 !important;
+        width: 100%;
+        grid-template-rows: minmax(0, 1fr) 50px minmax(0, 1fr);
+        align-items: stretch;
+        justify-items: stretch;
+      }
+
+      // Phase / folder views inside fullscreen: let the whole view scroll
+      // when cards overflow. Scrolling the view (not the flow-wrap) keeps
+      // the SVG arrow overlay aligned with its cards at all scroll
+      // positions, since the overlay is absolutely positioned inside the
+      // wrap and would otherwise stay fixed while cards scroll.
+      .pnp-view.is-active:not([data-view-path=""]) {
+        overflow-y: auto;
+        overflow-x: hidden;
+      }
+
+      .pnp-view.is-active .pnp-flow-wrap {
+        flex: 1 1 auto;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: stretch;
+        width: 100%;
+      }
+    }
+
+    // Compact header so the stage gets more vertical room.
+    .pnp-header h1 { font-size: 1.6rem; margin: 0; line-height: 1.1; }
+    .pnp-header .pnp-eyebrow { margin-bottom: 0.15rem; }
+
+    // Compact the phase cards so the 2x2 fits without inner scroll.
+    .pnp-phase-card {
+      padding: 0.9rem 1.25rem;
+      overflow: hidden;
+
+      .pnp-phase-icon {
+        font-size: 2rem;
+        margin-bottom: 0.25rem;
+      }
+      .pnp-phase-name { font-size: 1.3rem; margin: 0.1rem 0 0.2rem; }
+      .pnp-phase-desc { font-size: 0.8rem; }
+    }
+  }
+}
+
+.pnp-wireframe {
+  --pnp-bg: var(--global-bg-color);
+  --pnp-fg: var(--global-text-color);
+  --pnp-muted: var(--global-text-color-light);
+  --pnp-card: var(--global-card-bg-color);
+  --pnp-border: var(--global-divider-color);
+  --pnp-accent: var(--global-theme-color);
+  --pnp-dot: var(--global-divider-color);
+
+  // Break out of al-folio's .container max-width → full-bleed.
+  position: relative;
+  left: 50%;
+  right: 50%;
+  width: 100vw;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  min-height: calc(100vh - 120px);
+  padding: 2rem clamp(1rem, 4vw, 4rem) 4rem;
+  background-color: var(--pnp-bg);
+  background-image: radial-gradient(circle, var(--pnp-dot) 1px, transparent 1px);
+  background-size: 24px 24px;
+  font-family: var(--global-font-family, inherit);
+  color: var(--pnp-fg);
+  overflow: hidden;
+
+  * {
+    box-sizing: border-box;
+  }
+
+  // --- Header --------------------------------------------------------------
+  .pnp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+
+    .pnp-eyebrow {
+      font-size: 0.7rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--pnp-muted);
+      margin-bottom: 0.35rem;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 700;
+      line-height: 1.1;
+    }
+
+    .pnp-stats {
+      text-align: right;
+      font-size: 0.85rem;
+      color: var(--pnp-muted);
+
+      strong {
+        color: var(--pnp-fg);
+        font-weight: 600;
+      }
+
+      .pnp-hint {
+        display: block;
+        margin-top: 0.25rem;
+        font-size: 0.8rem;
+        opacity: 0.7;
+      }
+    }
+  }
+
+  // --- Stage (holds world / phase / folder views) --------------------------
+  .pnp-stage {
+    position: relative;
+    width: 100%;
+    min-height: 640px;
+
+    .pnp-view {
+      display: none;
+
+      &.is-active {
+        display: block;
+        animation: pnp-fade-in 280ms ease;
+      }
+
+      // Phase / folder views: stack nav + flow, vertically centre the flow
+      // block in the remaining height (tree or flat layout lives inside).
+      &.is-active:not([data-view-path=""]) {
+        display: flex;
+        flex-direction: column;
+        min-height: clamp(480px, 70vh, 880px);
+      }
+    }
+  }
+
+  .pnp-view.is-active:not([data-view-path=""]) .pnp-flow-wrap {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    min-height: 0;
+    width: 100%;
+  }
+
+  // Fits one layer (grid + arrows) to the phase view: JS scales
+  // `.pnp-flow-fit-inner` so everything stays visible.
+  .pnp-flow-wrap > .pnp-flow-fit {
+    // Do not grow to fill `.pnp-flow-wrap`; that would cancel the wrap's
+    // `justify-content: center` and pin the flow to the top of the view.
+    flex: 0 1 auto;
+    min-height: 0;
+    width: 100%;
+    max-width: 100%;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+
+  .pnp-flow-fit-inner {
+    position: relative;
+    transform-origin: top center;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  @keyframes pnp-fade-in {
+    from { opacity: 0; transform: scale(0.98); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pnp-stage .pnp-view.is-active { animation: none; }
+  }
+
+  // --- Breadcrumb / back controls -----------------------------------------
+  .pnp-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .pnp-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.45rem 0.9rem;
+    border-radius: 999px;
+    border: 1px solid var(--pnp-border);
+    background: var(--pnp-card);
+    color: var(--pnp-fg);
+    font-size: 0.85rem;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 160ms ease;
+
+    &:hover {
+      border-color: var(--pnp-accent);
+      color: var(--pnp-accent);
+    }
+  }
+
+  .pnp-crumbs {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    font-size: 0.9rem;
+
+    .pnp-crumb {
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0;
+      color: var(--pnp-muted);
+      font-size: inherit;
+      font-family: inherit;
+
+      &:hover { color: var(--pnp-accent); }
+
+      &.is-current {
+        color: var(--pnp-fg);
+        font-weight: 600;
+      }
+    }
+
+    .pnp-crumb-sep { color: var(--pnp-muted); opacity: 0.5; }
+  }
+
+  .pnp-section-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--pnp-muted);
+    margin: 0 0 0.75rem;
+  }
+
+  // --- World view: 2x2 phase grid with arrows ------------------------------
+  .pnp-world {
+    display: grid;
+    grid-template-columns: 1fr 100px 1fr;
+    // `minmax(0, 1fr)` keeps both phase rows sharing height evenly; plain `1fr`
+    // can let content min-sizes fight each other so one row looks "stuck" high.
+    grid-template-rows: minmax(0, 1fr) 80px minmax(0, 1fr);
+    gap: 0;
+    max-width: 1400px;
+    margin: 0 auto;
+    min-height: 70vh;
+    align-items: stretch;
+    justify-items: stretch;
+  }
+
+  .pnp-world > .pnp-phase-card {
+    height: 100%;
+    min-height: 0;
+    align-self: stretch;
+    justify-self: stretch;
+  }
+
+  .pnp-world .pnp-phase-preview-flow {
+    --pnp-card-w: clamp(44px, 9vw, 76px);
+    // Reserve a safe gutter so first/last mini cards never touch the
+    // phase-card border after auto-fit scaling.
+    padding-inline: clamp(0.5rem, 1.25vw, 0.9rem);
+    box-sizing: border-box;
+  }
+
+  .pnp-world .pnp-phase-preview-flow > .pnp-flow-fit {
+    justify-content: center;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .pnp-world .pnp-phase-preview-flow .pnp-flow-fit-inner {
+    // Let JS measure true content width for applyFlowFit in mini previews.
+    // If this stays width:100%, overflowed cards can be clipped without
+    // triggering a down-scale.
+    width: max-content;
+    min-width: 100%;
+    margin-inline: auto;
+  }
+
+  .pnp-world .pnp-phase-preview-flow .pnp-flow-grid {
+    padding-left: clamp(0.2rem, 0.65vw, 0.5rem);
+    padding-right: clamp(0.2rem, 0.65vw, 0.5rem);
+  }
+
+  // In mini previews, folders should read as visual nodes (big icon), not
+  // full cards with hidden text leaving empty blocks.
+  .pnp-world .pnp-phase-preview-flow .pnp-folder-card {
+    min-height: auto;
+    height: var(--pnp-card-w, 72px);
+    padding: 0;
+    display: grid;
+    place-items: center;
+  }
+
+  .pnp-world .pnp-phase-preview-flow .pnp-folder-card .pnp-folder-icon {
+    width: clamp(34px, 4.1vw, 46px);
+    height: clamp(34px, 4.1vw, 46px);
+    border-radius: 12px;
+    font-size: clamp(1.1rem, 1.9vw, 1.35rem);
+    margin: 0;
+  }
+
+  // Preview should show visual flow only: hide all card text in mini-map.
+  .pnp-world .pnp-phase-preview-flow .pnp-folder-count,
+  .pnp-world .pnp-phase-preview-flow .pnp-folder-name,
+  .pnp-world .pnp-phase-preview-flow .pnp-folder-desc,
+  .pnp-world .pnp-phase-preview-flow .pnp-folder-zoom,
+  .pnp-world .pnp-phase-preview-flow .pnp-wrap-hint,
+  .pnp-world .pnp-phase-preview-flow .pnp-screen-name {
+    display: none !important;
+  }
+
+  .pnp-phase-card {
+    position: relative;
+    padding: 1.5rem 1.75rem;
+    border: 1px solid var(--pnp-border);
+    border-radius: 16px;
+    background: var(--pnp-card);
+    cursor: pointer;
+    transition: transform 220ms cubic-bezier(0.4, 0, 0.2, 1), box-shadow 220ms ease, border-color 220ms ease;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    min-height: 280px;
+    overflow: hidden;
+
+    // Phase color is injected via --pnp-phase-color inline style.
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 60%, var(--pnp-phase-color, var(--pnp-accent)) 0%, transparent 60%);
+      opacity: 0.06;
+      pointer-events: none;
+    }
+
+    &:hover {
+      transform: translateY(-2px);
+      border-color: var(--pnp-phase-color, var(--pnp-accent));
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06),
+                  0 0 0 1px var(--pnp-phase-color, var(--pnp-accent));
+    }
+
+    .pnp-phase-tag {
+      display: inline-flex;
+      align-self: flex-start;
+      padding: 0.3rem 0.75rem;
+      border-radius: 999px;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      font-weight: 600;
+      text-transform: uppercase;
+      background: color-mix(in srgb, var(--pnp-phase-color, var(--pnp-accent)) 14%, transparent);
+      color: var(--pnp-phase-color, var(--pnp-accent));
+    }
+
+    .pnp-phase-count {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.75rem;
+      font-size: 0.75rem;
+      color: var(--pnp-muted);
+    }
+
+    // Same markup + edges as the zoomed phase view; JS runs layoutFlowGrid +
+    // drawFlow so columns, rows, and arrows match the real flow.
+    .pnp-phase-preview-flow {
+      flex: 1 1 auto;
+      min-height: 5.5rem;
+      min-width: 0;
+      width: 100%;
+      margin: 0.55rem 0 0;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .pnp-phase-preview-flow .pnp-flow-label {
+      font-size: 8px;
+    }
+
+    .pnp-phase-footer {
+      flex: 0 0 auto;
+      margin-top: auto;
+      padding-top: 0.85rem;
+      text-align: center;
+      z-index: 1;
+    }
+
+    .pnp-phase-icon {
+      font-size: 2.35rem;
+      line-height: 1;
+      text-align: center;
+      filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.08));
+      transition: transform 280ms ease;
+      margin-bottom: 0.35rem;
+    }
+
+    &:hover .pnp-phase-icon { transform: scale(1.08); }
+
+    .pnp-phase-name {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--pnp-phase-color, var(--pnp-fg));
+      margin: 0;
+      line-height: 1.15;
+    }
+
+    .pnp-phase-desc {
+      margin: 0.25rem 0 0;
+      font-size: 0.82rem;
+      color: var(--pnp-muted);
+    }
+  }
+
+  // World card positions (2x2)
+  .pnp-world .pnp-phase-card[data-grid="tl"] { grid-area: 1 / 1 / 2 / 2; }
+  .pnp-world .pnp-phase-card[data-grid="tr"] { grid-area: 1 / 3 / 2 / 4; }
+  .pnp-world .pnp-phase-card[data-grid="bl"] { grid-area: 3 / 1 / 4 / 2; }
+  .pnp-world .pnp-phase-card[data-grid="br"] { grid-area: 3 / 3 / 4 / 4; }
+
+  // Directional arrows between cards
+  .pnp-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--pnp-muted);
+    font-size: 1.5rem;
+    opacity: 0.5;
+    animation: pnp-pulse 2.4s ease-in-out infinite;
+
+    &[data-dir="right"]  { grid-area: 1 / 2 / 2 / 3; }
+    &[data-dir="down"]   { grid-area: 2 / 3 / 3 / 4; }
+    &[data-dir="left"]   { grid-area: 3 / 2 / 4 / 3; }
+    &[data-dir="up"]     { grid-area: 2 / 1 / 3 / 2; }
+  }
+
+  @keyframes pnp-pulse {
+    0%, 100% { opacity: 0.3; }
+    50%      { opacity: 0.8; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pnp-arrow { animation: none; }
+  }
+
+  .pnp-loop-badge {
+    grid-area: 2 / 2 / 3 / 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--pnp-muted);
+    border: 1px dashed var(--pnp-border);
+    border-radius: 999px;
+    width: 56px;
+    height: 56px;
+    justify-self: center;
+    align-self: center;
+    animation: pnp-spin 24s linear infinite;
+  }
+
+  @keyframes pnp-spin {
+    to { transform: rotate(360deg); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pnp-loop-badge { animation: none; }
+  }
+
+  // --- Phase / folder view: floating-object flow grid ---------------------
+  //
+  // Default (before / without tree script): flat flex. With edges, JS adds
+  // `.pnp-flow-grid--tree` and assigns CSS grid columns/rows so branches
+  // stack to the right of their parent (e.g. Menu -> three screens).
+  .pnp-flow-grid {
+    // Base card width; each layer is auto-scaled to fit the view in JS.
+    --pnp-card-w: clamp(120px, 14vw, 220px);
+    gap: 2.25rem 1.5rem;
+    padding: 1.25rem 0.5rem 1.75rem;
+    margin-bottom: 2rem;
+  }
+
+  .pnp-flow-grid--flat {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .pnp-flow-grid--tree {
+    display: grid;
+    width: 100%;
+    max-width: 100%;
+    justify-items: center;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    // Extra horizontal rhythm so edges and labels sit in clearer gaps once
+    // columns grow with minmax(..., 1fr) from layoutFlowGrid().
+    column-gap: clamp(1.5rem, 3.5vw, 3.25rem);
+    row-gap: clamp(1.25rem, 2.5vw, 2.5rem);
+  }
+
+  // Legacy grid containers (kept for backwards compat; unused by current
+  // template but safe to leave as defensive fallback styling).
+  .pnp-card-grid,
+  .pnp-screen-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .pnp-folder-card {
+    position: relative;
+    width: var(--pnp-card-w, 180px);
+    flex: 0 0 auto;
+    padding: 1rem 1rem 1.1rem;
+    border: 1px solid var(--pnp-border);
+    border-radius: 14px;
+    background: var(--pnp-card);
+    cursor: pointer;
+    transition: all 180ms ease;
+    min-height: 260px;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+
+    &:hover {
+      transform: translateY(-2px);
+      border-color: var(--pnp-phase-color, var(--pnp-accent));
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+    }
+
+    .pnp-folder-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: color-mix(in srgb, var(--pnp-phase-color, var(--pnp-accent)) 12%, transparent);
+      color: var(--pnp-phase-color, var(--pnp-accent));
+      display: grid;
+      place-items: center;
+      font-size: 1.2rem;
+    }
+
+    .pnp-folder-count {
+      position: absolute;
+      top: 0.85rem;
+      right: 0.9rem;
+      font-size: 0.65rem;
+      padding: 0.18rem 0.5rem;
+      border-radius: 999px;
+      background: color-mix(in srgb, var(--pnp-phase-color, var(--pnp-accent)) 10%, transparent);
+      color: var(--pnp-phase-color, var(--pnp-accent));
+      font-weight: 600;
+    }
+
+    .pnp-folder-name {
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin: 0.85rem 0 0.25rem;
+      line-height: 1.2;
+    }
+
+    .pnp-folder-desc {
+      font-size: 0.75rem;
+      color: var(--pnp-muted);
+      margin: 0;
+      line-height: 1.35;
+    }
+
+    .pnp-folder-zoom {
+      margin-top: auto;
+      padding-top: 0.75rem;
+      font-size: 0.75rem;
+      color: var(--pnp-phase-color, var(--pnp-accent));
+      font-weight: 600;
+
+      &::after { content: " →"; }
+    }
+  }
+
+  // --- Screen thumbnails (phone frames) -----------------------------------
+  .pnp-screen-card {
+    width: var(--pnp-card-w, 180px);
+    flex: 0 0 auto;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    font-family: inherit;
+    color: inherit;
+    text-align: center;
+
+    .pnp-phone-frame {
+      position: relative;
+      aspect-ratio: 9 / 19;
+      border-radius: 22px;
+      border: 1px solid var(--pnp-border);
+      background: var(--pnp-card);
+      overflow: hidden;
+      transition: all 200ms ease;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+    }
+
+    &:hover .pnp-phone-frame {
+      transform: translateY(-3px);
+      border-color: var(--pnp-phase-color, var(--pnp-accent));
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .pnp-screen-name {
+      margin: 0.55rem 0 0;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--pnp-fg);
+      line-height: 1.25;
+    }
+  }
+
+  // --- Exit card (sits in flow row: right of last screenshot) --------------
+  .pnp-exit {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.2rem 1.5rem;
+    border: 1px dashed var(--pnp-next-color, var(--pnp-accent));
+    border-radius: 14px;
+    background: color-mix(in srgb, var(--pnp-next-color, var(--pnp-accent)) 5%, transparent);
+    cursor: pointer;
+    transition: all 200ms ease;
+    margin-top: 1rem;
+
+    &:hover {
+      background: color-mix(in srgb, var(--pnp-next-color, var(--pnp-accent)) 10%, transparent);
+      transform: translateX(2px);
+    }
+
+    .pnp-exit-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: color-mix(in srgb, var(--pnp-next-color, var(--pnp-accent)) 14%, transparent);
+      display: grid;
+      place-items: center;
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    .pnp-exit-body {
+      flex: 1;
+      min-width: 0;
+
+      .pnp-exit-eyebrow {
+        font-size: 0.75rem;
+        color: var(--pnp-muted);
+      }
+
+      .pnp-exit-name {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--pnp-next-color, var(--pnp-accent));
+        margin: 0.1rem 0;
+      }
+
+      .pnp-exit-desc {
+        font-size: 0.8rem;
+        color: var(--pnp-muted);
+        margin: 0;
+      }
+    }
+
+    .pnp-exit-arrow {
+      font-size: 1.4rem;
+      color: var(--pnp-next-color, var(--pnp-accent));
+      flex-shrink: 0;
+    }
+  }
+
+  // Exit: after the last flow card; flat = flex sibling, tree = grid cell.
+  .pnp-flow-grid > .pnp-exit {
+    width: min(280px, calc(100% - 1rem));
+    margin-top: 0;
+    margin-bottom: 0;
+    box-sizing: border-box;
+  }
+
+  .pnp-flow-grid--flat > .pnp-exit {
+    flex: 0 0 auto;
+    align-self: center;
+  }
+
+  .pnp-flow-grid--tree > .pnp-exit {
+    align-self: center;
+  }
+
+  // --- Flow arrow overlay (SVG sibling of grid inside `.pnp-flow-fit-inner`)
+  .pnp-flow-wrap {
+    position: relative;
+  }
+
+  .pnp-flow-fit-inner > .pnp-flow-svg {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: visible;
+    z-index: 1;
+    color: var(--pnp-phase-color, var(--pnp-accent));
+  }
+
+  .pnp-flow-edge {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.1;
+    stroke-linecap: round;
+    opacity: 0.88;
+    stroke-dasharray: 6 5;
+    animation: pnp-flow-dash 2.4s linear infinite;
+  }
+
+  @keyframes pnp-flow-dash {
+    to { stroke-dashoffset: -18; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pnp-flow-edge { animation: none; }
+  }
+
+  .pnp-flow-label-leader {
+    stroke: color-mix(in srgb, var(--pnp-phase-color, var(--pnp-accent)) 50%, var(--pnp-border));
+    stroke-width: 1.35;
+    stroke-dasharray: 4 5;
+    opacity: 0.9;
+    fill: none;
+    pointer-events: none;
+  }
+
+  .pnp-flow-label {
+    fill: var(--pnp-phase-color, var(--pnp-accent));
+    font-size: 12px;
+    font-weight: 700;
+    font-family: inherit;
+    letter-spacing: 0.01em;
+    paint-order: stroke fill;
+    stroke: var(--pnp-bg);
+    stroke-width: 5;
+    stroke-linejoin: round;
+    opacity: 1;
+  }
+
+  // Cards + exit above the dashed SVG so arrows look like they route around them.
+  .pnp-flow-wrap .pnp-folder-card,
+  .pnp-flow-wrap .pnp-screen-card,
+  .pnp-flow-wrap .pnp-exit {
+    position: relative;
+    z-index: 2;
+  }
+
+  // "Wrapped" folder hint (legacy — now that folders float as peers, this
+  // just adds a subtle accent tint if a phase still declares `wraps`).
+  .pnp-folder-card.is-wrapped {
+    border-style: dashed;
+    border-color: color-mix(in srgb, var(--pnp-phase-color, var(--pnp-accent)) 45%, var(--pnp-border));
+
+    .pnp-wrap-hint {
+      display: none;
+    }
+  }
+
+  // --- Pulse highlight when next phase is about to auto-zoom --------------
+  .pnp-phase-card.is-pulsing {
+    animation: pnp-highlight 1.2s ease;
+  }
+
+  @keyframes pnp-highlight {
+    0%, 100% { box-shadow: 0 0 0 0 var(--pnp-phase-color, var(--pnp-accent)); }
+    50%      { box-shadow: 0 0 0 8px color-mix(in srgb, var(--pnp-phase-color, var(--pnp-accent)) 20%, transparent); }
+  }
+
+  // --- Screen modal -------------------------------------------------------
+  .pnp-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.72);
+    z-index: 2000;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+
+    &.is-open {
+      display: flex;
+      animation: pnp-fade-bg 180ms ease;
+    }
+
+    .pnp-modal-inner {
+      position: relative;
+      max-width: min(420px, 90vw);
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    img {
+      max-width: 100%;
+      max-height: 80vh;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: #000;
+      display: block;
+    }
+
+    .pnp-modal-caption {
+      color: #fff;
+      margin-top: 0.9rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .pnp-modal-close {
+      position: absolute;
+      top: -2.2rem;
+      right: -0.5rem;
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      border: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1rem;
+
+      &:hover { background: rgba(255, 255, 255, 0.2); }
+    }
+  }
+
+  @keyframes pnp-fade-bg {
+    from { background: rgba(0, 0, 0, 0); }
+    to   { background: rgba(0, 0, 0, 0.72); }
+  }
+
+  // --- Mobile tree fallback (<768px) --------------------------------------
+  .pnp-tree { display: none; }
+
+  @media (max-width: 767px) {
+    .pnp-stage { display: none; }
+    .pnp-tree {
+      display: block;
+      max-width: 560px;
+      margin: 1rem auto 0;
+    }
+
+    .pnp-tree-node {
+      margin: 0.35rem 0;
+    }
+
+    .pnp-tree-toggle {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      width: 100%;
+      padding: 0.7rem 0.9rem;
+      border: 1px solid var(--pnp-border);
+      border-radius: 10px;
+      background: var(--pnp-card);
+      color: var(--pnp-fg);
+      font-family: inherit;
+      font-size: 0.95rem;
+      text-align: left;
+      cursor: pointer;
+
+      .pnp-tree-chevron {
+        font-size: 0.75rem;
+        color: var(--pnp-muted);
+        transition: transform 180ms ease;
+      }
+
+      &[aria-expanded="true"] .pnp-tree-chevron { transform: rotate(90deg); }
+
+      .pnp-tree-count {
+        margin-left: auto;
+        font-size: 0.75rem;
+        color: var(--pnp-muted);
+      }
+    }
+
+    .pnp-tree-children {
+      display: none;
+      padding-left: 1.25rem;
+      margin-top: 0.3rem;
+
+      &.is-open { display: block; }
+    }
+
+    .pnp-tree-leaf {
+      display: block;
+      width: 100%;
+      padding: 0.5rem 0.9rem;
+      border: 1px solid var(--pnp-border);
+      border-radius: 8px;
+      background: var(--pnp-bg);
+      color: var(--pnp-fg);
+      font-family: inherit;
+      font-size: 0.85rem;
+      text-align: left;
+      cursor: pointer;
+
+      &:hover { border-color: var(--pnp-accent); }
+    }
+  }
+
+  // --- World grid responsive collapse -------------------------------------
+  @media (max-width: 1023px) and (min-width: 768px) {
+    .pnp-world {
+      grid-template-columns: 1fr 60px 1fr;
+      grid-template-rows: minmax(0, 1fr) 50px minmax(0, 1fr);
+    }
+
+    .pnp-phase-card { min-height: 220px; }
+  }
+}
+
+/* Teaser block on the project page */
+.pnp-teaser {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 1.25rem 1.5rem;
+  margin: 1.5rem 0;
+  border: 1px solid var(--global-divider-color);
+  border-radius: 12px;
+  background: var(--global-card-bg-color);
+  color: var(--global-text-color);
+  text-decoration: none;
+  transition: all 180ms ease;
+
+  &:hover {
+    border-color: var(--global-theme-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+    text-decoration: none;
+    color: var(--global-text-color);
+  }
+
+  .pnp-teaser-icon {
+    font-size: 2rem;
+    flex-shrink: 0;
+  }
+
+  .pnp-teaser-body {
+    flex: 1;
+    min-width: 0;
+
+    strong {
+      display: block;
+      font-size: 1.05rem;
+      margin-bottom: 0.2rem;
+    }
+
+    span {
+      font-size: 0.85rem;
+      color: var(--global-text-color-light);
+    }
+  }
+
+  .pnp-teaser-arrow {
+    color: var(--global-theme-color);
+    font-size: 1.3rem;
+    flex-shrink: 0;
+  }
+}

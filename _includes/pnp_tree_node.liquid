@@ -1,0 +1,45 @@
+{%- comment -%}
+  Mobile tree fallback — renders a collapsible tree node.
+  Params:
+    include.node  - folder/phase node OR a screen
+    include.level - nesting level (0 = root)
+{%- endcomment -%}
+
+{%- assign node = include.node -%}
+{%- assign data = site.data.picknplay_wireframe -%}
+
+{%- if node.type == "screen" -%}
+  <button type="button" class="pnp-tree-leaf"
+          data-screen-name="{{ node.name | escape }}"
+          data-screen-image="{{ '/' | append: data.asset_base | append: '/' | append: node.image | relative_url }}">
+    📱 {{ node.name }}
+  </button>
+{%- else -%}
+  {%- assign screen_count = 0 -%}
+  {%- for c in node.children -%}
+    {%- if c.type == "screen" -%}{%- assign screen_count = screen_count | plus: 1 -%}{%- endif -%}
+    {%- if c.type == "folder" -%}
+      {%- for gc in c.children -%}
+        {%- if gc.type == "screen" -%}{%- assign screen_count = screen_count | plus: 1 -%}{%- endif -%}
+        {%- if gc.type == "folder" -%}
+          {%- for ggc in gc.children -%}
+            {%- if ggc.type == "screen" -%}{%- assign screen_count = screen_count | plus: 1 -%}{%- endif -%}
+          {%- endfor -%}
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endif -%}
+  {%- endfor -%}
+  <div class="pnp-tree-node">
+    <button type="button" class="pnp-tree-toggle" aria-expanded="false">
+      <span class="pnp-tree-chevron">▸</span>
+      <span>{% if node.icon %}{{ node.icon }} {% endif %}{{ node.name }}</span>
+      <span class="pnp-tree-count">{{ screen_count }}</span>
+    </button>
+    <div class="pnp-tree-children">
+      {%- assign next_level = include.level | plus: 1 -%}
+      {%- for child in node.children -%}
+        {%- include pnp_tree_node.liquid node=child level=next_level -%}
+      {%- endfor -%}
+    </div>
+  </div>
+{%- endif -%}
