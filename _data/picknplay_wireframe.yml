@@ -40,12 +40,17 @@ phases:
         id: history
         name: "History"
         image: "Home/history.png"
+      - type: screen
+        id: about
+        name: "About"
+        image: "Home/about.png"
     edges:
-      - { from: homepage,         to: homepage-scrolled, style: bidir }
+      - { from: homepage, to: homepage-scrolled, style: bidir }
       - { from: homepage-scrolled, to: menu }
       - { from: menu, to: createroom }
       - { from: menu, to: findroom }
       - { from: menu, to: history, style: bidir }
+      - { from: menu, to: about, style: bidir }
 
   - id: lobby
     name: "Lobby Phase"
