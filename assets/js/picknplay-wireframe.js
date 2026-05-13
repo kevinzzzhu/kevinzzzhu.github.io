@@ -84,10 +84,16 @@
     }
 
     const back = e.target.closest(".pnp-back");
-    if (back) { goBack(); return; }
+    if (back) {
+      goBack();
+      return;
+    }
 
     const home = e.target.closest(".pnp-home");
-    if (home) { goHome(); return; }
+    if (home) {
+      goHome();
+      return;
+    }
 
     const exit = e.target.closest(".pnp-exit");
     if (exit) {
@@ -110,9 +116,7 @@
     // Zoom out to world, pulse the next phase card, then zoom in.
     showView("");
     requestAnimationFrame(() => {
-      const nextCard = stage.querySelector(
-        `.pnp-world .pnp-phase-card[data-phase="${nextPhaseId}"]`
-      );
+      const nextCard = stage.querySelector(`.pnp-world .pnp-phase-card[data-phase="${nextPhaseId}"]`);
       if (nextCard) {
         nextCard.classList.add("is-pulsing");
         setTimeout(() => nextCard.classList.remove("is-pulsing"), 1200);
@@ -247,6 +251,10 @@
     return wrap.querySelector(":scope > .pnp-flow-fit-inner");
   }
 
+  function isPhoneLandscape() {
+    return window.matchMedia("(orientation: landscape) and (max-height: 520px) and (max-width: 932px)").matches;
+  }
+
   /**
    * Scale the whole flow layer so grid + arrows fit inside `.pnp-flow-wrap`
    * (no user zoom; one uniform scale per layer from content to viewport).
@@ -256,10 +264,12 @@
     const inner = flowFitInnerFromWrap(wrap);
     if (!fitOuter || !inner) return;
     const isPreview = wrap.classList.contains("pnp-phase-preview-flow");
+    const preserveReadableScale = !isPreview && isPhoneLandscape();
 
     inner.style.removeProperty("transform");
     inner.style.removeProperty("transform-origin");
     fitOuter.style.removeProperty("height");
+    fitOuter.classList.remove("is-overflowing");
 
     const view = wrap.closest(".pnp-view");
     const nav = view?.querySelector(".pnp-nav");
@@ -313,7 +323,9 @@
     if (w < 2 || h < 2) return;
 
     const previewInset = isPreview ? 0.82 : 0.98;
-    const s = Math.min(1, (availW * previewInset) / w, (availH * 0.98) / h);
+    const fitScale = Math.min(1, (availW * previewInset) / w, (availH * 0.98) / h);
+    const s = preserveReadableScale ? Math.min(1, Math.max(fitScale, 0.42)) : fitScale;
+    fitOuter.classList.toggle("is-overflowing", preserveReadableScale && fitScale < s);
     if (s < 0.998) {
       inner.style.transformOrigin = "top center";
       inner.style.transform = `scale(${s})`;
@@ -333,9 +345,7 @@
    */
   function layoutFlowGrid(wrap) {
     const inner = flowFitInnerFromWrap(wrap);
-    const grid =
-      inner?.querySelector(":scope > .pnp-flow-grid") ||
-      wrap.querySelector(":scope > .pnp-flow-grid");
+    const grid = inner?.querySelector(":scope > .pnp-flow-grid") || wrap.querySelector(":scope > .pnp-flow-grid");
     if (!grid) return;
     const isPreview = wrap.classList.contains("pnp-phase-preview-flow");
 
@@ -484,26 +494,22 @@
       // stay visually attached to that parent (instead of column-level stacking).
       const groups = new Map();
       for (const id of rest) {
-        const parents = directed
-          .filter(([u, v]) => v === id && level[u] === L - 1)
-          .map(([u]) => u);
-        const parent =
-          parents.sort((a, b) => outScore(b) - outScore(a) || domOrder.get(a) - domOrder.get(b))[0] ||
-          "__orphan__";
+        const parents = directed.filter(([u, v]) => v === id && level[u] === L - 1).map(([u]) => u);
+        const parent = parents.sort((a, b) => outScore(b) - outScore(a) || domOrder.get(a) - domOrder.get(b))[0] || "__orphan__";
         if (!groups.has(parent)) groups.set(parent, []);
         groups.get(parent).push(id);
       }
 
       const orderedParents = [...groups.keys()].sort((a, b) => {
-        const ra = a === "__orphan__" ? baseRow : row[a] ?? baseRow;
-        const rb = b === "__orphan__" ? baseRow : row[b] ?? baseRow;
+        const ra = a === "__orphan__" ? baseRow : (row[a] ?? baseRow);
+        const rb = b === "__orphan__" ? baseRow : (row[b] ?? baseRow);
         return ra - rb || (a === "__orphan__" ? 1 : -1) || domOrder.get(a) - domOrder.get(b);
       });
 
       for (const p of orderedParents) {
         const kids = groups.get(p).sort((a, b) => domOrder.get(a) - domOrder.get(b));
         const offsets = sideOffsets(kids.length);
-        const anchor = p === "__orphan__" ? baseRow : row[p] ?? baseRow;
+        const anchor = p === "__orphan__" ? baseRow : (row[p] ?? baseRow);
         for (let i = 0; i < kids.length; i++) {
           const target = anchor + offsets[i];
           const prefer = offsets[i] >= 0 ? 1 : -1;
@@ -530,9 +536,7 @@
     grid.style.display = "grid";
     // Full views can stretch columns when there is spare width. Mini previews
     // should stay compact so first/last cards do not get pushed into clipping.
-    grid.style.gridTemplateColumns = isPreview
-      ? `repeat(${nCols}, max-content)`
-      : `repeat(${nCols}, minmax(max-content, 1fr))`;
+    grid.style.gridTemplateColumns = isPreview ? `repeat(${nCols}, max-content)` : `repeat(${nCols}, minmax(max-content, 1fr))`;
     grid.style.gridTemplateRows = `repeat(${nRows}, auto)`;
 
     for (const id of ids) {
@@ -666,9 +670,7 @@
       let found = false;
       for (let tryRow = 0; tryRow < 24 && !found; tryRow++) {
         const cx = Math.min(Math.max(it.midCurve.x, half + 8), svgW - half - 8);
-        const clash = placed.some(
-          (p) => p.row === tryRow && Math.abs(p.x - cx) < p.half + half + 14
-        );
+        const clash = placed.some((p) => p.row === tryRow && Math.abs(p.x - cx) < p.half + half + 14);
         if (!clash) {
           chosenRow = tryRow;
           chosenX = cx;
@@ -698,9 +700,7 @@
     view.querySelectorAll(".pnp-flow-wrap").forEach((wrap) => {
       const isPreview = wrap.classList.contains("pnp-phase-preview-flow");
       const inner = flowFitInnerFromWrap(wrap) || wrap;
-      const svg =
-        inner.querySelector(":scope > .pnp-flow-svg") ||
-        wrap.querySelector(":scope > .pnp-flow-svg");
+      const svg = inner.querySelector(":scope > .pnp-flow-svg") || wrap.querySelector(":scope > .pnp-flow-svg");
       if (!svg) return;
 
       layoutFlowGrid(wrap);
@@ -730,9 +730,7 @@
 
       const defs = document.createElementNS(SVG_NS, "defs");
       const phaseCard = wrap.closest(".pnp-phase-card");
-      const markerId = isPreview
-        ? `pnp-arrow-pv-${phaseCard?.dataset.phase || "x"}`
-        : `pnp-arrow-${Math.random().toString(36).slice(2, 10)}`;
+      const markerId = isPreview ? `pnp-arrow-pv-${phaseCard?.dataset.phase || "x"}` : `pnp-arrow-${Math.random().toString(36).slice(2, 10)}`;
       const marker = document.createElementNS(SVG_NS, "marker");
       marker.setAttribute("id", markerId);
       marker.setAttribute("viewBox", "0 0 10 10");
@@ -874,6 +872,14 @@
     }, 80);
   }
   window.addEventListener("resize", scheduleRedraw);
+  window.addEventListener("orientationchange", () => {
+    scheduleRedraw();
+    setTimeout(scheduleRedraw, 240);
+  });
+  window.screen?.orientation?.addEventListener?.("change", () => {
+    scheduleRedraw();
+    setTimeout(scheduleRedraw, 240);
+  });
   // Images inside the active view may load after showView -- redraw then.
   stage.querySelectorAll("img").forEach((img) => {
     if (!img.complete) img.addEventListener("load", scheduleRedraw, { once: true });

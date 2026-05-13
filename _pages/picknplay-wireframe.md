@@ -13,19 +13,19 @@ fullscreen_layout: true
 
 {% assign total = 0 %}
 {% for phase in data.phases %}
-  {% for child in phase.children %}
-    {% if child.type == "screen" %}{% assign total = total | plus: 1 %}{% endif %}
-    {% if child.type == "folder" %}
-      {% for gc in child.children %}
-        {% if gc.type == "screen" %}{% assign total = total | plus: 1 %}{% endif %}
-        {% if gc.type == "folder" %}
-          {% for ggc in gc.children %}
-            {% if ggc.type == "screen" %}{% assign total = total | plus: 1 %}{% endif %}
-          {% endfor %}
-        {% endif %}
-      {% endfor %}
-    {% endif %}
-  {% endfor %}
+{% for child in phase.children %}
+{% if child.type == "screen" %}{% assign total = total | plus: 1 %}{% endif %}
+{% if child.type == "folder" %}
+{% for gc in child.children %}
+{% if gc.type == "screen" %}{% assign total = total | plus: 1 %}{% endif %}
+{% if gc.type == "folder" %}
+{% for ggc in gc.children %}
+{% if ggc.type == "screen" %}{% assign total = total | plus: 1 %}{% endif %}
+{% endfor %}
+{% endif %}
+{% endfor %}
+{% endif %}
+{% endfor %}
 {% endfor %}
 
 <div class="pnp-wireframe" id="pnp-root">
@@ -116,11 +116,13 @@ fullscreen_layout: true
 
   </div><!-- /.pnp-stage -->
 
-  <!-- Mobile tree fallback -->
-  <div class="pnp-tree" aria-label="Flow tree">
-    {% for phase in data.phases %}
-      {% include pnp_tree_node.liquid node=phase level=0 %}
-    {% endfor %}
+  <!-- Portrait phone gate -->
+  <div class="pnp-rotate-gate" role="status" aria-live="polite">
+    <div class="pnp-rotate-icon" aria-hidden="true">↻</div>
+    <div>
+      <h2>Rotate your phone</h2>
+      <p>Turn your phone sideways to view the interactive flow map.</p>
+    </div>
   </div>
 
   <!-- Screen detail modal -->

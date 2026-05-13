@@ -107,8 +107,14 @@ body.fullscreen-layout {
     }
 
     // Compact header so the stage gets more vertical room.
-    .pnp-header h1 { font-size: 1.6rem; margin: 0; line-height: 1.1; }
-    .pnp-header .pnp-eyebrow { margin-bottom: 0.15rem; }
+    .pnp-header h1 {
+      font-size: 1.6rem;
+      margin: 0;
+      line-height: 1.1;
+    }
+    .pnp-header .pnp-eyebrow {
+      margin-bottom: 0.15rem;
+    }
 
     // Compact the phase cards so the 2x2 fits without inner scroll.
     .pnp-phase-card {
@@ -119,8 +125,128 @@ body.fullscreen-layout {
         font-size: 2rem;
         margin-bottom: 0.25rem;
       }
-      .pnp-phase-name { font-size: 1.3rem; margin: 0.1rem 0 0.2rem; }
-      .pnp-phase-desc { font-size: 0.8rem; }
+      .pnp-phase-name {
+        font-size: 1.3rem;
+        margin: 0.1rem 0 0.2rem;
+      }
+      .pnp-phase-desc {
+        font-size: 0.8rem;
+      }
+    }
+
+    @media (max-width: 767px) and (orientation: portrait) {
+      padding: 0.75rem 1rem 1rem;
+
+      .pnp-header {
+        margin-bottom: 0.75rem;
+      }
+
+      .pnp-stage {
+        display: none !important;
+      }
+
+      .pnp-rotate-gate {
+        display: flex;
+      }
+    }
+
+    @media (orientation: landscape) and (max-height: 520px) and (max-width: 932px) {
+      overflow-y: auto;
+      overflow-x: hidden;
+      overscroll-behavior: contain;
+      padding: 0.55rem clamp(0.75rem, 4vw, 2rem) 0.8rem;
+
+      .pnp-header {
+        gap: 0.5rem;
+        margin-bottom: 0.55rem;
+      }
+
+      .pnp-header h1 {
+        font-size: 1.35rem;
+      }
+
+      .pnp-header .pnp-eyebrow {
+        font-size: 0.62rem;
+      }
+
+      .pnp-header .pnp-stats {
+        font-size: 0.76rem;
+      }
+
+      .pnp-header .pnp-hint {
+        font-size: 0.72rem;
+      }
+
+      .pnp-stage {
+        flex: 0 0 auto;
+        min-height: 0 !important;
+        overflow: visible;
+      }
+
+      .pnp-stage .pnp-view.is-active:not([data-view-path=""]) {
+        min-height: 280px;
+        overflow: visible;
+      }
+
+      .pnp-stage .pnp-world {
+        min-height: 260px !important;
+        grid-template-columns: minmax(0, 1fr) 44px minmax(0, 1fr);
+        grid-template-rows: minmax(112px, auto) 28px minmax(112px, auto);
+      }
+
+      .pnp-world > .pnp-phase-card {
+        min-height: 112px;
+      }
+
+      .pnp-phase-card {
+        padding: 0.5rem 0.7rem;
+      }
+
+      .pnp-phase-card .pnp-phase-tag {
+        padding: 0.22rem 0.55rem;
+        font-size: 0.58rem;
+      }
+
+      .pnp-phase-card .pnp-phase-count {
+        top: 0.72rem;
+        right: 0.8rem;
+        font-size: 0.66rem;
+      }
+
+      .pnp-world .pnp-phase-card .pnp-phase-preview-flow {
+        display: none !important;
+      }
+
+      .pnp-phase-card .pnp-phase-footer {
+        padding-top: 0.2rem;
+      }
+
+      .pnp-phase-card .pnp-phase-icon {
+        font-size: 1.45rem;
+        margin-bottom: 0.15rem;
+      }
+
+      .pnp-phase-card .pnp-phase-name {
+        font-size: 1rem;
+      }
+
+      .pnp-phase-card .pnp-phase-desc {
+        display: none;
+      }
+
+      .pnp-arrow {
+        font-size: 1.2rem;
+      }
+
+      .pnp-loop-badge {
+        width: 48px;
+        height: 48px;
+        font-size: 0.58rem;
+      }
+
+      .pnp-loop-pointer {
+        font-size: 0.54rem;
+      }
     }
   }
 }
@@ -256,12 +382,20 @@ body.fullscreen-layout {
   }
 
   @keyframes pnp-fade-in {
-    from { opacity: 0; transform: scale(0.98); }
-    to   { opacity: 1; transform: scale(1); }
+    from {
+      opacity: 0;
+      transform: scale(0.98);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .pnp-stage .pnp-view.is-active { animation: none; }
+    .pnp-stage .pnp-view.is-active {
+      animation: none;
+    }
   }
 
   // --- Breadcrumb / back controls -----------------------------------------
@@ -310,7 +444,9 @@ body.fullscreen-layout {
       font-size: inherit;
       font-family: inherit;
 
-      &:hover { color: var(--pnp-accent); }
+      &:hover {
+        color: var(--pnp-accent);
+      }
 
       &.is-current {
         color: var(--pnp-fg);
@@ -318,7 +454,10 @@ body.fullscreen-layout {
       }
     }
 
-    .pnp-crumb-sep { color: var(--pnp-muted); opacity: 0.5; }
+    .pnp-crumb-sep {
+      color: var(--pnp-muted);
+      opacity: 0.5;
+    }
   }
 
   .pnp-section-label {
@@ -414,7 +553,10 @@ body.fullscreen-layout {
     border-radius: 16px;
     background: var(--pnp-card);
     cursor: pointer;
-    transition: transform 220ms cubic-bezier(0.4, 0, 0.2, 1), box-shadow 220ms ease, border-color 220ms ease;
+    transition:
+      transform 220ms cubic-bezier(0.4, 0, 0.2, 1),
+      box-shadow 220ms ease,
+      border-color 220ms ease;
     display: flex;
     flex-direction: column;
     align-items: stretch;
@@ -435,8 +577,9 @@ body.fullscreen-layout {
     &:hover {
       transform: translateY(-2px);
       border-color: var(--pnp-phase-color, var(--pnp-accent));
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06),
-                  0 0 0 1px var(--pnp-phase-color, var(--pnp-accent));
+      box-shadow:
+        0 8px 24px rgba(0, 0, 0, 0.06),
+        0 0 0 1px var(--pnp-phase-color, var(--pnp-accent));
     }
 
     .pnp-phase-tag {
@@ -493,7 +636,9 @@ body.fullscreen-layout {
       margin-bottom: 0.35rem;
     }
 
-    &:hover .pnp-phase-icon { transform: scale(1.08); }
+    &:hover .pnp-phase-icon {
+      transform: scale(1.08);
+    }
 
     .pnp-phase-name {
       font-size: 1.35rem;
@@ -511,10 +656,18 @@ body.fullscreen-layout {
   }
 
   // World card positions (2x2)
-  .pnp-world .pnp-phase-card[data-grid="tl"] { grid-area: 1 / 1 / 2 / 2; }
-  .pnp-world .pnp-phase-card[data-grid="tr"] { grid-area: 1 / 3 / 2 / 4; }
-  .pnp-world .pnp-phase-card[data-grid="bl"] { grid-area: 3 / 1 / 4 / 2; }
-  .pnp-world .pnp-phase-card[data-grid="br"] { grid-area: 3 / 3 / 4 / 4; }
+  .pnp-world .pnp-phase-card[data-grid="tl"] {
+    grid-area: 1 / 1 / 2 / 2;
+  }
+  .pnp-world .pnp-phase-card[data-grid="tr"] {
+    grid-area: 1 / 3 / 2 / 4;
+  }
+  .pnp-world .pnp-phase-card[data-grid="bl"] {
+    grid-area: 3 / 1 / 4 / 2;
+  }
+  .pnp-world .pnp-phase-card[data-grid="br"] {
+    grid-area: 3 / 3 / 4 / 4;
+  }
 
   // Directional arrows between cards
   .pnp-arrow {
@@ -526,19 +679,34 @@ body.fullscreen-layout {
     opacity: 0.5;
     animation: pnp-pulse 2.4s ease-in-out infinite;
 
-    &[data-dir="right"]  { grid-area: 1 / 2 / 2 / 3; }
-    &[data-dir="down"]   { grid-area: 2 / 3 / 3 / 4; }
-    &[data-dir="left"]   { grid-area: 3 / 2 / 4 / 3; }
-    &[data-dir="up"]     { grid-area: 2 / 1 / 3 / 2; }
+    &[data-dir="right"] {
+      grid-area: 1 / 2 / 2 / 3;
+    }
+    &[data-dir="down"] {
+      grid-area: 2 / 3 / 3 / 4;
+    }
+    &[data-dir="left"] {
+      grid-area: 3 / 2 / 4 / 3;
+    }
+    &[data-dir="up"] {
+      grid-area: 2 / 1 / 3 / 2;
+    }
   }
 
   @keyframes pnp-pulse {
-    0%, 100% { opacity: 0.3; }
-    50%      { opacity: 0.8; }
+    0%,
+    100% {
+      opacity: 0.3;
+    }
+    50% {
+      opacity: 0.8;
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .pnp-arrow { animation: none; }
+    .pnp-arrow {
+      animation: none;
+    }
   }
 
   .pnp-loop-cta {
@@ -616,11 +784,15 @@ body.fullscreen-layout {
   }
 
   @keyframes pnp-spin {
-    to { transform: rotate(360deg); }
+    to {
+      transform: rotate(360deg);
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .pnp-loop-badge { animation: none; }
+    .pnp-loop-badge {
+      animation: none;
+    }
   }
 
   // --- Phase / folder view: floating-object flow grid ---------------------
@@ -732,7 +904,9 @@ body.fullscreen-layout {
       color: var(--pnp-phase-color, var(--pnp-accent));
       font-weight: 600;
 
-      &::after { content: " →"; }
+      &::after {
+        content: " →";
+      }
     }
   }
 
@@ -885,11 +1059,15 @@ body.fullscreen-layout {
   }
 
   @keyframes pnp-flow-dash {
-    to { stroke-dashoffset: -18; }
+    to {
+      stroke-dashoffset: -18;
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .pnp-flow-edge { animation: none; }
+    .pnp-flow-edge {
+      animation: none;
+    }
   }
 
   .pnp-flow-label-leader {
@@ -939,8 +1117,13 @@ body.fullscreen-layout {
   }
 
   @keyframes pnp-highlight {
-    0%, 100% { box-shadow: 0 0 0 0 var(--pnp-phase-color, var(--pnp-accent)); }
-    50%      { box-shadow: 0 0 0 8px color-mix(in srgb, var(--pnp-phase-color, var(--pnp-accent)) 20%, transparent); }
+    0%,
+    100% {
+      box-shadow: 0 0 0 0 var(--pnp-phase-color, var(--pnp-accent));
+    }
+    50% {
+      box-shadow: 0 0 0 8px color-mix(in srgb, var(--pnp-phase-color, var(--pnp-accent)) 20%, transparent);
+    }
   }
 
   // --- Screen modal -------------------------------------------------------
@@ -998,82 +1181,159 @@ body.fullscreen-layout {
       cursor: pointer;
       font-size: 1rem;
 
-      &:hover { background: rgba(255, 255, 255, 0.2); }
+      &:hover {
+        background: rgba(255, 255, 255, 0.2);
+      }
     }
   }
 
   @keyframes pnp-fade-bg {
-    from { background: rgba(0, 0, 0, 0); }
-    to   { background: rgba(0, 0, 0, 0.72); }
+    from {
+      background: rgba(0, 0, 0, 0);
+    }
+    to {
+      background: rgba(0, 0, 0, 0.72);
+    }
   }
 
-  // --- Mobile tree fallback (<768px) --------------------------------------
-  .pnp-tree { display: none; }
+  // --- Portrait phone gate ------------------------------------------------
+  .pnp-rotate-gate {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    width: min(520px, 100%);
+    margin: auto;
+    padding: 1.25rem 1.4rem;
+    border: 1px solid var(--pnp-border);
+    border-radius: 16px;
+    background: var(--pnp-card);
+    color: var(--pnp-fg);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
 
-  @media (max-width: 767px) {
-    .pnp-stage { display: none; }
-    .pnp-tree {
-      display: block;
-      max-width: 560px;
-      margin: 1rem auto 0;
+    .pnp-rotate-icon {
+      width: 48px;
+      height: 48px;
+      flex: 0 0 auto;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: color-mix(in srgb, var(--pnp-accent) 12%, transparent);
+      color: var(--pnp-accent);
+      font-size: 1.65rem;
+      line-height: 1;
     }
 
-    .pnp-tree-node {
-      margin: 0.35rem 0;
+    h2 {
+      margin: 0;
+      font-size: 1.15rem;
+      line-height: 1.15;
+      font-weight: 700;
     }
 
-    .pnp-tree-toggle {
-      display: flex;
-      align-items: center;
-      gap: 0.55rem;
-      width: 100%;
-      padding: 0.7rem 0.9rem;
-      border: 1px solid var(--pnp-border);
+    p {
+      margin: 0.35rem 0 0;
+      color: var(--pnp-muted);
+      font-size: 0.88rem;
+      line-height: 1.35;
+    }
+  }
+
+  // The old collapsible tree remains unsupported for this page state.
+  .pnp-tree {
+    display: none;
+  }
+
+  @media (orientation: landscape) and (max-height: 520px) and (max-width: 932px) {
+    .pnp-flow-grid {
+      --pnp-card-w: clamp(88px, 12vw, 112px);
+      gap: 1rem 1rem;
+      padding: 0.7rem 0.45rem 1rem;
+      margin-bottom: 0;
+    }
+
+    .pnp-flow-grid--tree {
+      column-gap: 1.15rem;
+      row-gap: 0.9rem;
+    }
+
+    .pnp-nav {
+      gap: 0.5rem;
+      margin-bottom: 0.65rem;
+    }
+
+    .pnp-pill {
+      padding: 0.34rem 0.68rem;
+      font-size: 0.76rem;
+    }
+
+    .pnp-crumbs {
+      gap: 0.32rem;
+      font-size: 0.78rem;
+    }
+
+    .pnp-screen-card .pnp-phone-frame {
+      border-radius: 15px;
+    }
+
+    .pnp-screen-card .pnp-screen-name {
+      margin-top: 0.35rem;
+      font-size: 0.64rem;
+    }
+
+    .pnp-folder-card {
+      min-height: 150px;
+      padding: 0.75rem;
+    }
+
+    .pnp-folder-card .pnp-folder-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 9px;
+      font-size: 1rem;
+    }
+
+    .pnp-folder-card .pnp-folder-count {
+      top: 0.7rem;
+      right: 0.7rem;
+      font-size: 0.58rem;
+    }
+
+    .pnp-folder-card .pnp-folder-name {
+      font-size: 0.8rem;
+    }
+
+    .pnp-folder-card .pnp-folder-desc,
+    .pnp-folder-card .pnp-folder-zoom {
+      font-size: 0.64rem;
+    }
+
+    .pnp-exit {
+      gap: 0.6rem;
+      padding: 0.7rem 0.85rem;
+    }
+
+    .pnp-exit .pnp-exit-icon {
+      width: 36px;
+      height: 36px;
       border-radius: 10px;
-      background: var(--pnp-card);
-      color: var(--pnp-fg);
-      font-family: inherit;
-      font-size: 0.95rem;
-      text-align: left;
-      cursor: pointer;
-
-      .pnp-tree-chevron {
-        font-size: 0.75rem;
-        color: var(--pnp-muted);
-        transition: transform 180ms ease;
-      }
-
-      &[aria-expanded="true"] .pnp-tree-chevron { transform: rotate(90deg); }
-
-      .pnp-tree-count {
-        margin-left: auto;
-        font-size: 0.75rem;
-        color: var(--pnp-muted);
-      }
+      font-size: 1.1rem;
     }
 
-    .pnp-tree-children {
-      display: none;
-      padding-left: 1.25rem;
-      margin-top: 0.3rem;
-
-      &.is-open { display: block; }
+    .pnp-exit .pnp-exit-body .pnp-exit-eyebrow,
+    .pnp-exit .pnp-exit-body .pnp-exit-desc {
+      font-size: 0.62rem;
     }
 
-    .pnp-tree-leaf {
-      display: block;
-      width: 100%;
-      padding: 0.5rem 0.9rem;
-      border: 1px solid var(--pnp-border);
-      border-radius: 8px;
-      background: var(--pnp-bg);
-      color: var(--pnp-fg);
-      font-family: inherit;
-      font-size: 0.85rem;
-      text-align: left;
-      cursor: pointer;
+    .pnp-exit .pnp-exit-body .pnp-exit-name {
+      font-size: 0.82rem;
+    }
 
-      &:hover { border-color: var(--pnp-accent); }
+    .pnp-flow-wrap > .pnp-flow-fit.is-overflowing {
+      overflow: auto;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior: contain;
+      max-width: 100%;
     }
   }
 
@@ -1084,7 +1344,9 @@ body.fullscreen-layout {
       grid-template-rows: minmax(0, 1fr) 50px minmax(0, 1fr);
     }
 
-    .pnp-phase-card { min-height: 220px; }
+    .pnp-phase-card {
+      min-height: 220px;
+    }
   }
 }
 
