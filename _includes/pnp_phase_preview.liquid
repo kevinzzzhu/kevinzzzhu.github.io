@@ -5,32 +5,33 @@
   Params: include.phase, include.asset_base
 {%- endcomment -%}
 {%- assign node = include.phase -%}
-{%- assign edges_json = "" -%}
+{%- assign edges_json = '' -%}
 {%- if node.edges -%}
-  {%- assign edge_parts = "" | split: "" -%}
+  {%- assign edge_parts = '' | split: '' -%}
   {%- for e in node.edges -%}
-    {%- assign lbl = e.label | default: "" | replace: '"', '\"' -%}
-    {%- assign estyle = e.style | default: "arrow" -%}
+    {%- assign lbl = e.label | default: '' | replace: '"', '\"' -%}
+    {%- assign estyle = e.style | default: 'arrow' -%}
     {%- capture edge_piece -%}{"from":"{{ e.from }}","to":"{{ e.to }}","style":"{{ estyle }}","label":"{{ lbl }}"}{%- endcapture -%}
     {%- assign edge_parts = edge_parts | push: edge_piece -%}
   {%- endfor -%}
-  {%- assign edges_json = edge_parts | join: "," -%}
+  {%- assign edges_json = edge_parts | join: ',' -%}
 {%- endif -%}
-<div class="pnp-flow-wrap pnp-phase-preview-flow" data-edges='[{{ edges_json }}]' aria-hidden="true">
+{%- capture edges_attr -%}[{{ edges_json }}]{%- endcapture %}
+<div class="pnp-flow-wrap pnp-phase-preview-flow" data-edges="{{ edges_attr | escape }}" aria-hidden="true">
   <div class="pnp-flow-fit">
     <div class="pnp-flow-fit-inner">
       <div class="pnp-flow-grid pnp-flow-grid--flat">
         {%- for child in node.children -%}
-          {%- if child.type == "folder" -%}
+          {%- if child.type == 'folder' -%}
             {%- assign folder = child -%}
             {%- assign sub_count = 0 -%}
             {%- for c in folder.children -%}
-              {%- if c.type == "folder" -%}
+              {%- if c.type == 'folder' -%}
                 {%- for gc in c.children -%}
-                  {%- if gc.type == "screen" -%}{%- assign sub_count = sub_count | plus: 1 -%}{%- endif -%}
-                  {%- if gc.type == "folder" -%}
+                  {%- if gc.type == 'screen' -%}{%- assign sub_count = sub_count | plus: 1 -%}{%- endif -%}
+                  {%- if gc.type == 'folder' -%}
                     {%- for ggc in gc.children -%}
-                      {%- if ggc.type == "screen" -%}{%- assign sub_count = sub_count | plus: 1 -%}{%- endif -%}
+                      {%- if ggc.type == 'screen' -%}{%- assign sub_count = sub_count | plus: 1 -%}{%- endif -%}
                     {%- endfor -%}
                   {%- endif -%}
                 {%- endfor -%}
@@ -38,13 +39,15 @@
                 {%- assign sub_count = sub_count | plus: 1 -%}
               {%- endif -%}
             {%- endfor -%}
-            {%- assign wrap_class = "" -%}
-            {%- if node.wraps == folder.id -%}{%- assign wrap_class = " is-wrapped" -%}{%- endif -%}
+            {%- assign wrap_class = '' -%}
+            {%- if node.wraps == folder.id -%}{%- assign wrap_class = ' is-wrapped' -%}{%- endif -%}
             <div class="pnp-folder-card{{ wrap_class }}" data-card-id="{{ folder.id }}">
               <div class="pnp-folder-icon"><i class="fas fa-folder-open"></i></div>
               <span class="pnp-folder-count">{{ sub_count }} screens</span>
               <h3 class="pnp-folder-name">{{ folder.name }}</h3>
-              {%- if folder.description -%}<p class="pnp-folder-desc">{{ folder.description }}</p>{%- endif -%}
+              {%- if folder.description -%}
+                <p class="pnp-folder-desc">{{ folder.description }}</p>
+              {%- endif -%}
               <div class="pnp-folder-zoom">Zoom in</div>
               {%- if node.wraps == folder.id -%}
                 <span class="pnp-wrap-hint" aria-hidden="true">nested in this pool</span>
@@ -52,12 +55,19 @@
             </div>
           {%- else -%}
             {%- assign screen = child -%}
-            <div class="pnp-screen-card"
-                 data-card-id="{{ screen.id }}"
-                 data-screen-name="{{ screen.name | escape }}"
-                 data-screen-image="{{ '/' | append: include.asset_base | append: '/' | append: screen.image | relative_url }}">
+            <div
+              class="pnp-screen-card"
+              data-card-id="{{ screen.id }}"
+              data-screen-name="{{ screen.name | escape }}"
+              data-screen-image="{{ '/' | append: include.asset_base | append: '/' | append: screen.image | relative_url }}"
+            >
               <div class="pnp-phone-frame">
-                <img src="{{ '/' | append: include.asset_base | append: '/' | append: screen.image | relative_url }}" alt="" loading="lazy" decoding="async">
+                <img
+                  src="{{ '/' | append: include.asset_base | append: '/' | append: screen.image | relative_url }}"
+                  alt=""
+                  loading="eager"
+                  decoding="async"
+                >
               </div>
               <p class="pnp-screen-name">{{ screen.name }}</p>
             </div>

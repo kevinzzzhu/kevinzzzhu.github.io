@@ -224,7 +224,53 @@ body.fullscreen-layout {
       }
 
       .pnp-world .pnp-phase-card .pnp-phase-preview-flow {
-        display: none !important;
+        display: block !important;
+        flex: 0 1 3.35rem;
+        min-height: 2.6rem;
+        max-height: 3.35rem;
+        margin: 0.25rem 0 0;
+        padding-inline: 0.25rem;
+        overflow: hidden;
+      }
+
+      .pnp-world .pnp-phase-preview-flow {
+        --pnp-card-w: clamp(24px, 3.5vw, 30px);
+      }
+
+      .pnp-world .pnp-phase-preview-flow > .pnp-flow-fit {
+        align-items: flex-start;
+        max-height: 3.35rem;
+      }
+
+      .pnp-world .pnp-phase-preview-flow .pnp-flow-fit-inner {
+        width: 100%;
+        min-width: 0;
+      }
+
+      .pnp-world .pnp-phase-preview-flow .pnp-flow-grid {
+        display: flex !important;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: center;
+        gap: 0.35rem 0.28rem;
+        padding: 0.1rem 0.15rem 0.25rem;
+        margin-bottom: 0;
+      }
+
+      .pnp-world .pnp-phase-preview-flow .pnp-screen-card,
+      .pnp-world .pnp-phase-preview-flow .pnp-folder-card {
+        flex: 0 0 var(--pnp-card-w);
+      }
+
+      .pnp-world .pnp-phase-preview-flow .pnp-folder-card .pnp-folder-icon {
+        width: 24px;
+        height: 24px;
+        border-radius: 7px;
+        font-size: 0.72rem;
+      }
+
+      .pnp-world .pnp-phase-preview-flow .pnp-flow-svg {
+        display: none;
       }
 
       .pnp-phase-card .pnp-phase-footer {

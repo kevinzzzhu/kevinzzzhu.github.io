@@ -73,6 +73,7 @@ fullscreen_layout: true
             <span class="pnp-phase-count">
               {% if folder_count > 0 %}{{ folder_count }} folders · {% endif %}{{ phase_count }} screens
             </span>
+
             {% if phase_count > 0 %}
               {% include pnp_phase_preview.liquid phase=phase asset_base=data.asset_base %}
             {% endif %}
