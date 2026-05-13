@@ -25,6 +25,16 @@ body.fullscreen-layout {
     display: none !important;
   }
 
+  @media (orientation: landscape) and (max-height: 520px) and (max-width: 932px) {
+    &.fixed-top-nav {
+      padding-top: 0;
+    }
+
+    > header {
+      display: none;
+    }
+  }
+
   > .container {
     margin-top: 0 !important;
     padding-top: 0;
