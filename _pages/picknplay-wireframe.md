@@ -88,7 +88,15 @@ fullscreen_layout: true
         <div class="pnp-arrow" data-dir="down">&darr;</div>
         <div class="pnp-arrow" data-dir="left">&larr;</div>
         <div class="pnp-arrow" data-dir="up">&uarr;</div>
-        <div class="pnp-loop-badge">Loop</div>
+        <a
+          class="pnp-loop-badge"
+          href="https://pick-nplay.netlify.app/"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Open the PickNPlay website"
+        >
+          Loop
+        </a>
       </div>
     </div>
 

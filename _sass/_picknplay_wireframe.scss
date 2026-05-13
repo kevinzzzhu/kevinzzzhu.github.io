@@ -556,7 +556,20 @@ body.fullscreen-layout {
     height: 56px;
     justify-self: center;
     align-self: center;
+    text-decoration: none;
     animation: pnp-spin 24s linear infinite;
+
+    &:hover,
+    &:focus-visible {
+      color: var(--pnp-accent);
+      border-color: var(--pnp-accent);
+      text-decoration: none;
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--pnp-accent);
+      outline-offset: 4px;
+    }
   }
 
   @keyframes pnp-spin {
