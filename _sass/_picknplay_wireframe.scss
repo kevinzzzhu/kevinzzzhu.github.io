@@ -199,13 +199,13 @@ body.fullscreen-layout {
       }
 
       .pnp-stage .pnp-world {
-        min-height: 260px !important;
+        min-height: 320px !important;
         grid-template-columns: minmax(0, 1fr) 44px minmax(0, 1fr);
-        grid-template-rows: minmax(112px, auto) 28px minmax(112px, auto);
+        grid-template-rows: minmax(142px, auto) 32px minmax(142px, auto);
       }
 
       .pnp-world > .pnp-phase-card {
-        min-height: 112px;
+        min-height: 142px;
       }
 
       .pnp-phase-card {
@@ -1255,11 +1255,21 @@ body.fullscreen-layout {
   }
 
   @media (orientation: landscape) and (max-height: 520px) and (max-width: 932px) {
+    .pnp-stage .pnp-view.is-active:not([data-view-path=""]):has(.pnp-flow-grid > :nth-child(-n + 4):last-child) {
+      min-height: 320px;
+    }
+
     .pnp-flow-grid {
       --pnp-card-w: clamp(88px, 12vw, 112px);
       gap: 1rem 1rem;
       padding: 0.7rem 0.45rem 1rem;
       margin-bottom: 0;
+    }
+
+    .pnp-view.is-active:not([data-view-path=""]):has(.pnp-flow-grid > :nth-child(-n + 4):last-child) .pnp-flow-grid {
+      --pnp-card-w: clamp(108px, 15vw, 128px);
+      gap: 1.05rem 1.2rem;
+      padding: 0.85rem 0.5rem 1.05rem;
     }
 
     .pnp-flow-grid--tree {
