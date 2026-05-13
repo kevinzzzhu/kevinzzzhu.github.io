@@ -541,21 +541,64 @@ body.fullscreen-layout {
     .pnp-arrow { animation: none; }
   }
 
-  .pnp-loop-badge {
+  .pnp-loop-cta {
     grid-area: 2 / 2 / 3 / 3;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    justify-self: center;
+    align-self: center;
+  }
+
+  .pnp-loop-pointer {
+    position: absolute;
+    bottom: calc(100% + 0.45rem);
+    left: 50%;
+    transform: translateX(-50%);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.18rem 0.48rem;
+    border-radius: 999px;
+    background: var(--pnp-card);
+    border: 1px solid var(--pnp-border);
+    color: var(--pnp-accent);
+    font-size: 0.64rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    line-height: 1;
+    text-transform: uppercase;
+    white-space: nowrap;
+    pointer-events: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+
+    &::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: calc(100% - 1px);
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 7px solid var(--pnp-border);
+    }
+  }
+
+  .pnp-loop-badge {
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 0.7rem;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.02em;
     text-transform: uppercase;
     color: var(--pnp-muted);
     border: 1px dashed var(--pnp-border);
     border-radius: 999px;
-    width: 56px;
-    height: 56px;
-    justify-self: center;
-    align-self: center;
+    width: 72px;
+    height: 72px;
     text-decoration: none;
     animation: pnp-spin 24s linear infinite;
 
@@ -1037,7 +1080,7 @@ body.fullscreen-layout {
   // --- World grid responsive collapse -------------------------------------
   @media (max-width: 1023px) and (min-width: 768px) {
     .pnp-world {
-      grid-template-columns: 1fr 60px 1fr;
+      grid-template-columns: 1fr 72px 1fr;
       grid-template-rows: minmax(0, 1fr) 50px minmax(0, 1fr);
     }
 
