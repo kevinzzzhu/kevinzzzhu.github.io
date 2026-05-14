@@ -9,12 +9,17 @@
 html:has(body.fullscreen-layout) {
   overflow: hidden;
   height: 100vh;
+  height: 100dvh;
+  height: var(--pnp-vvh, 100dvh);
 }
 
 body.fullscreen-layout {
   overflow: hidden;
   box-sizing: border-box;
   height: 100vh;
+  height: 100dvh;
+  height: var(--pnp-vvh, 100dvh);
+  min-height: 0;
   // Override al-folio's default body padding-bottom: 70px — otherwise it
   // reserves a 70px gap below the wireframe even when the footer is hidden.
   padding-bottom: 0 !important;
@@ -161,66 +166,73 @@ body.fullscreen-layout {
     }
 
     @media (orientation: landscape) and (max-height: 520px) and (max-width: 932px) {
-      overflow-y: auto;
-      overflow-x: hidden;
+      height: var(--pnp-vvh, 100dvh);
+      max-height: var(--pnp-vvh, 100dvh);
+      overflow: hidden;
       overscroll-behavior: contain;
-      padding: 0.55rem clamp(0.75rem, 4vw, 2rem) 0.8rem;
+      padding: 0.35rem clamp(0.65rem, 3vw, 1.4rem) calc(0.4rem + env(safe-area-inset-bottom));
 
       .pnp-header {
-        gap: 0.5rem;
-        margin-bottom: 0.55rem;
+        gap: 0.4rem;
+        margin-bottom: 0.35rem;
       }
 
       .pnp-header h1 {
-        font-size: 1.35rem;
+        font-size: 1.18rem;
       }
 
       .pnp-header .pnp-eyebrow {
-        font-size: 0.62rem;
+        font-size: 0.55rem;
+        margin-bottom: 0.08rem;
       }
 
       .pnp-header .pnp-stats {
-        font-size: 0.76rem;
+        font-size: 0.68rem;
       }
 
       .pnp-header .pnp-hint {
-        font-size: 0.72rem;
+        margin-top: 0.08rem;
+        font-size: 0.64rem;
       }
 
       .pnp-stage {
-        flex: 0 0 auto;
+        flex: 1 1 auto;
         min-height: 0 !important;
-        overflow: visible;
+        overflow: hidden;
       }
 
       .pnp-stage .pnp-view.is-active:not([data-view-path=""]) {
-        min-height: 280px;
-        overflow: visible;
+        min-height: 0;
+        overflow-x: hidden;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        overscroll-behavior: contain;
       }
 
       .pnp-stage .pnp-world {
-        min-height: 320px !important;
-        grid-template-columns: minmax(0, 1fr) 44px minmax(0, 1fr);
-        grid-template-rows: minmax(142px, auto) 32px minmax(142px, auto);
+        height: 100%;
+        min-height: 0 !important;
+        grid-template-columns: minmax(0, 1fr) 38px minmax(0, 1fr);
+        grid-template-rows: minmax(98px, 1fr) 24px minmax(98px, 1fr);
       }
 
       .pnp-world > .pnp-phase-card {
-        min-height: 142px;
+        min-height: 0;
       }
 
       .pnp-phase-card {
-        padding: 0.5rem 0.7rem;
+        padding: 0.42rem 0.62rem;
       }
 
       .pnp-phase-card .pnp-phase-tag {
-        padding: 0.22rem 0.55rem;
-        font-size: 0.58rem;
+        padding: 0.18rem 0.48rem;
+        font-size: 0.52rem;
       }
 
       .pnp-phase-card .pnp-phase-count {
-        top: 0.72rem;
-        right: 0.8rem;
-        font-size: 0.66rem;
+        top: 0.58rem;
+        right: 0.68rem;
+        font-size: 0.58rem;
       }
 
       .pnp-world .pnp-phase-card .pnp-phase-preview-flow {
@@ -228,16 +240,16 @@ body.fullscreen-layout {
       }
 
       .pnp-phase-card .pnp-phase-footer {
-        padding-top: 0.2rem;
+        padding-top: 0.1rem;
       }
 
       .pnp-phase-card .pnp-phase-icon {
-        font-size: 1.45rem;
-        margin-bottom: 0.15rem;
+        font-size: 1.18rem;
+        margin-bottom: 0.08rem;
       }
 
       .pnp-phase-card .pnp-phase-name {
-        font-size: 1rem;
+        font-size: 0.88rem;
       }
 
       .pnp-phase-card .pnp-phase-desc {
@@ -245,17 +257,17 @@ body.fullscreen-layout {
       }
 
       .pnp-arrow {
-        font-size: 1.2rem;
+        font-size: 1rem;
       }
 
       .pnp-loop-badge {
-        width: 48px;
-        height: 48px;
-        font-size: 0.58rem;
+        width: 42px;
+        height: 42px;
+        font-size: 0.52rem;
       }
 
       .pnp-loop-pointer {
-        font-size: 0.54rem;
+        font-size: 0.5rem;
       }
     }
   }
@@ -278,6 +290,8 @@ body.fullscreen-layout {
   margin-left: -50vw;
   margin-right: -50vw;
   min-height: calc(100vh - 120px);
+  min-height: calc(100dvh - 120px);
+  min-height: calc(var(--pnp-vvh, 100dvh) - 120px);
   padding: 2rem clamp(1rem, 4vw, 4rem) 4rem;
   background-color: var(--pnp-bg);
   background-image: radial-gradient(circle, var(--pnp-dot) 1px, transparent 1px);
@@ -1041,6 +1055,12 @@ body.fullscreen-layout {
     align-self: center;
   }
 
+  .pnp-view[data-view-path="voting"] .pnp-flow-grid > .pnp-exit {
+    width: min(232px, calc(100% - 1rem));
+    padding: 0.95rem 1.05rem;
+    gap: 0.75rem;
+  }
+
   // --- Flow arrow overlay (SVG sibling of grid inside `.pnp-flow-fit-inner`)
   .pnp-flow-wrap {
     position: relative;
@@ -1331,6 +1351,12 @@ body.fullscreen-layout {
     .pnp-exit {
       gap: 0.6rem;
       padding: 0.7rem 0.85rem;
+    }
+
+    .pnp-view[data-view-path="voting"] .pnp-flow-grid > .pnp-exit {
+      width: min(190px, calc(100% - 0.75rem));
+      padding: 0.58rem 0.68rem;
+      gap: 0.48rem;
     }
 
     .pnp-exit .pnp-exit-icon {

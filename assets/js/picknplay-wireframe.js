@@ -25,9 +25,28 @@
   let currentPath = "";
   let pathHistory = []; // for Back button
 
+  function currentViewportSize() {
+    const viewport = window.visualViewport;
+    return {
+      width: viewport?.width || window.innerWidth,
+      height: viewport?.height || window.innerHeight,
+    };
+  }
+
+  function updateVisibleViewportVars() {
+    const { width, height } = currentViewportSize();
+    document.documentElement.style.setProperty("--pnp-vvw", `${width}px`);
+    document.documentElement.style.setProperty("--pnp-vvh", `${height}px`);
+    root.style.setProperty("--pnp-vvw", `${width}px`);
+    root.style.setProperty("--pnp-vvh", `${height}px`);
+  }
+
+  updateVisibleViewportVars();
+
   // --- View switching ------------------------------------------------------
 
   function showView(path, { pushHistory = true } = {}) {
+    updateVisibleViewportVars();
     path = path || "";
     const target = viewByPath.get(path);
     if (!target) {
@@ -252,7 +271,11 @@
   }
 
   function isPhoneLandscape() {
-    return window.matchMedia("(orientation: landscape) and (max-height: 520px) and (max-width: 932px)").matches;
+    const { width, height } = currentViewportSize();
+    return (
+      window.matchMedia("(orientation: landscape) and (max-height: 520px) and (max-width: 932px)").matches ||
+      (width > height && width <= 932 && height <= 520)
+    );
   }
 
   /**
@@ -288,10 +311,10 @@
       }
     }
     if (availH < 100) {
-      availH = Math.max(100, window.innerHeight * 0.5);
+      availH = Math.max(100, currentViewportSize().height * 0.5);
     }
     if (availW < 160) {
-      availW = Math.max(160, window.innerWidth * 0.85);
+      availW = Math.max(160, currentViewportSize().width * 0.85);
     }
 
     let w = inner.scrollWidth;
@@ -871,14 +894,22 @@
       if (active) drawFlow(active);
     }, 80);
   }
-  window.addEventListener("resize", scheduleRedraw);
-  window.addEventListener("orientationchange", () => {
+
+  function scheduleViewportRedraw() {
+    updateVisibleViewportVars();
     scheduleRedraw();
-    setTimeout(scheduleRedraw, 240);
+  }
+
+  window.addEventListener("resize", scheduleViewportRedraw);
+  window.visualViewport?.addEventListener?.("resize", scheduleViewportRedraw);
+  window.visualViewport?.addEventListener?.("scroll", scheduleViewportRedraw, { passive: true });
+  window.addEventListener("orientationchange", () => {
+    scheduleViewportRedraw();
+    setTimeout(scheduleViewportRedraw, 240);
   });
   window.screen?.orientation?.addEventListener?.("change", () => {
-    scheduleRedraw();
-    setTimeout(scheduleRedraw, 240);
+    scheduleViewportRedraw();
+    setTimeout(scheduleViewportRedraw, 240);
   });
   // Images inside the active view may load after showView -- redraw then.
   stage.querySelectorAll("img").forEach((img) => {
