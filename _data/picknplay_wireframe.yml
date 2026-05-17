@@ -141,12 +141,17 @@ phases:
         name: "Public Pool (Filled)"
         image: "Lobby/publicpoolfilled.png"
       - type: screen
+        id: roomqr
+        name: "Room QR Invite"
+        image: "Lobby/roomqr.png"
+      - type: screen
         id: loadinggamedata
         name: "Loading Game Data"
         image: "Lobby/loadinggamedata.png"
     edges:
       - { from: publicpool-empty, to: private-pool, label: "add private games" }
       - { from: private-pool, to: publicpoolfilled, label: "games appear here" }
+      - { from: publicpoolfilled, to: roomqr, style: bidir }
       - { from: publicpoolfilled, to: loadinggamedata }
 
   - id: voting
@@ -160,6 +165,10 @@ phases:
         id: entername
         name: "Enter Name"
         image: "Voting/entername.png"
+      - type: screen
+        id: entername-filled
+        name: "Name Entered"
+        image: "Voting/entername-filled.png"
       - type: screen
         id: gameinfo-vote
         name: "Game Info & Vote"
@@ -204,7 +213,8 @@ phases:
         name: "Algo Visualization"
         image: "Voting/algorithmvis.png"
     edges:
-      - { from: entername, to: gameinfo-vote }
+      - { from: entername, to: entername-filled }
+      - { from: entername-filled, to: gameinfo-vote }
       - { from: gameinfo-vote, to: aianalysis }
       - { from: gameinfo-vote, to: preferencepage }
       - { from: preferencepage, to: full-preference }
