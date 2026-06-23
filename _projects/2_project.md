@@ -1,181 +1,117 @@
 ---
 layout: page
 title: IMPSY Web Interface
-description: making musical AI more legible, expressive, and usable
+description: making musical AI easier to see, shape, and perform with
+img: /assets/img/impsy-web-interface-teaser.jpg
 importance: 2
 category: work
+permalink: /projects/impsy-interface/
+related_publications: false
+last_edited: 2026-06-23
 ---
 
-(AI generated content may be wrong)
+I built the IMPSY web interface because the musical AI system was powerful, but the
+workflow was hard to read while performing. The model could listen, learn from
+performance data, and generate responses, yet much of that activity stayed behind the
+scenes. For a musician, that makes the system harder to trust and harder to shape.
 
-This project started from a gap I kept noticing when working with musical AI systems:
-the models were powerful, but the experience of using them still felt fragmented,
-technical, and a bit opaque. A lot of the interesting intelligence was happening in the
-background, while the performer only saw small parts of the process. That makes it
-hard to trust the system, hard to learn from it, and honestly hard to feel like it is a
-creative partner rather than a black box.
+The practical problem was not just "can the AI make sound?" It was: can a performer
+see what the system heard, what data is being used, which model is active, and when the
+AI is replying? If those parts are hidden, the system can feel like a black box instead
+of an instrument.
 
-So this project became an attempt to redesign that relationship. Instead of treating the
-interface as a thin control panel for machine learning, I approached it as part of the
-instrument itself.
+This project became my honours research project at ANU and later developed into a
+NIME 2026 paper with Charles Martin:
+**A Web Interface for Real-Time Interaction with Machine Learning in Musical
+Performance**. The paper appears at NIME 2026, held June 23-26, 2026 in London and
+online.
 
-## Project map
+{% include figure.liquid path="/assets/img/impsy-web-interface-teaser.jpg" alt="The IMPSY web interface running beside a MIDI controller" caption="The IMPSY web interface brings project management, performance, training, and configuration into a browser workflow." %}
 
-- [Overview](#overview)
-- [Background](#background)
-- [Requirements and design process](#requirements-and-design-process)
-- [System design and architecture](#system-design-and-architecture)
-- [User study and evaluation](#user-study-and-evaluation)
-- [What came out of it](#what-came-out-of-it)
-- [Where it goes next](#where-it-goes-next)
+## Project links
 
-## Overview
+- [Official NIME proceedings page](https://nime2026.org/proceedings/196.html)
+- [Official NIME PDF](https://nime.org/proceedings/2026/nime2026_102.pdf)
+- [Local final paper PDF](/assets/pdf/impsy-nime-2026-paper.pdf)
+- [Upstream IMPSY repository](https://github.com/cpmpercussion/impsy)
+- [Design process](/projects/impsy-interface/process/)
+- [System walkthrough](/projects/impsy-interface/system/)
+- [Study takeaways](/projects/impsy-interface/study/)
+- [Gallery](/projects/impsy-interface/gallery/)
+- [Resources](/projects/impsy-interface/resources/)
 
-The IMPSY Web Interface is a web-based system for creating and performing with
-interactive musical machine learning models. It builds around IMPSY, an existing
-predictive music system using mixture density recurrent neural networks (MDRNNs),
-and rethinks how musicians interact with that system in real time.
+## What the interface does
 
-The main idea is simple: if a performer is going to work with an intelligent instrument,
-they should be able to see what is happening, understand how their data matters, and
-feel that the system is responding with them rather than just at them.
+IMPSY is a real-time musical AI system for call-and-response performance. A performer
+plays with a MIDI controller, the system records the interaction, and a machine
+learning model can generate musical responses from that performance data.
 
-This work eventually produced both a full honours thesis and a shorter NIME paper
-version. The thesis let me go deeper into the HCI framing, the design process, and the
-evaluation. The paper distilled the core contribution into a more focused argument:
-transparency is not just a nice visual feature, it is part of how creative agency is built in
-human-AI performance.
+My interface sits around that loop. It helps users collect and inspect logs, choose
+data for training, train or select models, configure the performance setup, and return
+to live improvisation with visual feedback. The important shift is that the data and
+model steps are not treated as invisible background tasks. They become part of the
+creative workflow.
 
-## Background
+In the performance view, the interface separates the human and AI sides of the
+exchange. The performer can see incoming control data and the generated response while
+the interaction is happening. This visual layer is not meant to replace listening. It
+is there to make the state of the system easier to follow, especially when the model
+does something unexpected.
 
-This project sits between HCI, music technology, and interactive machine learning.
-From the HCI side, I was interested in usability, feedback, trust, and how interfaces can
-support both beginners and expert users. From the music side, I was looking at how
-visualisation can support expressive performance without replacing listening. And from
-the machine learning side, I was working with a system that predicts continuous musical
-control data in real time.
+{% include figure.liquid path="/assets/img/impsy-improvisation-visualisation.jpg" alt="The IMPSY improvisation view showing performer input and AI output" caption="The improvisation view makes the live human-AI exchange visible while it happens." %}
 
-A lot of existing tools do one thing well. Some are good at browser-based control
-widgets. Some are good at mapping. Some are good at AI-assisted generation. But many
-of them still break the workflow into disconnected steps or make the learning process
-feel hidden. That gap became the motivation for this project.
+## My contribution
 
-## Requirements and design process
+The work was not only a visual refresh. I designed the web workflow, built the React
+interface, connected it to the Python IMPSY backend, and used D3.js to make logs and
+live interaction easier to inspect. The interface had to support both performance and
+machine-learning tasks, so the design had to make room for quick musical interaction
+as well as slower steps like dataset selection and model configuration.
 
-Because this was a large project, I structured it in a way that felt closer to design work
-than pure implementation work. The thesis design process followed the Double Diamond
-framework, moving through discovery, definition, development, and delivery.
+That combination is what made the project interesting to me. It sat between HCI,
+creative coding, and music technology: close enough to the model to expose what it was
+doing, but focused on what a performer could actually use while making sound.
 
-The early stages focused on user stories and personas. I was trying to imagine how very
-different people might approach the same system:
+## Why it mattered
 
-- a hobbyist who just wants to make something quickly,
-- an intermediate musician who wants more control and personalisation,
-- and a more technical creator who wants deep system access and experimentation.
+Musical machine learning tools often ask users to move between separate technical
+steps: recording data, finding files, configuring training, starting the model, and
+then returning to performance. That can be workable for researchers, but it breaks the
+flow for a performer who is trying to listen, respond, and stay creative.
 
-That led to wireframes, paper sketches, Figma prototypes, and in-lab feedback sessions.
-What mattered most here was not just where buttons should go, but how much complexity
-should be visible at each moment. I kept coming back to the same tension: how do you
-show enough of the machine learning process to make it legible, without overwhelming
-people who just want to play?
+I wanted the interface to make the loop easier to understand without pretending that
+machine learning is simple. A clearer interface cannot fix sparse training data or make
+every model response musically satisfying. It can, however, show how the user's data
+connects to the model and how the model is behaving in performance.
 
-## System design and architecture
+That became the main design direction: make the system approachable, keep advanced
+controls available, and show enough feedback for users to make informed choices.
 
-The final system brings together a React-based frontend and a Python backend, with
-WebSockets, HTTP endpoints, and MIDI communication working together. Under the
-hood, the backend handles the generative logic, interaction state, training workflows, and
-prediction loop. On the surface, the frontend turns that into something musicians can
-actually work with.
+## What I learned
 
-One of the most important shifts in this project was treating the full machine learning
-lifecycle as part of the interface:
+The exploratory study suggested that visual feedback helped people follow what the
+system was doing. Users could more easily tell when the system was receiving input,
+when the AI was responding, and how the interaction was unfolding over time.
 
-- logging and collecting data,
-- curating datasets,
-- training and selecting models,
-- configuring interaction behaviour,
-- and performing with live feedback.
+The hard part was still training and expectation-setting. A quickly trained model may
+not produce the kind of musical response a user imagines, especially if the training
+data is sparse or inconsistent. The interface helped expose that relationship, but it
+did not remove the learning curve.
 
-The NIME paper version sharpened this into three main interface views:
+That lesson is useful beyond this one system. For creative AI tools, transparency is
+not only an explanatory feature. It is part of how people decide whether they can work
+with the system, adjust their behaviour, and keep creative control.
 
-1. **Project and data management** for provenance and organisation
-2. **Training configuration** for making model behaviour more understandable
-3. **Performance and real-time visualisation** for live interaction and co-creation
+## Read more
 
-The visual layer was especially important. I used a dual strategy:
+The deeper pages split the project into smaller parts:
 
-- bar-style visualisations for immediate input/output inspection,
-- and a more immersive particle-based background visualisation to show the relationship
-  between performer gestures and AI responses over time.
-
-That combination was meant to support both analytical reading and felt experience. One
-helps you verify what the system is doing. The other helps you sense it as part of the
-performance.
-
-## User study and evaluation
-
-The evaluation side of the project was just as important as the build itself. I wanted to
-know whether making the system more visible and more interactive actually changed how
-people experienced it.
-
-The study involved participants with different levels of musical and technical background.
-Sessions combined:
-
-- a short tutorial and familiarisation period,
-- live improvisation with the system,
-- and survey/interview follow-up.
-
-Quantitatively, the usability score landed in a moderate range rather than an excellent
-one. That was not entirely surprising. Machine learning workflows are still conceptually
-heavy, especially for first-time users. But the more interesting part was the qualitative
-side. Participants repeatedly pointed to transparency and feedback as the most valuable
-parts of the system.
-
-The strongest themes were:
-
-- empowerment through flexibility and co-creation,
-- trust-building through transparent feedback,
-- positive experience through clean visual design,
-- and emotional engagement during performance.
-
-That contrast was interesting to me. The system was not necessarily effortless, but it
-was engaging. For creative tools, that difference matters a lot.
-
-## What came out of it
-
-This project produced two connected outputs:
-
-### 1. Honours thesis
-
-The thesis gave me space to document the entire arc of the project, from background and
-motivation through to design process, implementation, evaluation, and future work. It is
-the fuller story of the project, including the HCI rationale and the user study framing.
-
-### 2. NIME paper
-
-The NIME paper took the same project and focused it into a sharper research claim:
-that exposing the internal behaviour and data provenance of an interactive ML music
-system can improve trust, agency, and creative dialogue in performance.
-
-Writing the paper made me realise that a lot of what I cared about was not just "making
-an interface for AI", but making the AI legible enough that musicians could actually form
-a relationship with it.
-
-## Where it goes next
-
-The project still feels open in a good way. The main limitation is that transparent
-interfaces do not magically solve everything. If a model is under-trained or the data is
-too sparse, visual clarity alone cannot fix the musical result. But it can help people
-understand why things are happening, which already changes the experience.
-
-If I continue this work, the next steps would be:
-
-- better onboarding for non-technical users,
-- longer-term studies with richer training data,
-- stronger support for iterative personalisation,
-- and further exploration of how visual feedback can become part of performance rather
-  than just explanation.
-
-In a way, this project was less about building a polished final tool and more about asking
-what kind of relationship we want between musicians and intelligent systems. That is
-still the question I care about most.
+- [Design process](/projects/impsy-interface/process/) explains how the honours
+  project moved from workflow problems to sketches, prototypes, and implementation.
+- [System walkthrough](/projects/impsy-interface/system/) follows the record, inspect,
+  train, configure, and perform loop.
+- [Study takeaways](/projects/impsy-interface/study/) summarises the public-safe
+  findings without raw participant material.
+- [Gallery](/projects/impsy-interface/gallery/) collects the selected public images.
+- [Resources](/projects/impsy-interface/resources/) keeps the paper, code, and pending
+  material decisions in one place.
