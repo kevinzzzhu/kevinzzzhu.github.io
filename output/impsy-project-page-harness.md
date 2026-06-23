@@ -31,6 +31,57 @@ The work should run as a controlled harness:
 
 Do not skip the tracker. It is the continuity layer for the next agent.
 
+## Multi-Agent Work Plan
+
+Do not assign the whole website refresh to one agent. Split the work into small,
+reviewable passes. Each agent must update the tracker rows that belong to its scope.
+
+Recommended sequence:
+
+1. **Source Audit Agent**: verify public facts, identify private/sensitive material, and
+   update the source/link tracker.
+2. **Thesis-to-Web Content Agent**: turn selected thesis chapters into readable page
+   outlines and draft copy, without copying thesis prose wholesale.
+3. **Asset Curation Agent**: select and copy only public-safe screenshots/PDF/video
+   assets, then update the asset ledger.
+4. **Page Implementation Agent**: implement the main project page and agreed subpages
+   using the audited content and assets.
+5. **QA / Release Agent**: run formatting, build, browser checks, link checks, and
+   sensitive-file scans before final commit.
+
+If Kevin wants to approve content before implementation, stop after Agent 2 and return
+the proposed page map plus draft copy.
+
+## Thesis-To-Web Page Strategy
+
+The honours thesis should be used as source material for readable public pages, not as
+a long PDF dump and not as copied thesis prose.
+
+Convert the thesis into web-friendly pages:
+
+- Short paragraphs, not chapter-style sections.
+- Concrete captions around screenshots.
+- Small takeaway blocks.
+- Plain terms before technical terms.
+- Personal framing where appropriate: "what I was trying to solve", "what changed",
+  "what I learned".
+- Links to deeper resources for people who want the academic version.
+
+Recommended public page set:
+
+| Page               | Purpose                              | Thesis material to translate                                  | Keep out                                                |
+| ------------------ | ------------------------------------ | ------------------------------------------------------------- | ------------------------------------------------------- |
+| Main project hub   | Fast overview and links              | Abstract, intro, final reflection, NIME paper                 | Long literature review, raw methods detail              |
+| Design Process     | Explain how the project took shape   | Requirements, personas, sketches, Figma/prototype process     | Full thesis prose, excessive theory                     |
+| System Walkthrough | Explain the tool in plain language   | System design, architecture, workflow, screenshots            | Code dumps, implementation minutiae                     |
+| User Study         | Explain what was learned             | Study procedure, SUS overview, thematic findings              | Raw participant data, full quotes, consent/ethics files |
+| Gallery            | Let visitors inspect visuals quickly | Public-safe screenshots and diagrams                          | Duplicate or low-quality screenshots                    |
+| Resources          | Collect public outputs               | NIME page, paper/poster/video links, maybe thesis if approved | Private review, CMT, ethics, raw data                   |
+
+Use the thesis PDF or LaTeX source to understand the story, but write new website
+copy. The website should feel like a personal project record that a musician, HCI
+student, or potential supervisor could understand without reading the thesis.
+
 ## Implementation Prompt
 
 You are a Jekyll/al-folio content implementation agent working in:
@@ -153,6 +204,9 @@ Use the thesis material to recover:
 - user study framing
 - what changed between honours thesis and NIME paper
 
+Translate this material into easy-to-understand pages. Do not paste thesis paragraphs
+directly unless a short phrase is clearly suitable for public-facing copy.
+
 Do not publish the thesis PDF unless Kevin explicitly confirms it should be public.
 If uncertain, mention it as an internal source only.
 
@@ -226,6 +280,9 @@ The main page should include:
 
 Create these if they fit cleanly with the existing al-folio structure.
 
+The pages below should be readable public translations of selected thesis material,
+not mini thesis chapters.
+
 #### Process Page
 
 Suggested URL:
@@ -244,9 +301,64 @@ Include:
 
 - how the honours project began
 - design process
+- the problem with the old workflow
+- user needs/personas in plain language
+- design goals and tradeoffs
 - thesis-to-paper transition
-- user study summary
 - what changed for NIME
+
+Keep it understandable to non-specialists. Use screenshots or diagrams where they
+clarify the story.
+
+#### System Walkthrough Page
+
+Suggested URL:
+
+```text
+/projects/impsy-interface/system/
+```
+
+Suggested file:
+
+```text
+_pages/impsy-interface-system.md
+```
+
+Include:
+
+- frontend/backend overview
+- logging/data/model/performance workflow
+- what users can control
+- how visual feedback makes the AI less opaque
+- architecture diagram and screenshots with plain captions
+
+Do not include long code explanations unless they affect public understanding of the
+project.
+
+#### User Study Page
+
+Suggested URL:
+
+```text
+/projects/impsy-interface/study/
+```
+
+Suggested file:
+
+```text
+_pages/impsy-interface-study.md
+```
+
+Include:
+
+- what the study asked
+- what participants did
+- main takeaways in plain language
+- what was hard for users
+- what this taught Kevin about transparent musical AI tools
+
+Do not include raw participant quotes, identifying details, consent/ethics forms, or
+full participant tables unless Kevin explicitly approves a specific excerpt.
 
 #### Gallery Page
 
@@ -371,38 +483,299 @@ git add .
 git commit -m "docs: refresh IMPSY project page"
 ```
 
+## Agent Prompt Pack
+
+Use these prompts as separate handoffs. Do not merge them into one giant task unless
+Kevin explicitly asks for a single-agent pass.
+
+### Agent 1: Source Audit And Public-Safety Pass
+
+```markdown
+# Agent Brief: IMPSY Source Audit
+
+<role>
+You are a source-audit and publication-safety agent. Your job is to verify public facts
+and decide which local materials are safe to use for Kevin's personal website.
+</role>
+
+<mission>
+Audit the IMPSY/NIME/thesis sources listed in
+`output/impsy-project-page-harness.md`, then update the tracker, link ledger, and
+decision list. Do not rewrite or implement website pages.
+</mission>
+
+<context>
+Workspace:
+/Users/kevinzhu/Documents/personal-website/kevinzzzhu.github.io
+
+Harness:
+output/impsy-project-page-harness.md
+
+Public source of truth:
+https://nime2026.org/proceedings/196.html
+https://nime2026.org/
+</context>
+
+<workflow>
+1. Read `AGENTS.md`, `CLAUDE.md`, and the harness.
+2. Verify the official NIME page facts: title, authors, session/type, abstract, links.
+3. Inspect the NIME publication folder and COMP4550 thesis folder at a high level.
+4. Identify which materials are public-safe, private, or need Kevin's decision.
+5. Update only the harness tracker, link ledger, and decisions table.
+</workflow>
+
+<constraints>
+- Do not modify website content pages.
+- Do not copy assets.
+- Do not publish or quote raw participant material.
+- Treat CMT reviews, ethics files, consent forms, and raw interviews as private.
+</constraints>
+
+<output_contract>
+Return:
+
+1. Public facts verified
+2. Materials marked safe/unsafe/needs decision
+3. Harness sections updated
+4. Remaining blockers
+   </output_contract>
+```
+
+### Agent 2: Thesis-To-Web Content Extraction
+
+```markdown
+# Agent Brief: IMPSY Thesis-To-Web Content
+
+<role>
+You are a research-to-web writing agent. You translate thesis material into clear,
+personal website content without making it sound like a thesis chapter.
+</role>
+
+<mission>
+Use the COMP4550 thesis materials to produce readable page outlines and draft copy for
+the IMPSY project pages. Do not implement site files unless Kevin explicitly asks.
+</mission>
+
+<context>
+Workspace:
+/Users/kevinzhu/Documents/personal-website/kevinzzzhu.github.io
+
+Harness:
+output/impsy-project-page-harness.md
+
+Thesis source:
+/Users/kevinzhu/Documents/ANU/ANU-Bachelor-of-Advanced-Computing/Semester-7-2024/COMP4550
+
+NIME source:
+/Users/kevinzhu/Documents/Publications/NIME-2026/IMPSY_Web_Interface_NIME_2026/nime-paper.tex
+</context>
+
+<workflow>
+1. Read the harness and check the public-safety decisions from Agent 1.
+2. Inspect thesis intro, requirements/design, system design, and evaluation sections.
+3. Draft page maps for:
+   - main project hub
+   - design process
+   - system walkthrough
+   - user study
+   - gallery captions
+   - resources
+4. Rewrite in web-friendly prose: short paragraphs, clear captions, personal tone.
+5. Update the harness with proposed page scope and any source rows checked.
+</workflow>
+
+<constraints>
+- Do not copy thesis paragraphs wholesale.
+- Do not include raw participant quotes or identifying details.
+- Do not publish the thesis PDF unless Kevin has approved it.
+- Avoid overclaiming; use "suggests", "helped", "supported", and similar wording.
+</constraints>
+
+<output_contract>
+Return:
+
+1. Recommended page map
+2. Draft copy for each page
+3. Screenshot/caption suggestions
+4. Claims that need source verification
+5. Harness rows updated
+   </output_contract>
+```
+
+### Agent 3: Public Asset Curation
+
+```markdown
+# Agent Brief: IMPSY Public Asset Curation
+
+<role>
+You are a visual asset and publication-safety agent. You select a small set of public
+assets for the website and copy them with clean names.
+</role>
+
+<mission>
+From the approved source folders in `output/impsy-project-page-harness.md`, select only
+the strongest public-safe images/PDF/video assets for the IMPSY project pages.
+</mission>
+
+<workflow>
+1. Read the harness, especially the public-safe asset ledger and decisions table.
+2. Inspect candidate images and public PDFs/video.
+3. Select a small set: main teaser, performance, configuration/training, architecture,
+   log visualisation, and optional study setup.
+4. Copy selected files into `assets/img/`, `assets/pdf/`, or `assets/video/` using clean,
+   lowercase filenames.
+5. Update the asset ledger with source, destination, safety status, and intended use.
+6. Run the sensitive-file scan from the harness.
+</workflow>
+
+<constraints>
+- Do not copy CMT/review/ethics/consent/participant/raw interview materials.
+- Do not copy the thesis PDF unless Kevin has approved it.
+- Do not dump every screenshot.
+- Avoid bloating the repo with unnecessary video if linking is better.
+</constraints>
+
+<output_contract>
+Return:
+
+1. Assets copied
+2. Assets rejected and why
+3. Sensitive-file scan result
+4. Harness asset ledger updates
+   </output_contract>
+```
+
+### Agent 4: Page Implementation
+
+```markdown
+# Agent Brief: IMPSY Page Implementation
+
+<role>
+You are a Jekyll/al-folio implementation agent. You turn approved copy and assets into
+site pages that match the existing personal website.
+</role>
+
+<mission>
+Implement the IMPSY project hub and approved linked pages using the audited source
+facts, drafted copy, and curated assets recorded in `output/impsy-project-page-harness.md`.
+</mission>
+
+<workflow>
+1. Read `AGENTS.md`, `CLAUDE.md`, al-folio content instructions, and the harness.
+2. Confirm Agent 1-3 tracker rows are complete enough to implement.
+3. Update `_projects/2_project.md`.
+4. Create approved subpages, likely:
+   - `_pages/impsy-interface-process.md`
+   - `_pages/impsy-interface-system.md`
+   - `_pages/impsy-interface-study.md`
+   - `_pages/impsy-interface-gallery.md`
+   - `_pages/impsy-interface-resources.md`
+5. Use existing al-folio markdown conventions and local assets.
+6. Update the tracker rows for implemented pages.
+</workflow>
+
+<constraints>
+- Keep the tone personal, clear, and not too academic.
+- Do not add unsupported claims.
+- Do not include private materials.
+- Do not publish thesis/video/code links unless the harness says they are approved.
+- Avoid heavy custom CSS unless unavoidable.
+</constraints>
+
+<output_contract>
+Return:
+
+1. Files changed
+2. Pages created/updated
+3. Links and assets used
+4. Harness tracker updates
+5. Any unresolved Kevin decisions
+   </output_contract>
+```
+
+### Agent 5: QA And Release Check
+
+```markdown
+# Agent Brief: IMPSY Website QA
+
+<role>
+You are a website QA and release-readiness agent for a Jekyll/al-folio site.
+</role>
+
+<mission>
+Verify the IMPSY project page refresh before commit. Focus on build correctness,
+visual rendering, links, dark mode, and absence of private copied materials.
+</mission>
+
+<workflow>
+1. Read the harness and inspect the implementation diff.
+2. Run `npx prettier . --write`.
+3. Run `docker compose down && docker compose up --build`.
+4. Browser-check `/projects/`, the main IMPSY page, and all new linked pages.
+5. Verify images, PDFs/video links, dark mode readability, and navigation.
+6. Run:
+   `find assets -type f | rg -i "review|cmt|ethic|consent|participant|interview|meta-review"`
+7. Fix small issues if clearly in scope; otherwise report blockers.
+8. Update the harness QA rows and commit with `docs: refresh IMPSY project page`.
+</workflow>
+
+<constraints>
+- Do not push.
+- Do not alter content direction unless fixing factual or rendering problems.
+- Do not remove unrelated user changes.
+</constraints>
+
+<output_contract>
+Return:
+
+1. Verification commands and results
+2. Browser pages checked
+3. Issues fixed
+4. Residual risks or blockers
+5. Commit hash
+   </output_contract>
+```
+
 ## Up-To-Date Tracker
 
 Update this table during implementation. Keep `Last checked` as an ISO date.
 
-| Item                          | Source / Path                                           | Status               | Last checked | Notes                                                     |
-| ----------------------------- | ------------------------------------------------------- | -------------------- | ------------ | --------------------------------------------------------- |
-| Project instructions          | `AGENTS.md`, `CLAUDE.md`                                | Not started          |              | Read before edits.                                        |
-| al-folio coding instructions  | `.github/copilot-instructions.md`                       | Not started          |              | Required for build and repo conventions.                  |
-| al-folio content instructions | `.github/instructions/markdown-content.instructions.md` | Not started          |              | Required for frontmatter and content files.               |
-| Current IMPSY project page    | `_projects/2_project.md`                                | Not started          |              | Remove AI warning line if present.                        |
-| Official NIME paper page      | `https://nime2026.org/proceedings/196.html`             | Not started          |              | Verify title, authors, format, session, abstract.         |
-| NIME homepage                 | `https://nime2026.org/`                                 | Checked              | 2026-06-23   | Confirms NIME 2026 dates and hybrid London/online format. |
-| Camera-ready paper source     | `.../IMPSY_Web_Interface_NIME_2026/nime-paper.tex`      | Not started          |              | Use for paper title and claims.                           |
-| Paper PDF                     | `.../IMPSY_Web_Interface_NIME_2026.pdf`                 | Not started          |              | Copy only if public-safe.                                 |
-| Poster PDF                    | `.../IMPSY_Web_Interface_NIME_2026_Poster.pdf`          | Not started          |              | Copy only if public-safe.                                 |
-| Lightning talk video          | `.../196_lightning_talk.mp4`                            | Not started          |              | Check size/rendering before hosting locally.              |
-| Thesis folder                 | `.../Semester-7-2024/COMP4550`                          | Not started          |              | First-class source for process and design story.          |
-| Thesis PDF                    | `.../COMP4550_Kevin_Zhu.pdf`                            | Needs Kevin decision |              | Do not publish without explicit approval.                 |
-| Teaser image                  | `zhu-web-interface-1000.jpg`                            | Not started          |              | Candidate main project image.                             |
-| Improvisation screenshot      | `new-impsy-improvisation.jpg`                           | Not started          |              | Candidate gallery/performance image.                      |
-| Configuration screenshot      | `configuration.jpg`                                     | Not started          |              | Candidate process/system image.                           |
-| Dataflow diagram              | `dataflow.png`                                          | Not started          |              | Candidate architecture image.                             |
-| Study setup image             | `minilab3.jpg`                                          | Not started          |              | Candidate evaluation/setup image.                         |
-| Log visualisation image       | `new-impsy-logvis-combined.png`                         | Not started          |              | Candidate transparency/log image.                         |
-| Main page rewrite             | `_projects/2_project.md`                                | Not started          |              | Keep personal, not overly academic.                       |
-| Process subpage               | `_pages/impsy-interface-process.md`                     | Proposed             |              | Create if scope remains useful.                           |
-| Gallery subpage               | `_pages/impsy-interface-gallery.md`                     | Proposed             |              | Create if selected images support it.                     |
-| Resources subpage             | `_pages/impsy-interface-resources.md`                   | Proposed             |              | Include official links and hosted assets.                 |
-| Sensitive file scan           | `find assets ... rg ...`                                | Not started          |              | Must pass before commit.                                  |
-| Formatting                    | `npx prettier . --write`                                | Not started          |              | Must run before commit.                                   |
-| Docker build/browser check    | `docker compose up --build`                             | Not started          |              | Verify project pages and dark mode.                       |
-| Commit                        | `docs: refresh IMPSY project page`                      | Not started          |              | Do not push.                                              |
+| Item                          | Source / Path                                           | Status               | Last checked | Notes                                                      |
+| ----------------------------- | ------------------------------------------------------- | -------------------- | ------------ | ---------------------------------------------------------- |
+| Project instructions          | `AGENTS.md`, `CLAUDE.md`                                | Not started          |              | Read before edits.                                         |
+| al-folio coding instructions  | `.github/copilot-instructions.md`                       | Not started          |              | Required for build and repo conventions.                   |
+| al-folio content instructions | `.github/instructions/markdown-content.instructions.md` | Not started          |              | Required for frontmatter and content files.                |
+| Current IMPSY project page    | `_projects/2_project.md`                                | Not started          |              | Remove AI warning line if present.                         |
+| Official NIME paper page      | `https://nime2026.org/proceedings/196.html`             | Not started          |              | Verify title, authors, format, session, abstract.          |
+| NIME homepage                 | `https://nime2026.org/`                                 | Checked              | 2026-06-23   | Confirms NIME 2026 dates and hybrid London/online format.  |
+| Camera-ready paper source     | `.../IMPSY_Web_Interface_NIME_2026/nime-paper.tex`      | Not started          |              | Use for paper title and claims.                            |
+| Paper PDF                     | `.../IMPSY_Web_Interface_NIME_2026.pdf`                 | Not started          |              | Copy only if public-safe.                                  |
+| Poster PDF                    | `.../IMPSY_Web_Interface_NIME_2026_Poster.pdf`          | Not started          |              | Copy only if public-safe.                                  |
+| Lightning talk video          | `.../196_lightning_talk.mp4`                            | Not started          |              | Check size/rendering before hosting locally.               |
+| Thesis folder                 | `.../Semester-7-2024/COMP4550`                          | Not started          |              | First-class source for process and design story.           |
+| Thesis PDF                    | `.../COMP4550_Kevin_Zhu.pdf`                            | Needs Kevin decision |              | Do not publish without explicit approval.                  |
+| Thesis-to-web page map        | Harness `Thesis-To-Web Page Strategy`                   | Proposed             | 2026-06-23   | Translate thesis into readable pages, not copied chapters. |
+| Source Audit Agent            | Harness `Agent Prompt Pack`                             | Proposed             | 2026-06-23   | Run first; no content implementation.                      |
+| Thesis-To-Web Agent           | Harness `Agent Prompt Pack`                             | Proposed             | 2026-06-23   | Draft page copy and captions; no site implementation.      |
+| Asset Curation Agent          | Harness `Agent Prompt Pack`                             | Proposed             | 2026-06-23   | Copy only selected public-safe assets.                     |
+| Page Implementation Agent     | Harness `Agent Prompt Pack`                             | Proposed             | 2026-06-23   | Implement only after audit/copy decisions are clear.       |
+| QA / Release Agent            | Harness `Agent Prompt Pack`                             | Proposed             | 2026-06-23   | Final formatting, build, browser, and sensitive scan.      |
+| Teaser image                  | `zhu-web-interface-1000.jpg`                            | Not started          |              | Candidate main project image.                              |
+| Improvisation screenshot      | `new-impsy-improvisation.jpg`                           | Not started          |              | Candidate gallery/performance image.                       |
+| Configuration screenshot      | `configuration.jpg`                                     | Not started          |              | Candidate process/system image.                            |
+| Dataflow diagram              | `dataflow.png`                                          | Not started          |              | Candidate architecture image.                              |
+| Study setup image             | `minilab3.jpg`                                          | Not started          |              | Candidate evaluation/setup image.                          |
+| Log visualisation image       | `new-impsy-logvis-combined.png`                         | Not started          |              | Candidate transparency/log image.                          |
+| Main page rewrite             | `_projects/2_project.md`                                | Not started          |              | Keep personal, not overly academic.                        |
+| Process subpage               | `_pages/impsy-interface-process.md`                     | Proposed             |              | Create if scope remains useful.                            |
+| System walkthrough subpage    | `_pages/impsy-interface-system.md`                      | Proposed             |              | Translate thesis system design into plain language.        |
+| User study subpage            | `_pages/impsy-interface-study.md`                       | Proposed             |              | Translate thesis evaluation into public-safe takeaways.    |
+| Gallery subpage               | `_pages/impsy-interface-gallery.md`                     | Proposed             |              | Create if selected images support it.                      |
+| Resources subpage             | `_pages/impsy-interface-resources.md`                   | Proposed             |              | Include official links and hosted assets.                  |
+| Sensitive file scan           | `find assets ... rg ...`                                | Not started          |              | Must pass before commit.                                   |
+| Formatting                    | `npx prettier . --write`                                | Not started          |              | Must run before commit.                                    |
+| Docker build/browser check    | `docker compose up --build`                             | Not started          |              | Verify project pages and dark mode.                        |
+| Commit                        | `docs: refresh IMPSY project page`                      | Not started          |              | Do not push.                                               |
 
 Status values:
 
