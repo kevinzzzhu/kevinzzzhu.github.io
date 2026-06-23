@@ -31,6 +31,97 @@ The work should run as a controlled harness:
 
 Do not skip the tracker. It is the continuity layer for the next agent.
 
+## Completed Planning Outputs
+
+These report files are now part of the handoff. Use them before assigning page
+implementation:
+
+| Output                                 | Owner scope                      | How implementation should use it                                                                 |
+| -------------------------------------- | -------------------------------- | ------------------------------------------------------------------------------------------------ |
+| `output/impsy-source-audit.md`         | Public fact and safety audit     | Use for source precedence, official NIME facts, private/excluded materials, and Kevin decisions. |
+| `output/impsy-thesis-to-web-draft.md`  | Thesis-to-web content drafting   | Use as source copy, but compress and rewrite to match the style review.                          |
+| `output/impsy-asset-inventory.md`      | Visual/PDF/video asset inventory | Use for the first copy set and avoid list; do not copy rejected/private assets.                  |
+| `output/impsy-style-manager-review.md` | Site voice and style consistency | Use as the writing standard for the implementation agent.                                        |
+| `output/impsy-ui-test-plan.md`         | Browser and release QA plan      | Use as the final QA checklist after implementation.                                              |
+
+## Integrated Findings For Implementation
+
+### Verified Public Facts
+
+- Official project title:
+  `A Web Interface for Real-Time Interaction with Machine Learning in Musical Performance`
+- Authors: Hongzhe Zhu and Charles Martin.
+- Venue: NIME 2026 / New Interfaces for Musical Expression 2026.
+- Conference: June 23-26, 2026, London, UK and online.
+- Official proceedings page: `https://nime2026.org/proceedings/196.html`.
+- Official paper PDF: `https://nime.org/proceedings/2026/nime2026_102.pdf`.
+- Presentation metadata from the source audit: poster, remote presence, medium paper,
+  Poster Session 3, Friday 2026-06-26, 12:30-14:30 BST, Fourth Floor.
+- If mentioning quantitative study results, use the final paper value: SUS mean
+  62.50, SD 11.9. Prefer qualitative/plain-language summary on the hub.
+
+### Source Precedence
+
+Use this order when facts conflict:
+
+1. Official NIME proceedings page and linked official PDF.
+2. Local camera-ready paper source:
+   `/Users/kevinzhu/Documents/Publications/NIME-2026/IMPSY_Web_Interface_NIME_2026/nime-paper.tex`.
+3. Local final paper/poster/video assets.
+4. COMP4550 thesis PDF and LaTeX source as internal design-story material.
+5. Older drafts, package guides, review responses, and planning notes only as
+   historical context.
+
+Do not use the older title
+`IMPSY: A Web Interface for Democratizing Human-AI Musical Collaboration`.
+
+### First-Pass Asset Recommendation
+
+The implementation pass should use a small curated set:
+
+- Main teaser: `assets/img/impsy-web-interface-teaser.jpg`
+- Performance visual: `assets/img/impsy-improvisation-visualisation.jpg`
+- Configuration/setup: `assets/img/impsy-configuration.jpg`
+- Architecture/dataflow: `assets/img/impsy-dataflow.png`
+- Log/transparency visual: `assets/img/impsy-log-visualisation.png`
+- Optional hardware image: `assets/img/impsy-minilab-controller.jpg`
+
+PDF/video recommendation:
+
+- Link the official NIME proceedings page and official PDF.
+- Copy local paper/poster PDFs only if the implementation agent confirms they are the
+  final public versions.
+- Prefer an official external video link for the lightning talk; copy the MP4/SRT only
+  if no stable external link exists and Kevin approves local hosting.
+- Do not copy the thesis PDF in this refresh unless Kevin explicitly approves it.
+
+### Style Guardrails
+
+- Main hub target length: 800-1,100 words.
+- Process/system/study pages: roughly 500-900 words each.
+- Gallery/resources should stay short and functional.
+- Start with the practical problem before the research framing.
+- Pair abstract ideas like transparency, trust, and agency with concrete UI details:
+  logs, input/output visualisation, training state, model selection.
+- Do not make the hub a thesis chapter or a copy of the NIME abstract.
+- Avoid "proved", "solved", "validated", and broad "democratizing AI" framing.
+- Remove `(AI generated content may be wrong)` from the current project page.
+
+### QA Requirements
+
+Final QA must verify:
+
+- `/projects/`
+- final IMPSY hub route
+- `/projects/impsy-interface/process/`
+- `/projects/impsy-interface/system/`
+- `/projects/impsy-interface/study/`
+- `/projects/impsy-interface/gallery/`
+- `/projects/impsy-interface/resources/`
+- all copied image/PDF/video routes
+- mobile wrapping for the long paper title and URLs
+- no sensitive copied files via the scan in the Verification section
+
 ## Multi-Agent Work Plan
 
 Do not assign the whole website refresh to one agent. Split the work into small,
@@ -48,6 +139,9 @@ Recommended sequence:
    using the audited content and assets.
 5. **QA / Release Agent**: run formatting, build, browser checks, link checks, and
    sensitive-file scans before final commit.
+
+Agents 1, 2, 3, and the manager/test-planning passes are complete. The next agent
+should be the Page Implementation Agent, followed by the QA / Release Agent.
 
 If Kevin wants to approve content before implementation, stop after Agent 2 and return
 the proposed page map plus draft copy.
@@ -740,42 +834,44 @@ Return:
 
 Update this table during implementation. Keep `Last checked` as an ISO date.
 
-| Item                          | Source / Path                                           | Status               | Last checked | Notes                                                      |
-| ----------------------------- | ------------------------------------------------------- | -------------------- | ------------ | ---------------------------------------------------------- |
-| Project instructions          | `AGENTS.md`, `CLAUDE.md`                                | Not started          |              | Read before edits.                                         |
-| al-folio coding instructions  | `.github/copilot-instructions.md`                       | Not started          |              | Required for build and repo conventions.                   |
-| al-folio content instructions | `.github/instructions/markdown-content.instructions.md` | Not started          |              | Required for frontmatter and content files.                |
-| Current IMPSY project page    | `_projects/2_project.md`                                | Not started          |              | Remove AI warning line if present.                         |
-| Official NIME paper page      | `https://nime2026.org/proceedings/196.html`             | Not started          |              | Verify title, authors, format, session, abstract.          |
-| NIME homepage                 | `https://nime2026.org/`                                 | Checked              | 2026-06-23   | Confirms NIME 2026 dates and hybrid London/online format.  |
-| Camera-ready paper source     | `.../IMPSY_Web_Interface_NIME_2026/nime-paper.tex`      | Not started          |              | Use for paper title and claims.                            |
-| Paper PDF                     | `.../IMPSY_Web_Interface_NIME_2026.pdf`                 | Not started          |              | Copy only if public-safe.                                  |
-| Poster PDF                    | `.../IMPSY_Web_Interface_NIME_2026_Poster.pdf`          | Not started          |              | Copy only if public-safe.                                  |
-| Lightning talk video          | `.../196_lightning_talk.mp4`                            | Not started          |              | Check size/rendering before hosting locally.               |
-| Thesis folder                 | `.../Semester-7-2024/COMP4550`                          | Not started          |              | First-class source for process and design story.           |
-| Thesis PDF                    | `.../COMP4550_Kevin_Zhu.pdf`                            | Needs Kevin decision |              | Do not publish without explicit approval.                  |
-| Thesis-to-web page map        | Harness `Thesis-To-Web Page Strategy`                   | Proposed             | 2026-06-23   | Translate thesis into readable pages, not copied chapters. |
-| Source Audit Agent            | Harness `Agent Prompt Pack`                             | Proposed             | 2026-06-23   | Run first; no content implementation.                      |
-| Thesis-To-Web Agent           | Harness `Agent Prompt Pack`                             | Proposed             | 2026-06-23   | Draft page copy and captions; no site implementation.      |
-| Asset Curation Agent          | Harness `Agent Prompt Pack`                             | Proposed             | 2026-06-23   | Copy only selected public-safe assets.                     |
-| Page Implementation Agent     | Harness `Agent Prompt Pack`                             | Proposed             | 2026-06-23   | Implement only after audit/copy decisions are clear.       |
-| QA / Release Agent            | Harness `Agent Prompt Pack`                             | Proposed             | 2026-06-23   | Final formatting, build, browser, and sensitive scan.      |
-| Teaser image                  | `zhu-web-interface-1000.jpg`                            | Not started          |              | Candidate main project image.                              |
-| Improvisation screenshot      | `new-impsy-improvisation.jpg`                           | Not started          |              | Candidate gallery/performance image.                       |
-| Configuration screenshot      | `configuration.jpg`                                     | Not started          |              | Candidate process/system image.                            |
-| Dataflow diagram              | `dataflow.png`                                          | Not started          |              | Candidate architecture image.                              |
-| Study setup image             | `minilab3.jpg`                                          | Not started          |              | Candidate evaluation/setup image.                          |
-| Log visualisation image       | `new-impsy-logvis-combined.png`                         | Not started          |              | Candidate transparency/log image.                          |
-| Main page rewrite             | `_projects/2_project.md`                                | Not started          |              | Keep personal, not overly academic.                        |
-| Process subpage               | `_pages/impsy-interface-process.md`                     | Proposed             |              | Create if scope remains useful.                            |
-| System walkthrough subpage    | `_pages/impsy-interface-system.md`                      | Proposed             |              | Translate thesis system design into plain language.        |
-| User study subpage            | `_pages/impsy-interface-study.md`                       | Proposed             |              | Translate thesis evaluation into public-safe takeaways.    |
-| Gallery subpage               | `_pages/impsy-interface-gallery.md`                     | Proposed             |              | Create if selected images support it.                      |
-| Resources subpage             | `_pages/impsy-interface-resources.md`                   | Proposed             |              | Include official links and hosted assets.                  |
-| Sensitive file scan           | `find assets ... rg ...`                                | Not started          |              | Must pass before commit.                                   |
-| Formatting                    | `npx prettier . --write`                                | Not started          |              | Must run before commit.                                    |
-| Docker build/browser check    | `docker compose up --build`                             | Not started          |              | Verify project pages and dark mode.                        |
-| Commit                        | `docs: refresh IMPSY project page`                      | Not started          |              | Do not push.                                               |
+| Item                          | Source / Path                                           | Status               | Last checked | Notes                                                                                      |
+| ----------------------------- | ------------------------------------------------------- | -------------------- | ------------ | ------------------------------------------------------------------------------------------ |
+| Project instructions          | `AGENTS.md`, `CLAUDE.md`                                | Not started          |              | Read before edits.                                                                         |
+| al-folio coding instructions  | `.github/copilot-instructions.md`                       | Not started          |              | Required for build and repo conventions.                                                   |
+| al-folio content instructions | `.github/instructions/markdown-content.instructions.md` | Not started          |              | Required for frontmatter and content files.                                                |
+| Current IMPSY project page    | `_projects/2_project.md`                                | Not started          |              | Remove AI warning line if present.                                                         |
+| Official NIME paper page      | `https://nime2026.org/proceedings/196.html`             | Checked              | 2026-06-23   | Title, authors, poster/remote/medium metadata, session, abstract verified by source audit. |
+| NIME homepage                 | `https://nime2026.org/`                                 | Checked              | 2026-06-23   | Confirms NIME 2026 dates and hybrid London/online format.                                  |
+| Camera-ready paper source     | `.../IMPSY_Web_Interface_NIME_2026/nime-paper.tex`      | Checked              | 2026-06-23   | Use after official NIME page/PDF for paper title and claims.                               |
+| Paper PDF                     | `.../IMPSY_Web_Interface_NIME_2026.pdf`                 | Selected             | 2026-06-23   | Local copy candidate; still link official NIME page/PDF as source of truth.                |
+| Poster PDF                    | `.../IMPSY_Web_Interface_NIME_2026_Poster.pdf`          | Needs Kevin decision | 2026-06-23   | Public-safe candidate if Kevin wants local poster hosting.                                 |
+| Lightning talk video          | `.../196_lightning_talk.mp4`                            | Needs Kevin decision | 2026-06-23   | Prefer official external link if available; local copy only if approved.                   |
+| Thesis folder                 | `.../Semester-7-2024/COMP4550`                          | Checked              | 2026-06-23   | First-class internal source for readable process/system/study pages.                       |
+| Thesis PDF                    | `.../COMP4550_Kevin_Zhu.pdf`                            | Needs Kevin decision |              | Do not publish without explicit approval.                                                  |
+| Thesis-to-web page map        | Harness `Thesis-To-Web Page Strategy`                   | Proposed             | 2026-06-23   | Translate thesis into readable pages, not copied chapters.                                 |
+| Source Audit Agent            | `output/impsy-source-audit.md`                          | Checked              | 2026-06-23   | Public facts, source precedence, exclusions, and decisions recorded.                       |
+| Thesis-To-Web Agent           | `output/impsy-thesis-to-web-draft.md`                   | Checked              | 2026-06-23   | Draft page copy and captions produced; implementation should compress.                     |
+| Asset Curation Agent          | `output/impsy-asset-inventory.md`                       | Checked              | 2026-06-23   | First-pass asset set recommended; no assets copied yet.                                    |
+| Style Manager Agent           | `output/impsy-style-manager-review.md`                  | Checked              | 2026-06-23   | Style guardrails and length targets ready for implementation.                              |
+| UI Test Planner Agent         | `output/impsy-ui-test-plan.md`                          | Checked              | 2026-06-23   | Route, browser, mobile, link, and sensitive-file QA plan ready.                            |
+| Page Implementation Agent     | Harness `Agent Prompt Pack`                             | Proposed             | 2026-06-23   | Implement only after audit/copy decisions are clear.                                       |
+| QA / Release Agent            | Harness `Agent Prompt Pack`                             | Proposed             | 2026-06-23   | Final formatting, build, browser, and sensitive scan.                                      |
+| Teaser image                  | `zhu-web-interface-1000.jpg`                            | Selected             | 2026-06-23   | Copy as `assets/img/impsy-web-interface-teaser.jpg`.                                       |
+| Improvisation screenshot      | `new-impsy-improvisation.jpg`                           | Selected             | 2026-06-23   | Copy as `assets/img/impsy-improvisation-visualisation.jpg`.                                |
+| Configuration screenshot      | `configuration.jpg`                                     | Selected             | 2026-06-23   | Copy as `assets/img/impsy-configuration.jpg`.                                              |
+| Dataflow diagram              | `dataflow.png`                                          | Selected             | 2026-06-23   | Copy as `assets/img/impsy-dataflow.png`; optimize if practical.                            |
+| Study setup image             | `minilab3.jpg`                                          | Selected             | 2026-06-23   | Optional copy as `assets/img/impsy-minilab-controller.jpg`.                                |
+| Log visualisation image       | `new-impsy-logvis-combined.png`                         | Selected             | 2026-06-23   | Copy as `assets/img/impsy-log-visualisation.png`; thesis-derived UI screenshot.            |
+| Main page rewrite             | `_projects/2_project.md`                                | Not started          |              | Keep personal, not overly academic.                                                        |
+| Process subpage               | `_pages/impsy-interface-process.md`                     | Proposed             |              | Create if scope remains useful.                                                            |
+| System walkthrough subpage    | `_pages/impsy-interface-system.md`                      | Proposed             |              | Translate thesis system design into plain language.                                        |
+| User study subpage            | `_pages/impsy-interface-study.md`                       | Proposed             |              | Translate thesis evaluation into public-safe takeaways.                                    |
+| Gallery subpage               | `_pages/impsy-interface-gallery.md`                     | Proposed             |              | Create if selected images support it.                                                      |
+| Resources subpage             | `_pages/impsy-interface-resources.md`                   | Proposed             |              | Include official links and hosted assets.                                                  |
+| Sensitive file scan           | `find assets ... rg ...`                                | Not started          |              | Must pass before commit.                                                                   |
+| Formatting                    | `npx prettier . --write`                                | Not started          |              | Must run before commit.                                                                    |
+| Docker build/browser check    | `docker compose up --build`                             | Not started          |              | Verify project pages and dark mode.                                                        |
+| Commit                        | `docs: refresh IMPSY project page`                      | Not started          |              | Do not push.                                                                               |
 
 Status values:
 
@@ -800,11 +896,13 @@ When copying files, record every copied source and destination.
 
 Record every external or local link added to the website.
 
-| Link text                | URL / path                                  | Verified?       | Where used                     | Notes                            |
-| ------------------------ | ------------------------------------------- | --------------- | ------------------------------ | -------------------------------- |
-| Official NIME paper page | `https://nime2026.org/proceedings/196.html` | No              | Proposed quick links/resources | Verify live before publishing.   |
-| NIME 2026 homepage       | `https://nime2026.org/`                     | Yes, 2026-06-23 | Context/resources              | Confirms conference dates/theme. |
-| IMPSY upstream repo      | `https://github.com/cpmpercussion/impsy`    | No              | Proposed quick links/resources | Verify before publishing.        |
+| Link text                | URL / path                                           | Verified?       | Where used                       | Notes                                                         |
+| ------------------------ | ---------------------------------------------------- | --------------- | -------------------------------- | ------------------------------------------------------------- |
+| Official NIME paper page | `https://nime2026.org/proceedings/196.html`          | Yes, 2026-06-23 | Proposed quick links/resources   | Source audit verified title, authors, metadata, and abstract. |
+| Official NIME PDF        | `https://nime.org/proceedings/2026/nime2026_102.pdf` | Yes, 2026-06-23 | Proposed quick links/resources   | Prefer as public paper PDF source of truth.                   |
+| Poster Session 3         | `https://nime2026.org/sessions/posters-3.html`       | Yes, 2026-06-23 | Optional resources/status detail | Source audit verified session time/location.                  |
+| NIME 2026 homepage       | `https://nime2026.org/`                              | Yes, 2026-06-23 | Context/resources                | Confirms conference dates/theme.                              |
+| IMPSY upstream repo      | `https://github.com/cpmpercussion/impsy`             | No              | Proposed quick links/resources   | Verify before publishing.                                     |
 
 ## Decisions Needed From Kevin
 
