@@ -5,24 +5,24 @@ permalink: /projects/impsy-interface/study/
 description: Public-safe takeaways from the exploratory IMPSY web interface study
 nav: false
 created: 2026-06-23
-last_edited: 2026-06-23
+last_edited: 2026-06-25
 tags:
   - impsy
   - study
   - hci
 ---
 
-I evaluated the interface through a small exploratory study. The goal was not to prove
-that the system solved musical AI interaction. It was to understand how people made
-sense of the interface, where the workflow helped, and where the learning curve
-remained.
+I evaluated the interface through a small exploratory honours study. The goal was not
+to prove that the system solved musical AI interaction. It was to understand how
+people made sense of the workflow, where visual feedback helped, and where the
+learning curve stayed visible.
 
-Five participants used the system in a structured session. They were introduced to the
+Five people used the system in a structured session. They were introduced to the
 interface and controller, explored the system through improvisation, worked with a
-model, and then completed a usability survey and interview.
+model, and then completed post-session responses.
 
-No raw participant quotes, identifying details, consent material, or study documents
-are included here. This page only summarises public-safe takeaways.
+No source quotes, identifying details, private forms, or study documents are included
+here. I am only summarising public-safe takeaways.
 
 ## What the study asked
 
@@ -46,21 +46,22 @@ still complex.
 The study suggested that transparency can support creative agency. When users can see
 more of the system state, they have more information for deciding what to try next.
 
+{% include figure.liquid path="/assets/img/impsy-configuration.jpg" alt="IMPSY configuration interface shown beside a compact MIDI controller" caption="The study used a compact controller-and-browser setup so people could move between musical interaction and system configuration." %}
+
 ## What was still hard
 
 Training a musical AI model is still conceptually demanding. The interface made the
 workflow clearer, but it did not remove the need to understand that model behaviour is
 shaped by the data it sees.
 
-The NIME paper reports a System Usability Scale mean of 62.50 with a standard
-deviation of 11.9. I treat that as a signal for further design work, not as a final
-judgement on the system. The interface helped people read the interaction, but the
-whole workflow still had a learning curve.
-
 There was also a mismatch between some expectations and what a small, quickly trained
 model could produce. In a short session, users may not create enough structured data
 for satisfying musical responses. That can make the AI feel unpredictable even when
 the interface is accurately showing what is happening.
+
+The thesis and NIME paper report a System Usability Scale mean of 62.50. I treat that
+as a design signal, not as a headline result. It says the interface had useful
+direction, but still needed stronger onboarding and learnability.
 
 ## What I took from it
 

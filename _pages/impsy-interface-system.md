@@ -5,31 +5,30 @@ permalink: /projects/impsy-interface/system/
 description: A plain-language walkthrough of the IMPSY web interface workflow
 nav: false
 created: 2026-06-23
-last_edited: 2026-06-23
+last_edited: 2026-06-25
 tags:
   - impsy
   - system
   - musical-ai
 ---
 
-The IMPSY web interface connects a browser-based control surface to a Python musical
-AI backend. The browser gives the user a place to manage projects, inspect data, train
-or select models, configure the setup, and perform with the AI. The backend handles
-model logic, MIDI communication, logging, and timing-sensitive musical response.
+The system is easiest to understand as a loop: play, inspect, train, configure, and
+return to performance.
 
-The important idea is that the interface follows the whole machine-learning music
-loop, not just the final performance moment.
+The browser interface handles the visible workflow. The Python backend handles IMPSY's
+musical AI logic, MIDI communication, logging, and timing-sensitive response. I start
+with what a user does first, then leave the backend details for the technical snapshot.
 
-## 1. Play and record
+## 1. Connect and play
 
-A performer plays with a MIDI controller. The system records the interaction as a log
-so it can be inspected later or reused as training material.
+A performer starts with a MIDI controller and the browser interface. The first job of
+the interface is to make the system state visible: is the controller connected, is the
+system receiving input, and is the performance being recorded?
 
-During performance, the interface shows live control data. This gives the performer a
-basic check that the system is receiving input and that the musical action is entering
-the AI workflow.
+This matters because the user's playing is not only sound. It is also data that can be
+reviewed, selected, and used for later model training.
 
-{% include figure.liquid path="/assets/img/impsy-minilab-controller.jpg" alt="A compact MIDI controller used with the IMPSY interface" caption="The public study setup used a compact controller and laptop-style workflow rather than a large installation." %}
+{% include figure.liquid path="/assets/img/impsy-minilab-controller.jpg" alt="A compact MIDI controller used with the IMPSY interface" caption="The compact controller setup reflects the small-studio context used for testing and demonstration." %}
 
 ## 2. See the AI respond
 
@@ -41,7 +40,7 @@ user can tell when they are driving the sound and when the model is contributing
 That visibility helped turn the model from a hidden process into something closer to a
 responsive instrument.
 
-{% include figure.liquid path="/assets/img/impsy-improvisation-visualisation.jpg" alt="IMPSY improvisation screen with input and output visualisation" caption="The live view separates human input and AI output so the performer can follow the exchange." %}
+{% include figure.liquid path="/assets/img/impsy-improvisation-visualisation.jpg" alt="IMPSY improvisation view with human input and AI output visualisation" caption="The live view separates performer input from AI output so the call-and-response interaction is visible while it happens." %}
 
 ## 3. Inspect recorded data
 
@@ -52,26 +51,32 @@ Instead of treating recordings as hidden files, the system makes the recorded ma
 part of the browser workflow. That helps users decide which takes are useful for
 training and which ones should be left out.
 
-## 4. Build a model
+## 4. Train or choose a model
 
-The user can select logs and use them as training material. Training is still a
-technical step, but the interface can make it easier to follow by showing progress and
-keeping model choices close to the rest of the workflow.
+The user can train from selected material or choose an existing model. Training is
+still conceptually difficult, especially in a short creative session, but the interface
+can make the step more visible by keeping data, model state, and progress close to the
+rest of the workflow.
 
-This is one of the main public points of the project: the system does not only show
-the AI's final output. It also shows the path from the user's performance data to the
-model that later responds in performance.
+This is the relationship I wanted the interface to make clearer: the system does not
+only show the AI's final output. It also shows the path from the user's performance
+data to the model that later responds in performance.
 
-## 5. Return to performance
+## 5. Configure and return to performance
 
-Once a model is selected or trained, the performer can return to improvisation. The
-loop starts again: play, listen, inspect, train, configure, and refine.
+Configuration stays in the browser workflow so setup is not detached from performance.
+Once the user has selected settings and a model, they return to improvisation and the
+loop starts again.
 
-That repeated loop is where the interface becomes part of the instrument. It gives the
-performer a way to understand and shape the AI through use, rather than treating the
-model as a separate technical object.
+That repeated loop is the heart of the project. The interface lets the user move
+between musical action and machine-learning state without treating the model as a
+separate technical object.
 
-{% include figure.liquid path="/assets/img/impsy-dataflow.png" alt="IMPSY system dataflow diagram" caption="The system links MIDI hardware, the Python IMPSY backend, browser views, logs, models, and real-time communication." %}
+{% include figure.liquid path="/assets/img/impsy-configuration.jpg" alt="IMPSY configuration interface" caption="Configuration stays visible in the browser workflow so setup decisions remain connected to performance." %}
+
+{% include figure.liquid path="/assets/img/impsy-dataflow.png" alt="IMPSY system dataflow diagram" caption="The system links MIDI hardware, the Python backend, logs, models, browser visualisation, and real-time communication." %}
+
+{% include figure.liquid path="/assets/img/impsy-interaction-flow.jpg" alt="IMPSY interaction flow diagram" caption="The interaction flow shows how setup, performance, logs, training, models, and configuration connect in use." %}
 
 ## Technical snapshot
 

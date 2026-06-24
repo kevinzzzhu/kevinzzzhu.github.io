@@ -2,26 +2,38 @@
 layout: page
 title: IMPSY design process
 permalink: /projects/impsy-interface/process/
-description: How the IMPSY web interface moved from workflow problems to a public NIME paper
+description: How the honours project moved from workflow problems to sketches, prototypes, and design goals
 nav: false
 created: 2026-06-23
-last_edited: 2026-06-23
+last_edited: 2026-06-25
 tags:
   - impsy
   - design-process
   - hci
 ---
 
-The interface started from a practical gap in the original IMPSY workflow. The AI
-system could record performances, train models, and generate responses, but moving
-between those steps was still fragmented. A performer had to understand what was
-running, where the data was stored, which model was active, and whether the AI was
-listening or replying.
+The interface did not start as a visual polish layer. It started from a workflow
+problem. The original IMPSY system could record performances, train models, and
+generate responses, but the user had to understand several separate technical steps to
+keep the interaction moving.
 
-For a researcher, that kind of workflow can be manageable. For a musician trying to
-stay in a creative flow, it adds friction at exactly the wrong moment.
+For the honours project, I treated that as an HCI problem. The main question was: how
+can a musician understand and shape a musical AI system while still staying in a
+creative flow?
 
-## Starting from use
+## Understanding the old workflow
+
+The old interface exposed useful parts of IMPSY, including logs, datasets, models, and
+configuration. The issue was not that these pieces were missing. The issue was that
+the relationship between them was not easy to read during use.
+
+That gave me the first design direction: keep the whole loop visible. A user should be
+able to see how performance becomes data, how data becomes a model, and how that model
+returns to live interaction.
+
+{% include figure.liquid path="/assets/img/impsy-old-workflow-home.jpg" alt="The older IMPSY home workflow" caption="The previous workflow exposed the system's parts, but the redesign needed to make the relationship between performance, data, models, and response easier to follow." %}
+
+## Personas as design tools
 
 I treated the honours project as an interface design problem, not only an engineering
 task. The early work asked what different users might need from the same system: a
@@ -29,16 +41,16 @@ beginner who wants to try sound quickly, a musician who wants to shape a model a
 their own playing, and a technical creator who wants more control over configuration
 and data.
 
-Those user types were design tools, not claims about real participant groups. They
-helped keep the interface from serving only an expert user who already understands the
-backend.
+Those user types helped me avoid designing only for an expert user who already
+understands the backend. I used them to keep the interface grounded in different
+levels of musical and technical confidence.
 
 The design direction became progressive disclosure. A new user should be able to start
 playing and see useful feedback quickly. Deeper settings, model choices, and MIDI
 configuration should still be available, but they should not block the first musical
 interaction.
 
-## From workflow problem to prototype
+## Sketching the loop
 
 The old workflow made it too easy to lose the connection between action and result.
 Recording data, choosing training material, configuring the system, and performing
@@ -52,7 +64,9 @@ The key question was not just where to put buttons. It was how the interface cou
 show the relationship between performance data, model behaviour, and the musical
 response.
 
-{% include figure.liquid path="/assets/img/impsy-configuration.jpg" alt="IMPSY configuration interface" caption="Configuration stayed part of the visible workflow so setup decisions did not feel detached from performance." %}
+{% include figure.liquid path="/assets/img/impsy-wireframe-sketch.jpg" alt="Early paper wireframe for the IMPSY interface" caption="The early sketch explored how performance, logs, training, models, and configuration could become one connected workflow." %}
+
+{% include figure.liquid path="/assets/img/impsy-figma-prototype-flow.jpg" alt="Figma prototype flow for the IMPSY web interface" caption="The Figma prototype turned the rough workflow into connected screens before implementation." %}
 
 ## Design goals
 
@@ -69,8 +83,8 @@ creative loop: play, inspect, train, return to performance, and refine.
 
 ## From thesis to NIME
 
-The honours thesis gave me room to document the whole design process: requirements,
-early interface structures, implementation, and the exploratory study.
+The honours thesis gave me room to document the whole process: requirements, early
+interface structures, implementation, and the exploratory study.
 
 The NIME paper sharpened the public framing. It focused on real-time interaction with
 machine learning in musical performance, and on how interface transparency can support
