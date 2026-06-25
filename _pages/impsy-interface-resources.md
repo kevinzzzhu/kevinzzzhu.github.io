@@ -12,6 +12,8 @@ tags:
   - nime
 ---
 
+{% include impsy_project_nav.liquid active="resources" %}
+
 This page collects the public materials for the IMPSY web interface project. The
 project began as my COMP4550 honours work at ANU and later became a NIME 2026 paper. I
 keep private study context and materials still awaiting public-release decisions off
@@ -26,6 +28,11 @@ this page.
 
 The honours thesis guides the website story. I will add the thesis PDF only after a
 public release is approved.
+
+The project should be read in two layers. The thesis layer contains the design process,
+system implementation, and exploratory study. The NIME layer is the later public paper
+that presents the work to the musical-interface community. This page keeps those
+materials separated so the project does not collapse into only a publication entry.
 
 ## Publication
 
@@ -44,6 +51,22 @@ Hongzhe Zhu and Charles Martin, NIME 2026, June 23-26, 2026, London and online.
 I am linking the upstream IMPSY repository here because it is the public code source
 confirmed for this refresh. I will add a separate web-interface repository once a
 public repo is confirmed.
+
+The web interface work built around that upstream system. It connected a React
+frontend, Python backend, D3 visualisations, MIDI/OSC/WebSocket communication, and
+configuration files into a workflow for performance, log inspection, model training,
+and model reuse.
+
+## What is intentionally not public here
+
+Some thesis material is useful for writing but not appropriate to publish directly on
+the website. I am not hosting raw participant material, consent forms, ethics
+documents, interview transcripts, feedback PDFs, or internal review material. The
+public pages summarise the study findings and use only public-safe images.
+
+The honours thesis PDF, poster, and talk video are still treated as release decisions.
+They can be added later, but only after checking that they are appropriate for public
+distribution.
 
 ## Website assets
 
@@ -74,3 +97,5 @@ can repeat images for browsing.
 - Add the poster PDF after Kevin confirms it should be public on the website.
 - Add the lightning talk video after the public-release and hosting decision is made.
 - Add a separate web-interface code repository after a public repo is verified.
+
+{% include impsy_project_nav.liquid active="resources" %}

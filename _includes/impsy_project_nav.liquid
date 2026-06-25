@@ -1,0 +1,81 @@
+<nav class="impsy-project-nav" aria-label="IMPSY project pages">
+  <style>
+    .impsy-project-nav {
+      border-bottom: 1px solid var(--global-divider-color);
+      border-top: 1px solid var(--global-divider-color);
+      margin: 1.25rem 0 2rem;
+      padding: 0.85rem 0;
+    }
+
+    .impsy-project-nav__links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .impsy-project-nav__link {
+      border: 1px solid var(--global-divider-color);
+      border-radius: 4px;
+      font-size: 0.9rem;
+      line-height: 1.2;
+      padding: 0.45rem 0.65rem;
+    }
+
+    .impsy-project-nav__link[aria-current='page'] {
+      background: var(--global-theme-color);
+      border-color: var(--global-theme-color);
+      color: var(--global-bg-color);
+    }
+  </style>
+
+  <div class="impsy-project-nav__links">
+    <a
+      class="impsy-project-nav__link"
+      href="/projects/impsy-interface/"
+      {% if include.active == 'overview' %}
+        aria-current="page"
+      {% endif %}
+      >Overview</a
+    >
+    <a
+      class="impsy-project-nav__link"
+      href="/projects/impsy-interface/process/"
+      {% if include.active == 'process' %}
+        aria-current="page"
+      {% endif %}
+      >Design process</a
+    >
+    <a
+      class="impsy-project-nav__link"
+      href="/projects/impsy-interface/system/"
+      {% if include.active == 'system' %}
+        aria-current="page"
+      {% endif %}
+      >System walkthrough</a
+    >
+    <a
+      class="impsy-project-nav__link"
+      href="/projects/impsy-interface/study/"
+      {% if include.active == 'study' %}
+        aria-current="page"
+      {% endif %}
+      >Study takeaways</a
+    >
+    <a
+      class="impsy-project-nav__link"
+      href="/projects/impsy-interface/gallery/"
+      {% if include.active == 'gallery' %}
+        aria-current="page"
+      {% endif %}
+      >Gallery</a
+    >
+    <a
+      class="impsy-project-nav__link"
+      href="/projects/impsy-interface/resources/"
+      {% if include.active == 'resources' %}
+        aria-current="page"
+      {% endif %}
+      >Resources</a
+    >
+  </div>
+</nav>

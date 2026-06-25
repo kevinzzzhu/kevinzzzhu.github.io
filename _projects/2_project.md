@@ -10,6 +10,8 @@ related_publications: false
 last_edited: 2026-06-25
 ---
 
+{% include impsy_project_nav.liquid active="overview" %}
+
 I built the IMPSY web interface for my COMP4550 honours project at ANU. IMPSY was
 already a powerful musical AI system: it could listen to performance data, train
 models, and generate responses. The problem was that too much of that workflow was
@@ -24,6 +26,12 @@ My project was to wrap that machine-learning music loop in a browser interface. 
 interface connects performance, logs, training data, model selection, configuration,
 and real-time visual feedback so the user can move through the whole workflow without
 losing the thread.
+
+The thesis treated this as both an HCI project and a systems project. The HCI side
+asked how musicians with different levels of technical confidence could understand a
+musical AI system while using it. The systems side asked how a React browser
+interface, Python backend, MIDI/OSC/WebSocket communication, logs, and MDRNN models
+could work together in a real-time musical setting.
 
 {% include figure.liquid path="/assets/img/impsy-web-interface-teaser.jpg" alt="The IMPSY web interface running beside a MIDI controller" caption="The project began as my honours interface for making IMPSY's performance, training, model, and configuration workflow easier to follow." %}
 
@@ -43,6 +51,15 @@ exchange. The performer can see incoming control data and the generated response
 the interaction is happening. This visual layer supports listening by making the state
 of the system easier to follow, especially when the model does something unexpected.
 
+The implemented interface organised the work into a few connected areas:
+
+- a project start point for recent projects and model selection
+- an improvisation view for live human/AI interaction
+- log views for inspecting recorded performance material
+- dataset and training views for turning logs into model data
+- model-detail views for reviewing trained behaviour
+- configuration screens for MIDI mapping and backend settings
+
 {% include figure.liquid path="/assets/img/impsy-improvisation-visualisation.jpg" alt="The IMPSY improvisation view showing performer input and AI output" caption="The live view separates performer input from AI output so the call-and-response interaction is visible while it happens." %}
 
 ## Why I cared about this
@@ -56,6 +73,12 @@ That meant balancing two needs: a beginner should be able to start playing witho
 understanding every backend detail, while an experienced user should still be able to
 inspect data, configure the system, and shape the model.
 
+The design work used three user perspectives from the thesis: a beginner musician who
+needs a low-pressure start, an experienced performer who wants to train and reuse
+models around their own style, and a technical creator who wants control over
+configuration, integration, and data. That mix kept the interface from becoming only a
+technical dashboard or only a simplified demo.
+
 ## My contribution
 
 The work went beyond a visual refresh. I designed the web workflow, built the React
@@ -67,6 +90,13 @@ as well as slower steps like dataset selection and model configuration.
 That combination is what made the project interesting to me. It sat between HCI,
 creative coding, and music technology: close enough to the model to expose what it was
 doing, but focused on what a performer could actually use while making sound.
+
+The main engineering contribution was not a single screen. It was the connection
+between screens and system state: live input/output visualisation, log inspection,
+training flow, model selection, and configuration all had to refer to the same musical
+loop. The thesis framed this as transparency: making the relationship between
+performance data, model behaviour, and generated response visible enough for a user to
+act on it.
 
 ## Explore the project
 
@@ -105,3 +135,5 @@ story starts earlier, with the thesis design process and the system I built.
 
 The publication links and code links are collected on the
 [resources page](/projects/impsy-interface/resources/), after the project story.
+
+{% include impsy_project_nav.liquid active="overview" %}

@@ -12,6 +12,8 @@ tags:
   - images
 ---
 
+{% include impsy_project_nav.liquid active="gallery" %}
+
 <style>
   .impsy-gallery-lede {
     margin-bottom: 1.75rem;
@@ -146,3 +148,5 @@ tags:
 {% include figure.liquid path="/assets/img/impsy-minilab-controller.jpg" alt="MiniLab controller used with IMPSY" caption="The compact controller setup reflects the small-studio context used for testing the interface." sizes="(min-width: 768px) 45vw, 95vw" %}
 
 </div>
+
+{% include impsy_project_nav.liquid active="gallery" %}
