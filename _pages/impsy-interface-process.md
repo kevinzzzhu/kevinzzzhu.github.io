@@ -67,6 +67,10 @@ relationship between performance data, model behaviour, and the musical response
 
 {% include figure.liquid path="/assets/img/impsy-figma-prototype-flow.jpg" alt="Figma prototype flow for the IMPSY web interface" caption="The Figma prototype turned the rough workflow into connected screens before implementation." %}
 
+The fuller image archive is on the [IMPSY gallery](/projects/impsy-interface/gallery/).
+That page keeps the old screens, story maps, prototype flow, and redesigned interface
+screens together so this process page can stay readable.
+
 ## Design goals
 
 The final design settled around four practical goals:
