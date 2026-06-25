@@ -12,17 +12,16 @@ tags:
   - hci
 ---
 
-I evaluated the interface through a small exploratory honours study. The goal was not
-to prove that the system solved musical AI interaction. It was to understand how
-people made sense of the workflow, where visual feedback helped, and where the
-learning curve stayed visible.
+I evaluated the interface through a small exploratory honours study. The goal was to
+understand how people made sense of the workflow, where visual feedback helped, and
+where the learning curve stayed visible.
 
 Five people used the system in a structured session. They were introduced to the
 interface and controller, explored the system through improvisation, worked with a
 model, and then completed post-session responses.
 
-No source quotes, identifying details, private forms, or study documents are included
-here. I am only summarising public-safe takeaways.
+I keep this page to public-safe takeaways, leaving out source quotes, identifying
+details, private forms, and study documents.
 
 ## What the study asked
 
@@ -51,16 +50,16 @@ more of the system state, they have more information for deciding what to try ne
 ## What was still hard
 
 Training a musical AI model is still conceptually demanding. The interface made the
-workflow clearer, but it did not remove the need to understand that model behaviour is
-shaped by the data it sees.
+workflow clearer while keeping the data-to-model relationship visible: model behaviour
+is shaped by the data it sees.
 
 There was also a mismatch between some expectations and what a small, quickly trained
-model could produce. In a short session, users may not create enough structured data
+model could produce. In a short session, users may create too little structured data
 for satisfying musical responses. That can make the AI feel unpredictable even when
 the interface is accurately showing what is happening.
 
 The thesis and NIME paper report a System Usability Scale mean of 62.50. I treat that
-as a design signal, not as a headline result. It says the interface had useful
+as a design signal rather than a headline result. It says the interface had useful
 direction, but still needed stronger onboarding and learnability.
 
 ## What I took from it
@@ -71,8 +70,8 @@ Visual feedback can help users understand what the system is doing. Log views ca
 connect performance data to later model behaviour. Clearer configuration can reduce
 friction.
 
-But interface design cannot fully compensate for sparse or unclear training data. A
-better interface should help users learn that relationship rather than hide it.
+Interface design also has limits around sparse or unclear training data. A better
+interface should help users learn that relationship rather than hide it.
 
 Future versions could support beginners with clearer onboarding, preset models,
 better MIDI mapping, and more explicit explanations of how data choices affect the

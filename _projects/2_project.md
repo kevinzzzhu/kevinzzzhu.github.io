@@ -15,9 +15,9 @@ already a powerful musical AI system: it could listen to performance data, train
 models, and generate responses. The problem was that too much of that workflow was
 hard to see while using it creatively.
 
-The practical problem was not just "can the AI make sound?" It was: can a performer
+The practical question went beyond "can the AI make sound?" A performer also needs to
 see what the system heard, what data is being used, which model is active, and when the
-AI is replying? If those parts are hidden, the system can feel like a black box instead
+AI is replying. If those parts are hidden, the system can feel like a black box instead
 of an instrument.
 
 My project was to wrap that machine-learning music loop in a browser interface. The
@@ -40,18 +40,17 @@ longer hidden background work. They become part of the creative workflow.
 
 In the performance view, the interface separates the human and AI sides of the
 exchange. The performer can see incoming control data and the generated response while
-the interaction is happening. This visual layer is not meant to replace listening. It
-is there to make the state of the system easier to follow, especially when the model
-does something unexpected.
+the interaction is happening. This visual layer supports listening by making the state
+of the system easier to follow, especially when the model does something unexpected.
 
 {% include figure.liquid path="/assets/img/impsy-improvisation-visualisation.jpg" alt="The IMPSY improvisation view showing performer input and AI output" caption="The live view separates performer input from AI output so the call-and-response interaction is visible while it happens." %}
 
 ## Why I cared about this
 
 This project sat in the part of HCI I enjoy most: making a technical system legible
-enough that people can work with it creatively. I was not trying to pretend musical
-machine learning is simple. I wanted the interface to show enough of the system state
-that a user could make better choices while still staying close to the musical task.
+enough that people can work with it creatively. Musical machine learning is still
+complex, so I wanted the interface to show enough of the system state that a user could
+make better choices while staying close to the musical task.
 
 That meant balancing two needs: a beginner should be able to start playing without
 understanding every backend detail, while an experienced user should still be able to
@@ -59,7 +58,7 @@ inspect data, configure the system, and shape the model.
 
 ## My contribution
 
-The work was not only a visual refresh. I designed the web workflow, built the React
+The work went beyond a visual refresh. I designed the web workflow, built the React
 interface, connected it to the Python IMPSY backend, and used D3.js to make logs and
 live interaction easier to inspect. The interface had to support both performance and
 machine-learning tasks, so the design had to make room for quick musical interaction
@@ -88,13 +87,13 @@ The exploratory study suggested that visual feedback helped people follow what t
 system was doing. Users could more easily tell when the system was receiving input,
 when the AI was responding, and how the interaction was unfolding over time.
 
-The hard part was still training and expectation-setting. A quickly trained model may
-not produce the kind of musical response a user imagines, especially if the training
-data is sparse or inconsistent. The interface helped expose that relationship, but it
-did not remove the learning curve.
+The hard part was still training and expectation-setting. A quickly trained model can
+fall short of the musical response a user imagines, especially if the training data is
+sparse or inconsistent. The interface helped expose that relationship while the
+learning curve remained.
 
 That lesson is useful beyond this one system. For creative AI tools, transparency is
-not only an explanatory feature. It is part of how people decide whether they can work
+more than an explanatory feature. It is part of how people decide whether they can work
 with the system, adjust their behaviour, and keep creative control.
 
 ## Later public outcome

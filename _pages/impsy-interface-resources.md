@@ -13,9 +13,9 @@ tags:
 ---
 
 This page collects the public materials for the IMPSY web interface project. The
-project began as my COMP4550 honours work at ANU and later became a NIME 2026 paper.
-Some thesis-era materials are not linked here because they include private study
-context or still need a public-release decision.
+project began as my COMP4550 honours work at ANU and later became a NIME 2026 paper. I
+keep private study context and materials still awaiting public-release decisions off
+this page.
 
 ## Project context
 
@@ -24,8 +24,8 @@ context or still need a public-release decision.
 - Focus: a browser interface for making musical AI performance, logs, training,
   models, and configuration easier to understand
 
-The honours thesis is used as the source for the website story, but the thesis PDF is
-not linked unless Kevin approves a public release.
+The honours thesis guides the website story. I will add the thesis PDF only after a
+public release is approved.
 
 ## Publication
 
@@ -42,7 +42,7 @@ Hongzhe Zhu and Charles Martin, NIME 2026, June 23-26, 2026, London and online.
 - [Upstream IMPSY repository](https://github.com/cpmpercussion/impsy)
 
 I am linking the upstream IMPSY repository here because it is the public code source
-confirmed for this refresh. A separate web-interface repository is not linked until a
+confirmed for this refresh. I will add a separate web-interface repository once a
 public repo is confirmed.
 
 ## Website assets
@@ -59,14 +59,12 @@ public repo is confirmed.
 - `/assets/pdf/impsy-nime-2026-paper.pdf`
 
 The old-workflow image is cropped to avoid showing lower machine and project metadata.
-Log, dataset, model, and training screenshots with readable filenames are not used.
+I have kept log, dataset, model, and training screenshots with readable filenames out
+of the public asset set.
 
 ## Pending public decisions
 
-- The honours thesis PDF is not linked until public release is approved.
-- The poster PDF is not hosted until Kevin confirms it should be public on the
-  website.
-- The lightning talk video is not hosted locally until there is a public-release and
-  hosting decision.
-- A separate web-interface code repository is not linked until a public repo is
-  verified.
+- Add the honours thesis PDF after public release is approved.
+- Add the poster PDF after Kevin confirms it should be public on the website.
+- Add the lightning talk video after the public-release and hosting decision is made.
+- Add a separate web-interface code repository after a public repo is verified.

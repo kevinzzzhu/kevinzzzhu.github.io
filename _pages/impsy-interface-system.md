@@ -25,8 +25,8 @@ A performer starts with a MIDI controller and the browser interface. The first j
 the interface is to make the system state visible: is the controller connected, is the
 system receiving input, and is the performance being recorded?
 
-This matters because the user's playing is not only sound. It is also data that can be
-reviewed, selected, and used for later model training.
+This matters because the user's playing is sound and also data that can be reviewed,
+selected, and used for later model training.
 
 {% include figure.liquid path="/assets/img/impsy-minilab-controller.jpg" alt="A compact MIDI controller used with the IMPSY interface" caption="The compact controller setup reflects the small-studio context used for testing and demonstration." %}
 
@@ -58,13 +58,13 @@ still conceptually difficult, especially in a short creative session, but the in
 can make the step more visible by keeping data, model state, and progress close to the
 rest of the workflow.
 
-This is the relationship I wanted the interface to make clearer: the system does not
-only show the AI's final output. It also shows the path from the user's performance
-data to the model that later responds in performance.
+This is the relationship I wanted the interface to make clearer: the system shows the
+AI's final output alongside the path from the user's performance data to the model that
+later responds in performance.
 
 ## 5. Configure and return to performance
 
-Configuration stays in the browser workflow so setup is not detached from performance.
+Configuration stays in the browser workflow so setup remains connected to performance.
 Once the user has selected settings and a model, they return to improvisation and the
 loop starts again.
 

@@ -12,10 +12,10 @@ tags:
   - hci
 ---
 
-The interface did not start as a visual polish layer. It started from a workflow
-problem. The original IMPSY system could record performances, train models, and
-generate responses, but the user had to understand several separate technical steps to
-keep the interaction moving.
+The interface started from a workflow problem rather than a visual polish task. The
+original IMPSY system could record performances, train models, and generate responses,
+but the user had to understand several separate technical steps to keep the interaction
+moving.
 
 For the honours project, I treated that as an HCI problem. The main question was: how
 can a musician understand and shape a musical AI system while still staying in a
@@ -24,8 +24,8 @@ creative flow?
 ## Understanding the old workflow
 
 The old interface exposed useful parts of IMPSY, including logs, datasets, models, and
-configuration. The issue was not that these pieces were missing. The issue was that
-the relationship between them was not easy to read during use.
+configuration. What needed work was the relationship between them: during use, the full
+loop was hard to read.
 
 That gave me the first design direction: keep the whole loop visible. A user should be
 able to see how performance becomes data, how data becomes a model, and how that model
@@ -35,7 +35,7 @@ returns to live interaction.
 
 ## Personas as design tools
 
-I treated the honours project as an interface design problem, not only an engineering
+I treated the honours project as both an interface design problem and an engineering
 task. The early work asked what different users might need from the same system: a
 beginner who wants to try sound quickly, a musician who wants to shape a model around
 their own playing, and a technical creator who wants more control over configuration
@@ -60,9 +60,8 @@ The redesign tried to keep those steps connected. Paper sketches and Figma proto
 explored how a user might move between project setup, improvisation, log inspection,
 training, and configuration without losing track of the loop.
 
-The key question was not just where to put buttons. It was how the interface could
-show the relationship between performance data, model behaviour, and the musical
-response.
+The key question went beyond where to put buttons. I wanted the interface to show the
+relationship between performance data, model behaviour, and the musical response.
 
 {% include figure.liquid path="/assets/img/impsy-wireframe-sketch.jpg" alt="Early paper wireframe for the IMPSY interface" caption="The early sketch explored how performance, logs, training, models, and configuration could become one connected workflow." %}
 
