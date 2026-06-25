@@ -28,7 +28,7 @@ system receiving input, and is the performance being recorded?
 This matters because the user's playing is sound and also data that can be reviewed,
 selected, and used for later model training.
 
-{% include figure.liquid path="/assets/img/impsy-minilab-controller.jpg" alt="A compact MIDI controller used with the IMPSY interface" caption="The compact controller setup reflects the small-studio context used for testing and demonstration." %}
+{% include figure.liquid path="/assets/img/impsy-new-home.jpg" alt="Redesigned IMPSY home screen" caption="The home screen gives the user a clear start point before they choose an existing model or begin a new project." %}
 
 ## 2. See the AI respond
 
@@ -40,7 +40,7 @@ user can tell when they are driving the sound and when the model is contributing
 That visibility helped turn the model from a hidden process into something closer to a
 responsive instrument.
 
-{% include figure.liquid path="/assets/img/impsy-improvisation-visualisation.jpg" alt="IMPSY improvisation view with human input and AI output visualisation" caption="The live view separates performer input from AI output so the call-and-response interaction is visible while it happens." %}
+{% include figure.liquid path="/assets/img/impsy-new-improvisation.jpg" alt="IMPSY improvisation screen from the thesis interface" caption="The improvisation screen keeps musical interaction at the centre while the browser tracks the system state." %}
 
 ## 3. Inspect recorded data
 
@@ -50,6 +50,8 @@ performance with data.
 Instead of treating recordings as hidden files, the system makes the recorded material
 part of the browser workflow. That helps users decide which takes are useful for
 training and which ones should be left out.
+
+{% include figure.liquid path="/assets/img/impsy-new-logvis-combined.jpg" alt="Combined IMPSY log visualisation screen" caption="The combined log visualisation keeps recorded performance material visible before it becomes training data." %}
 
 ## 4. Train or choose a model
 
@@ -62,6 +64,8 @@ This is the relationship I wanted the interface to make clearer: the system show
 AI's final output alongside the path from the user's performance data to the model that
 later responds in performance.
 
+{% include figure.liquid path="/assets/img/impsy-new-training.jpg" alt="IMPSY model training screen" caption="The training view makes model creation feel like part of the same workflow rather than a separate backend task." %}
+
 ## 5. Configure and return to performance
 
 Configuration stays in the browser workflow so setup remains connected to performance.
@@ -72,11 +76,7 @@ That repeated loop is the heart of the project. The interface lets the user move
 between musical action and machine-learning state without treating the model as a
 separate technical object.
 
-{% include figure.liquid path="/assets/img/impsy-configuration.jpg" alt="IMPSY configuration interface" caption="Configuration stays visible in the browser workflow so setup decisions remain connected to performance." %}
-
-{% include figure.liquid path="/assets/img/impsy-dataflow.png" alt="IMPSY system dataflow diagram" caption="The system links MIDI hardware, the Python backend, logs, models, browser visualisation, and real-time communication." %}
-
-{% include figure.liquid path="/assets/img/impsy-interaction-flow.jpg" alt="IMPSY interaction flow diagram" caption="The interaction flow shows how setup, performance, logs, training, models, and configuration connect in use." %}
+{% include figure.liquid path="/assets/img/impsy-new-model-detail.jpg" alt="IMPSY model detail screen" caption="The model detail view keeps trained model behaviour inspectable before the user returns to performance." %}
 
 ## Technical snapshot
 

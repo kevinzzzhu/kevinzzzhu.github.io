@@ -47,20 +47,26 @@ public repo is confirmed.
 
 ## Website assets
 
-- `/assets/img/impsy-web-interface-teaser.jpg`
-- `/assets/img/impsy-improvisation-visualisation.jpg`
-- `/assets/img/impsy-configuration.jpg`
-- `/assets/img/impsy-dataflow.png`
-- `/assets/img/impsy-minilab-controller.jpg`
-- `/assets/img/impsy-old-workflow-home.jpg`
-- `/assets/img/impsy-wireframe-sketch.jpg`
-- `/assets/img/impsy-figma-prototype-flow.jpg`
-- `/assets/img/impsy-interaction-flow.jpg`
+- Hub images: `/assets/img/impsy-web-interface-teaser.jpg`,
+  `/assets/img/impsy-improvisation-visualisation.jpg`
+- Process images: `/assets/img/impsy-old-workflow-home.jpg`,
+  `/assets/img/impsy-wireframe-sketch.jpg`,
+  `/assets/img/impsy-figma-prototype-flow.jpg`
+- System walkthrough images: `/assets/img/impsy-new-home.jpg`,
+  `/assets/img/impsy-new-improvisation.jpg`,
+  `/assets/img/impsy-new-logvis-combined.jpg`,
+  `/assets/img/impsy-new-training.jpg`,
+  `/assets/img/impsy-new-model-detail.jpg`
+- Study images: `/assets/img/impsy-study-session-setup.jpg`,
+  `/assets/img/impsy-study-sus-average.png`
+- Gallery archive images: old workflow screens, user story maps, redesigned interface
+  screens, system/context diagrams, and selected public NIME assets
 - `/assets/pdf/impsy-nime-2026-paper.pdf`
 
 The old-workflow image is cropped to avoid showing lower machine and project metadata.
-I have kept log, dataset, model, and training screenshots with readable filenames out
-of the public asset set.
+The subpages now use distinct image sets so the project story does not repeat the same
+screens on every page. The gallery remains the place where the fuller visual archive
+can repeat images for browsing.
 
 ## Pending public decisions
 

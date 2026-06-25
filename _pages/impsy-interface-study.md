@@ -45,7 +45,7 @@ still complex.
 The study suggested that transparency can support creative agency. When users can see
 more of the system state, they have more information for deciding what to try next.
 
-{% include figure.liquid path="/assets/img/impsy-configuration.jpg" alt="IMPSY configuration interface shown beside a compact MIDI controller" caption="The study used a compact controller-and-browser setup so people could move between musical interaction and system configuration." %}
+{% include figure.liquid path="/assets/img/impsy-study-session-setup.jpg" alt="IMPSY study session setup with browser interface, MIDI controller, and audio software" caption="The study setup put the browser interface, MIDI controller, and audio environment together so participants could move between playing and inspecting the system." %}
 
 ## What was still hard
 
@@ -61,6 +61,8 @@ the interface is accurately showing what is happening.
 The thesis and NIME paper report a System Usability Scale mean of 62.50. I treat that
 as a design signal rather than a headline result. It says the interface had useful
 direction, but still needed stronger onboarding and learnability.
+
+{% include figure.liquid path="/assets/img/impsy-study-sus-average.png" alt="Average adjusted System Usability Scale contribution score per question" caption="The SUS responses were useful as a design signal: some parts of the workflow worked, while learnability and confidence still needed attention." %}
 
 ## What I took from it
 
