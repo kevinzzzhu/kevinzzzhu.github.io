@@ -5,14 +5,12 @@ permalink: /projects/impsy-interface/resources/
 description: Public links and release decisions for the IMPSY honours project and NIME paper
 nav: false
 created: 2026-06-23
-last_edited: 2026-06-25
+last_edited: 2026-06-26
 tags:
   - impsy
   - resources
   - nime
 ---
-
-{% include impsy_project_nav.liquid active="resources" %}
 
 This page collects the public materials for the IMPSY web interface project. The
 project began as my COMP4550 honours work at ANU and later became a NIME 2026 paper. I
@@ -97,5 +95,3 @@ can repeat images for browsing.
 - Add the poster PDF after Kevin confirms it should be public on the website.
 - Add the lightning talk video after the public-release and hosting decision is made.
 - Add a separate web-interface code repository after a public repo is verified.
-
-{% include impsy_project_nav.liquid active="resources" %}

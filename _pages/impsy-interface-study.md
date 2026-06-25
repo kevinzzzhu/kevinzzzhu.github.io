@@ -5,14 +5,12 @@ permalink: /projects/impsy-interface/study/
 description: Public-safe takeaways from the exploratory IMPSY web interface study
 nav: false
 created: 2026-06-23
-last_edited: 2026-06-25
+last_edited: 2026-06-26
 tags:
   - impsy
   - study
   - hci
 ---
-
-{% include impsy_project_nav.liquid active="study" %}
 
 I evaluated the interface through a small exploratory honours study. The goal was to
 understand how people made sense of the workflow, where visual feedback helped, and
@@ -142,5 +140,3 @@ For a future version, the thesis pointed to several practical directions: preset
 pretrained models for beginners, a clearer MIDI mapping page, richer explanations of
 interaction modes, more musical data representations such as pitch or gesture, and
 more guidance during the training process.
-
-{% include impsy_project_nav.liquid active="study" %}

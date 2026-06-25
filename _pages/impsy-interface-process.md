@@ -5,14 +5,12 @@ permalink: /projects/impsy-interface/process/
 description: How the honours project moved from workflow problems to sketches, prototypes, and design goals
 nav: false
 created: 2026-06-23
-last_edited: 2026-06-25
+last_edited: 2026-06-26
 tags:
   - impsy
   - design-process
   - hci
 ---
-
-{% include impsy_project_nav.liquid active="process" %}
 
 The interface started from a workflow problem rather than a visual polish task. The
 original IMPSY system could record performances, train models, and generate responses,
@@ -159,5 +157,3 @@ creative work without claiming to solve every modelling problem.
 For the website, I treat the thesis as the design-story source and the NIME paper as
 the public research milestone. The result is a project that is both a working system
 and a record of what I learned about making musical AI easier to understand.
-
-{% include impsy_project_nav.liquid active="process" %}

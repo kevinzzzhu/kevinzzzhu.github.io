@@ -1,6 +1,6 @@
 ---
 created: 2026-06-25
-last_edited: 2026-06-25
+last_edited: 2026-06-26
 tags:
   - impsy
   - navigation
@@ -12,13 +12,10 @@ tags:
 
 ## What Changed
 
-Added a reusable navigation include:
-
-```text
-_includes/impsy_project_nav.liquid
-```
-
-The nav appears at the top and bottom of:
+The IMPSY section now uses the site's side-arrow navigation instead of an in-page
+button strip. The overview page stays in the project layer, so its side arrows move
+between projects. The IMPSY subpages use custom side-arrow targets in
+`_layouts/default.liquid`:
 
 - `/projects/impsy-interface/`
 - `/projects/impsy-interface/process/`
@@ -26,6 +23,8 @@ The nav appears at the top and bottom of:
 - `/projects/impsy-interface/study/`
 - `/projects/impsy-interface/gallery/`
 - `/projects/impsy-interface/resources/`
+
+The old `_includes/impsy_project_nav.liquid` button include was removed.
 
 ## Content Expansion
 
@@ -43,6 +42,7 @@ Expanded the narrative pages using public-safe thesis content:
 
 ## Rule For Future Agents
 
-Keep the pages connected. Do not create a new IMPSY subpage without adding it to the
-shared navigation include. Keep expansion professional and source-backed, but avoid
-copying thesis paragraphs verbatim or exposing private participant materials.
+Keep the pages connected. Do not create a new IMPSY subpage without updating the
+IMPSY side-arrow branch in `_layouts/default.liquid`. Keep expansion professional and
+source-backed, but avoid copying thesis paragraphs verbatim or exposing private
+participant materials.

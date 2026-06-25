@@ -5,14 +5,12 @@ permalink: /projects/impsy-interface/system/
 description: A plain-language walkthrough of the IMPSY web interface workflow
 nav: false
 created: 2026-06-23
-last_edited: 2026-06-25
+last_edited: 2026-06-26
 tags:
   - impsy
   - system
   - musical-ai
 ---
-
-{% include impsy_project_nav.liquid active="system" %}
 
 The system is easiest to understand as a loop: play, inspect, train, configure, and
 return to performance.
@@ -133,5 +131,3 @@ HTTP endpoints support configuration and non-real-time tasks.
 
 The technical stack matters because it supports the user-facing loop: record, inspect,
 train, configure, perform, and understand.
-
-{% include impsy_project_nav.liquid active="system" %}

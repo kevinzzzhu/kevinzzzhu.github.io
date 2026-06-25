@@ -7,10 +7,8 @@ importance: 2
 category: work
 permalink: /projects/impsy-interface/
 related_publications: false
-last_edited: 2026-06-25
+last_edited: 2026-06-26
 ---
-
-{% include impsy_project_nav.liquid active="overview" %}
 
 I built the IMPSY web interface for my COMP4550 honours project at ANU. IMPSY was
 already a powerful musical AI system: it could listen to performance data, train
@@ -135,5 +133,3 @@ story starts earlier, with the thesis design process and the system I built.
 
 The publication links and code links are collected on the
 [resources page](/projects/impsy-interface/resources/), after the project story.
-
-{% include impsy_project_nav.liquid active="overview" %}

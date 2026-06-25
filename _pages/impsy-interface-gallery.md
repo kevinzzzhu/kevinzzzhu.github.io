@@ -5,14 +5,12 @@ permalink: /projects/impsy-interface/gallery/
 description: Process, old workflow, and new interface visuals from the IMPSY honours project
 nav: false
 created: 2026-06-23
-last_edited: 2026-06-25
+last_edited: 2026-06-26
 tags:
   - impsy
   - gallery
   - images
 ---
-
-{% include impsy_project_nav.liquid active="gallery" %}
 
 <style>
   .impsy-gallery-lede {
@@ -148,5 +146,3 @@ tags:
 {% include figure.liquid path="/assets/img/impsy-minilab-controller.jpg" alt="MiniLab controller used with IMPSY" caption="The compact controller setup reflects the small-studio context used for testing the interface." sizes="(min-width: 768px) 45vw, 95vw" %}
 
 </div>
-
-{% include impsy_project_nav.liquid active="gallery" %}

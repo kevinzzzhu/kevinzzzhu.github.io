@@ -109,6 +109,21 @@
           {% endif %}
         {% endfor %}
       {% endif %}
+    {% elsif current_url == '/projects/impsy-interface/process/' %}
+      {% assign cycle_prev = '/projects/impsy-interface/' %}
+      {% assign cycle_next = '/projects/impsy-interface/system/' %}
+    {% elsif current_url == '/projects/impsy-interface/system/' %}
+      {% assign cycle_prev = '/projects/impsy-interface/process/' %}
+      {% assign cycle_next = '/projects/impsy-interface/study/' %}
+    {% elsif current_url == '/projects/impsy-interface/study/' %}
+      {% assign cycle_prev = '/projects/impsy-interface/system/' %}
+      {% assign cycle_next = '/projects/impsy-interface/gallery/' %}
+    {% elsif current_url == '/projects/impsy-interface/gallery/' %}
+      {% assign cycle_prev = '/projects/impsy-interface/study/' %}
+      {% assign cycle_next = '/projects/impsy-interface/resources/' %}
+    {% elsif current_url == '/projects/impsy-interface/resources/' %}
+      {% assign cycle_prev = '/projects/impsy-interface/gallery/' %}
+      {% assign cycle_next = '/projects/impsy-interface/' %}
     {% elsif current_url == '/' %}
       {% assign cycle_prev = '/cv/' %}
       {% assign cycle_next = '/blog/' %}
@@ -131,10 +146,18 @@
     {% elsif page.collection == 'projects' %}
       {% assign delayed_cycle_nav = true %}
       {% assign cycle_item_label = 'project' %}
+    {% elsif current_url contains '/projects/impsy-interface/' %}
+      {% assign delayed_cycle_nav = true %}
+      {% assign cycle_item_label = 'IMPSY page' %}
     {% endif %}
 
     {% if cycle_prev != '' and cycle_next != '' and page.hide_cycle_nav != true %}
-      <div id="page-cycle-nav" {% if delayed_cycle_nav %}class="page-cycle-nav-delayed"{% endif %}>
+      <div
+        id="page-cycle-nav"
+        {% if delayed_cycle_nav %}
+          class="page-cycle-nav-delayed"
+        {% endif %}
+      >
         <a class="page-cycle-arrow page-cycle-left" href="{{ cycle_prev | relative_url }}" aria-label="Go to previous page">
           <span class="page-cycle-glyph">&#8249;</span>
           {% if delayed_cycle_nav %}
@@ -154,13 +177,13 @@
     {% include footer.liquid %}
 
     <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const nav = document.getElementById("page-cycle-nav");
-        if (!nav || !nav.classList.contains("page-cycle-nav-delayed")) {
+      document.addEventListener('DOMContentLoaded', function () {
+        const nav = document.getElementById('page-cycle-nav');
+        if (!nav || !nav.classList.contains('page-cycle-nav-delayed')) {
           return;
         }
 
-        const arrows = nav.querySelectorAll(".page-cycle-arrow");
+        const arrows = nav.querySelectorAll('.page-cycle-arrow');
         const revealStart = 0.82;
         const revealEnd = 0.98;
 
@@ -173,13 +196,13 @@
             const baseOpacity = 0.12;
             const fullOpacity = 0.55;
             arrow.style.opacity = (baseOpacity + (fullOpacity - baseOpacity) * progress).toString();
-            arrow.style.pointerEvents = progress > 0.05 ? "auto" : "none";
+            arrow.style.pointerEvents = progress > 0.05 ? 'auto' : 'none';
           });
         }
 
         updateCycleReveal();
-        window.addEventListener("scroll", updateCycleReveal, { passive: true });
-        window.addEventListener("resize", updateCycleReveal);
+        window.addEventListener('scroll', updateCycleReveal, { passive: true });
+        window.addEventListener('resize', updateCycleReveal);
       });
     </script>
 
