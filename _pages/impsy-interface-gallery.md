@@ -139,9 +139,7 @@ tags:
 ## System and context
 
 <div class="impsy-gallery-grid impsy-gallery-grid--wide">
-  {% include figure.liquid path="/assets/img/impsy-system-design.jpg" alt="IMPSY system design diagram" caption="The system design connects the browser interface, Flask backend, OSC messaging, MIDI hardware, logs, and models." sizes="(min-width: 768px) 45vw, 95vw" %}
-
-{% include figure.liquid path="/assets/img/impsy-dataflow.png" alt="IMPSY dataflow diagram" caption="The dataflow diagram shows how MIDI hardware, the Python backend, logs, models, browser visualisation, and real-time communication fit together." sizes="(min-width: 768px) 45vw, 95vw" %}
+  {% include figure.liquid path="/assets/img/impsy-dataflow.png" alt="IMPSY dataflow diagram" caption="The dataflow diagram shows how MIDI hardware, the Python backend, logs, models, browser visualisation, and real-time communication fit together." sizes="(min-width: 768px) 45vw, 95vw" %}
 
 {% include figure.liquid path="/assets/img/impsy-web-interface-teaser.jpg" alt="Overview of the IMPSY web interface beside MIDI hardware" caption="Overview of the IMPSY web interface for live interaction with a musical AI model." sizes="(min-width: 768px) 45vw, 95vw" %}
 
