@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd"> <html><body> <h1 id="impsy-thesis-first-ui-test">IMPSY Thesis-First UI Test</h1> <h2 id="verdict">Verdict</h2> <p>The thesis-first IMPSY pages build and render correctly on the checked desktop and mobile viewports. I found no IMPSY private-material leaks in the changed page copy, new IMPSY asset filenames, or linked public resources.</p> <p>Two caveats are outside the IMPSY markdown changes:</p> <ul> <li>The site-wide footer is <code class="language-plaintext highlighter-rouge">position: fixed</code> and overlays page content in full-page and mobile screenshots.</li> <li> <code class="language-plaintext highlighter-rouge">_config.yml</code> has <code class="language-plaintext highlighter-rouge">enable_darkmode: false</code>, so there is no exposed theme toggle. A forced <code class="language-plaintext highlighter-rouge">data-theme="dark"</code> CSS check on the resources page rendered without an IMPSY-specific layout issue.</li> </ul> <h2 id="commands-run">Commands Run</h2> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npx prettier <span class="nt">--check</span> _projects/2_project.md _pages/impsy-interface-process.md _pages/impsy-interface-system.md _pages/impsy-interface-study.md _pages/impsy-interface-gallery.md _pages/impsy-interface-resources.md output/impsy-project-page-harness.md
+</code></pre></div></div> <p>Result: passed; no formatting changes made.</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bundle <span class="nb">exec </span>jekyll build
+</code></pre></div></div> <p>Result: passed; IMPSY responsive image variants were generated in <code class="language-plaintext highlighter-rouge">_site/assets/img/</code>.</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python3 <span class="nt">-m</span> http.server 4000 <span class="nt">--directory</span> _site
+</code></pre></div></div> <p>Result: served built site at <code class="language-plaintext highlighter-rouge">http://localhost:4000/</code>.</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>find assets <span class="nt">-type</span> f | rg <span class="nt">-i</span> <span class="s2">"review|cmt|meta-review|ethic|consent|participant|interview|feedback|sus|question|recruit|poster|raw|log|dataset|model|transcript|quote|theme|code|</span><span class="se">\.</span><span class="s2">npz|</span><span class="se">\.</span><span class="s2">keras|</span><span class="se">\.</span><span class="s2">tflite|</span><span class="se">\.</span><span class="s2">h5|</span><span class="se">\.</span><span class="s2">log"</span>
+</code></pre></div></div> <p>Result: no IMPSY asset hits. Pre-existing unrelated hits:</p> <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>assets/css/jekyll-pygments-themes-github.css
+assets/css/jekyll-pygments-themes-native.css
+assets/js/theme.js
+assets/js/copy_code.js
+assets/js/pseudocode-setup.js
+assets/img/publication_preview/brownian-motion.gif
+assets/img/publication_preview/wave-mechanics.gif
+assets/img/picknplay-wireframe/Voting/gameinforeview.png
+assets/img/picknplay-wireframe/Lobby/private-pool/add-individuals/scanbarcode.png
+assets/img/picknplay-wireframe/Lobby/private-pool/barcodemanagement.png
+assets/jupyter/blog.ipynb
+</code></pre></div></div> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rg <span class="nt">-n</span> <span class="nt">-i</span> <span class="s2">"review|cmt|meta-review|ethic|consent|participant|interview|feedback|recruit|raw|backup-logs|study/[0-9]{3}|</span><span class="se">\.</span><span class="s2">npz|</span><span class="se">\.</span><span class="s2">keras|</span><span class="se">\.</span><span class="s2">tflite|</span><span class="se">\.</span><span class="s2">h5|</span><span class="se">\.</span><span class="s2">log|COMP4550_Kevin_Zhu</span><span class="se">\.</span><span class="s2">pdf"</span> _projects _pages assets
+</code></pre></div></div> <p>Result: the required broad scan was noisy because it includes minified/search assets and binary/static assets. The IMPSY markdown subset contained only public-safe terms:</p> <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>_pages/impsy-interface-system.md:29:reviewed, selected, and used for later model training.
+_pages/impsy-interface-study.md:17:people made sense of the workflow, where visual feedback helped, and where the
+_pages/impsy-interface-study.md:29:The study focused on a practical question: does visual feedback help people understand
+_pages/impsy-interface-study.md:38:The clearest strength was real-time feedback. Visualisation helped users see when the
+_pages/impsy-interface-study.md:70:Visual feedback can help users understand what the system is doing. Log views can
+_projects/2_project.md:25:and real-time visual feedback so the user can move through the whole workflow without
+_projects/2_project.md:87:The exploratory study suggested that visual feedback helped people follow what the
+_pages/impsy-interface-process.md:49:playing and see useful feedback quickly. Deeper settings, model choices, and MIDI
+_pages/impsy-interface-process.md:76:- show immediate feedback during live interaction
+</code></pre></div></div> <p>No <code class="language-plaintext highlighter-rouge">COMP4550_Kevin_Zhu.pdf</code>, private study path, model file, dataset file, CMT/review, ethics, consent, recruitment, raw log, or raw participant/interview material was found in the IMPSY page subset.</p> <h2 id="routes-checked">Routes Checked</h2> <p>Local HTTP checks:</p> <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/projects/ 200 text/html
+/projects/impsy-interface/ 200 text/html
+/projects/impsy-interface/process/ 200 text/html
+/projects/impsy-interface/system/ 200 text/html
+/projects/impsy-interface/study/ 200 text/html
+/projects/impsy-interface/gallery/ 200 text/html
+/projects/impsy-interface/resources/ 200 text/html
+/assets/pdf/impsy-nime-2026-paper.pdf 200 application/pdf
+</code></pre></div></div> <p>External resource checks:</p> <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://nime2026.org/proceedings/196.html 200 text/html
+https://nime.org/proceedings/2026/nime2026_102.pdf 200 application/pdf
+https://github.com/cpmpercussion/impsy 200 text/html
+</code></pre></div></div> <p>IMPSY image checks:</p> <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/assets/img/impsy-web-interface-teaser.jpg 200 image/jpeg
+/assets/img/impsy-improvisation-visualisation.jpg 200 image/jpeg
+/assets/img/impsy-configuration.jpg 200 image/jpeg
+/assets/img/impsy-dataflow.png 200 image/png
+/assets/img/impsy-minilab-controller.jpg 200 image/jpeg
+/assets/img/impsy-old-workflow-home.jpg 200 image/jpeg
+/assets/img/impsy-wireframe-sketch.jpg 200 image/jpeg
+/assets/img/impsy-figma-prototype-flow.jpg 200 image/jpeg
+/assets/img/impsy-interaction-flow.jpg 200 image/jpeg
+</code></pre></div></div> <h2 id="browser-checks">Browser Checks</h2> <p>Checked with Playwright at:</p> <ul> <li>Desktop: <code class="language-plaintext highlighter-rouge">1440x1000</code> </li> <li>Mobile: <code class="language-plaintext highlighter-rouge">390x844</code> </li> </ul> <p>Findings:</p> <ul> <li>All requested routes loaded with the expected page titles and headings.</li> <li>No broken images on the requested routes.</li> <li>IMPSY images rendered at responsive sizes on desktop and mobile.</li> <li>No document/body horizontal overflow on desktop or mobile.</li> <li>Resource links and long asset paths wrapped within the mobile viewport.</li> <li>The resources page local PDF link returned <code class="language-plaintext highlighter-rouge">200 application/pdf</code>.</li> <li>The official NIME page/PDF and upstream GitHub link returned <code class="language-plaintext highlighter-rouge">200</code>.</li> <li>The four new thesis-first images do not show obvious private participant, ethics, CMT, raw log filename, dataset/model file, or thesis-PDF exposure.</li> </ul> <p>Screenshots:</p> <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>output/playwright/impsy-hub-desktop-light.png
+output/playwright/impsy-resources-mobile-light.png
+output/playwright/impsy-resources-mobile-forced-dark.png
+</code></pre></div></div> <h2 id="issues-fixed">Issues Fixed</h2> <p>None. No markdown link or image-reference fix was needed.</p> <h2 id="blockers--caveats">Blockers / Caveats</h2> <ul> <li>The global browser console shows <code class="language-plaintext highlighter-rouge">determineComputedTheme is not defined</code>. This was also noted in prior IMPSY QA memory and is not specific to the new IMPSY markdown.</li> <li>Dark mode is disabled in <code class="language-plaintext highlighter-rouge">_config.yml</code>, so I did not test a real user-facing theme toggle.</li> <li>The fixed global footer can cover content while scrolling or in full-page screenshots, especially on mobile. I left it unchanged because it is outside this tester write scope.</li> </ul> </body></html>

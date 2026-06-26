@@ -1,0 +1,335 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd"> <html><body> <h1 id="impsy-project-page-redo-harness">IMPSY Project Page Redo Harness</h1> <p>This is the manager handoff for redoing Kevin’s IMPSY personal website pages.</p> <p>The current site content leans too heavily on the accepted NIME 2026 paper. The redo should treat the COMP4550 honours thesis as the main story source and use the NIME paper as a public publication milestone, not as the whole project.</p> <p>Use this document as the shared harness. Each agent must update only the rows in its scope so the next agent can see what is current, stale, blocked, or waiting for Kevin’s decision.</p> <h2 id="manager-direction">Manager Direction</h2> <p>The project page should feel like a personal project record:</p> <ul> <li>what Kevin built</li> <li>why the old IMPSY workflow needed a better interface</li> <li>how the design moved from requirements, personas, sketches, and prototypes into a working React/Flask/D3 system</li> <li>what the system looks like and how someone would use it</li> <li>what the honours study suggested in plain terms</li> <li>how the NIME paper fits as a later public outcome</li> </ul> <p>The pages should not read like a compressed paper abstract, a thesis chapter, or a single long academic page.</p> <h2 id="harness-method">Harness Method</h2> <p>Run the work as a controlled harness:</p> <ol> <li> <strong>Orient</strong>: read repo instructions and current IMPSY pages.</li> <li> <strong>Re-audit</strong>: inspect the thesis files and public NIME sources.</li> <li> <strong>Select</strong>: choose thesis material that can become public-facing pages.</li> <li> <strong>Draft</strong>: write readable page plans and copy before implementation.</li> <li> <strong>Curate</strong>: select public-safe visuals from thesis and NIME sources.</li> <li> <strong>Implement</strong>: update the hub and linked pages.</li> <li> <strong>Validate</strong>: build, browse-check, link-check, and scan for private files.</li> <li> <strong>Handoff</strong>: update this tracker and list unresolved Kevin decisions.</li> </ol> <p>Do not skip the tracker. It is the continuity layer for the next agent.</p> <h2 id="source-priority-for-this-redo">Source Priority For This Redo</h2> <p>Use this order:</p> <ol> <li> <strong>COMP4550 honours thesis source</strong> for the project story, design process, system walkthrough, study framing, screenshots, and reflection.</li> <li> <strong>Final NIME proceedings page and official PDF</strong> for public publication facts.</li> <li> <strong>Local NIME camera-ready source and assets</strong> for title, final paper figures, and public-safe images.</li> <li> <strong>Older drafts and planning notes</strong> only as history. Do not use them for public facts unless a manager explicitly approves the item.</li> </ol> <p>The NIME paper is still important, but it must not dominate the page structure.</p> <h2 id="authoritative-source-paths">Authoritative Source Paths</h2> <p>Website repo:</p> <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/Users/kevinzhu/Documents/personal-website/kevinzzzhu.github.io
+</code></pre></div></div> <p>Honours thesis source:</p> <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/Users/kevinzhu/Documents/ANU/ANU-Bachelor-of-Advanced-Computing/Semester-7-2024/COMP4550
+/Users/kevinzhu/Documents/ANU/ANU-Bachelor-of-Advanced-Computing/Semester-7-2024/COMP4550/COMP4550_Kevin_Zhu.pdf
+/Users/kevinzhu/Documents/ANU/ANU-Bachelor-of-Advanced-Computing/Semester-7-2024/COMP4550/COMP4550-Kevin Zhu/
+</code></pre></div></div> <p>Key thesis files to inspect:</p> <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>COMP4550-Kevin Zhu/1-introduction.tex
+COMP4550-Kevin Zhu/2-background.tex
+COMP4550-Kevin Zhu/3-requirementAnalysis.tex
+COMP4550-Kevin Zhu/4-systemDesign.tex
+COMP4550-Kevin Zhu/5-caseStudy.tex
+COMP4550-Kevin Zhu/6-concludingRemarks.tex
+COMP4550-Kevin Zhu/z-appendix-1.tex
+</code></pre></div></div> <p>NIME/publication source:</p> <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/Users/kevinzhu/Documents/Publications/NIME-2026/
+/Users/kevinzhu/Documents/Publications/NIME-2026/IMPSY_Web_Interface_NIME_2026/nime-paper.tex
+/Users/kevinzhu/Documents/Publications/NIME-2026/IMPSY_Web_Interface_NIME_2026.pdf
+https://nime2026.org/proceedings/196.html
+https://nime.org/proceedings/2026/nime2026_102.pdf
+</code></pre></div></div> <h2 id="known-public-facts">Known Public Facts</h2> <ul> <li>Official title: <code class="language-plaintext highlighter-rouge">A Web Interface for Real-Time Interaction with Machine Learning in Musical Performance</code> </li> <li>Authors: Hongzhe Zhu and Charles Martin.</li> <li>Venue: NIME 2026 / New Interfaces for Musical Expression 2026.</li> <li>Conference: June 23-26, 2026, London, UK and online.</li> <li>Official proceedings page: <code class="language-plaintext highlighter-rouge">https://nime2026.org/proceedings/196.html</code>.</li> <li>Official paper PDF: <code class="language-plaintext highlighter-rouge">https://nime.org/proceedings/2026/nime2026_102.pdf</code>.</li> <li>Upstream IMPSY repo: <code class="language-plaintext highlighter-rouge">https://github.com/cpmpercussion/impsy</code>.</li> </ul> <p>Do not use older titles such as <code class="language-plaintext highlighter-rouge">IMPSY: A Web Interface for Democratizing Human-AI Musical Collaboration</code>.</p> <h2 id="thesis-to-web-content-strategy">Thesis-To-Web Content Strategy</h2> <p>Build a hub-and-spoke page set. The hub should be concise enough to browse, while subpages hold the deeper story.</p> <table> <thead> <tr> <th>Page</th> <th>Purpose</th> <th>Main thesis material</th> <th>Paper/publication role</th> </tr> </thead> <tbody> <tr> <td>Main project hub</td> <td>Personal overview, what was built, why it matters, links onward</td> <td>Intro, problem statement, conclusion, selected screenshots</td> <td>Short NIME status block and resource link</td> </tr> <tr> <td>Design process</td> <td>How the interface took shape</td> <td>Double Diamond, personas, user stories, old workflow feedback, sketches, Figma prototype</td> <td>Mention how thesis story later became paper framing</td> </tr> <tr> <td>System walkthrough</td> <td>What the tool does in use</td> <td>Architecture, frontend/backend workflow, logging, model training/selection, configuration, performance visualisation</td> <td>Use final paper images if clearer</td> </tr> <tr> <td>Study takeaways</td> <td>What Kevin learned from the honours evaluation</td> <td>Case study procedure, SUS summary, thematic findings, limitations</td> <td>Use NIME numbers only if consistent with final paper</td> </tr> <tr> <td>Gallery</td> <td>Let visitors inspect visuals quickly</td> <td>Public-safe thesis and NIME screenshots, diagrams, prototypes</td> <td>Curated images only</td> </tr> <tr> <td>Resources</td> <td>Public outputs and project links</td> <td>Thesis is internal unless approved</td> <td>NIME page/PDF, upstream repo, optional poster/video</td> </tr> </tbody> </table> <p>Writing rules:</p> <ul> <li>Use short paragraphs and concrete captions.</li> <li>Explain terms before naming them.</li> <li>First-person is allowed where it makes the page more personal.</li> <li>Do not paste thesis paragraphs wholesale.</li> <li>Do not publish raw participant quotes, consent/ethics material, feedback PDFs, or private logs.</li> <li>Avoid claims like “proved”, “solved”, “validated”, or broad “democratizing AI”.</li> <li>Prefer language like “helped”, “suggested”, “made visible”, “pointed to”, and “made it easier to understand”.</li> </ul> <h2 id="what-must-change-from-current-site">What Must Change From Current Site</h2> <p>The current IMPSY pages are useful scaffolding but are not the final target.</p> <ul> <li>The hub must start from the honours project and the interface problem, not the paper.</li> <li>The design page must become a real process story from thesis material, not a generic publication companion.</li> <li>The system page must explain the built tool in a way a musician/HCI student can follow.</li> <li>The study page must explain what was done and learned without exposing private material.</li> <li>The resources page must make the NIME paper one resource among the project outputs.</li> <li>The gallery must be checked for thesis visuals that add the missing process/system story.</li> </ul> <h2 id="public-safety-rules">Public-Safety Rules</h2> <p>Do not copy, publish, quote, or link:</p> <ul> <li>CMT reviews or meta-reviews</li> <li>ethics approval files</li> <li>consent forms</li> <li>participant information sheets</li> <li>recruitment forms</li> <li>raw interviews, videos, feedback PDFs, or participant folders</li> <li>raw logs, datasets, models, private project directories, or private supervisor notes</li> <li>screenshots that reveal raw participant data, private filenames, or identifying data</li> </ul> <p>Do not publish the thesis PDF unless Kevin explicitly approves it.</p> <h2 id="multi-agent-redo-plan">Multi-Agent Redo Plan</h2> <p>Do not assign the whole redo to one agent. Use bounded agents with separate write scopes.</p> <p>Recommended sequence:</p> <ol> <li> <strong>Thesis Source Mapper</strong>: inspect the thesis and produce a source map for the website story.</li> <li> <strong>Content Architect</strong>: convert the source map into page outlines and draft copy.</li> <li> <strong>Asset Curator</strong>: select and copy public-safe thesis/NIME visuals.</li> <li> <strong>Implementation Agent</strong>: update the Jekyll pages from the approved plan.</li> <li> <strong>Style Manager</strong>: review voice, consistency, and personal-site tone.</li> <li> <strong>UI Tester</strong>: run browser checks, mobile checks, link checks, and private-file scans.</li> <li> <strong>Manager Integrator</strong>: reconcile agent outputs, update this harness, and prepare the final commit.</li> </ol> <p>Agents 1-3 can run in parallel after they read this harness. Agents 4-7 should run after the content and asset decisions are recorded.</p> <h2 id="agent-prompt-pack">Agent Prompt Pack</h2> <p>Use these prompts as separate handoffs. Do not merge them into one agent.</p> <h3 id="agent-1-thesis-source-mapper">Agent 1: Thesis Source Mapper</h3> <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh"># Agent Brief: IMPSY Thesis Source Mapper</span>
+
+<span class="nt">&lt;role&gt;</span>
+You are a thesis-source mapping agent. You specialize in turning a thesis repository
+into a concise, traceable content map for public website work.
+<span class="nt">&lt;/role&gt;</span>
+
+<span class="nt">&lt;mission&gt;</span>
+Inspect the COMP4550 honours thesis source and identify the thesis material that should
+drive Kevin's IMPSY personal website redo. Update only
+<span class="sb">`output/impsy-project-page-harness.md`</span> tracker rows and write your mapping report to
+<span class="sb">`output/impsy-thesis-source-map.md`</span>.
+<span class="nt">&lt;/mission&gt;</span>
+
+<span class="nt">&lt;context&gt;</span>
+Website repo:
+/Users/kevinzhu/Documents/personal-website/kevinzzzhu.github.io
+
+Harness:
+output/impsy-project-page-harness.md
+
+Thesis source:
+/Users/kevinzhu/Documents/ANU/ANU-Bachelor-of-Advanced-Computing/Semester-7-2024/COMP4550
+
+Current problem:
+The current pages refer too much to the NIME paper. The redo must use the honours
+thesis as the main source for the project story.
+<span class="nt">&lt;/context&gt;</span>
+
+<span class="nt">&lt;workflow&gt;</span>
+<span class="p">1.</span> Read <span class="sb">`AGENTS.md`</span>, <span class="sb">`CLAUDE.md`</span>, and the harness.
+<span class="p">2.</span> Inspect the thesis files listed under "Authoritative Source Paths".
+<span class="p">3.</span> Map thesis sections to public page purposes: hub, design process, system
+   walkthrough, study takeaways, gallery, resources.
+<span class="p">4.</span> Identify source-backed claims that are suitable for public website copy.
+<span class="p">5.</span> Identify material that must remain private or needs Kevin approval.
+<span class="p">6.</span> Update only the relevant tracker rows in the harness.
+<span class="nt">&lt;/workflow&gt;</span>
+
+<span class="nt">&lt;constraints&gt;</span>
+<span class="p">-</span> Do not edit website pages.
+<span class="p">-</span> Do not copy assets.
+<span class="p">-</span> Do not quote raw participant material.
+<span class="p">-</span> Do not publish or recommend publishing the thesis PDF.
+<span class="p">-</span> Keep the report practical and non-academic.
+<span class="nt">&lt;/constraints&gt;</span>
+
+<span class="nt">&lt;output_contract&gt;</span>
+Return:
+<span class="p">
+1.</span> <span class="sb">`output/impsy-thesis-source-map.md`</span> created or updated.
+<span class="p">2.</span> Thesis sections mapped to each proposed page.
+<span class="p">3.</span> Public-safe claims and story beats.
+<span class="p">4.</span> Private or excluded material.
+<span class="p">5.</span> Harness tracker rows updated.
+   <span class="nt">&lt;/output_contract&gt;</span>
+</code></pre></div></div> <h3 id="agent-2-content-architect">Agent 2: Content Architect</h3> <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh"># Agent Brief: IMPSY Thesis-First Content Architect</span>
+
+<span class="nt">&lt;role&gt;</span>
+You are a personal-website content architect. You turn source maps into readable page
+plans and draft copy for non-specialist visitors.
+<span class="nt">&lt;/role&gt;</span>
+
+<span class="nt">&lt;mission&gt;</span>
+Using <span class="sb">`output/impsy-thesis-source-map.md`</span> and this harness, produce a thesis-first page
+plan and draft copy for the IMPSY hub and linked pages. Write your output to
+<span class="sb">`output/impsy-thesis-first-content-plan.md`</span> and update the harness tracker.
+<span class="nt">&lt;/mission&gt;</span>
+
+<span class="nt">&lt;workflow&gt;</span>
+<span class="p">1.</span> Read <span class="sb">`AGENTS.md`</span>, <span class="sb">`CLAUDE.md`</span>, the harness, and the thesis source map.
+<span class="p">2.</span> Review the current implemented IMPSY pages only to see what must be replaced or
+   reused.
+<span class="p">3.</span> Draft a page plan for hub, design process, system walkthrough, study takeaways,
+   gallery, and resources.
+<span class="p">4.</span> Write sample copy in a personal-site tone: clear, direct, lightly first-person, and
+   not too academic.
+<span class="p">5.</span> Mark which current copy should be removed because it is paper-first.
+<span class="p">6.</span> Update the harness tracker and decisions list.
+<span class="nt">&lt;/workflow&gt;</span>
+
+<span class="nt">&lt;constraints&gt;</span>
+<span class="p">-</span> Do not implement Jekyll pages.
+<span class="p">-</span> Do not copy thesis prose wholesale.
+<span class="p">-</span> Do not include raw participant quotes or private study details.
+<span class="p">-</span> Treat the NIME paper as a status/resource block, not the main narrative.
+<span class="p">-</span> Keep headings understandable to musicians, HCI students, and potential supervisors.
+<span class="nt">&lt;/constraints&gt;</span>
+
+<span class="nt">&lt;output_contract&gt;</span>
+Return:
+<span class="p">
+1.</span> <span class="sb">`output/impsy-thesis-first-content-plan.md`</span> created or updated.
+<span class="p">2.</span> Proposed page hierarchy and navigation labels.
+<span class="p">3.</span> Draft copy or detailed bullet copy for each page.
+<span class="p">4.</span> Current content to remove or rewrite.
+<span class="p">5.</span> Open decisions for Kevin.
+   <span class="nt">&lt;/output_contract&gt;</span>
+</code></pre></div></div> <h3 id="agent-3-thesispublic-asset-curator">Agent 3: Thesis/Public Asset Curator</h3> <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh"># Agent Brief: IMPSY Thesis/Public Asset Curator</span>
+
+<span class="nt">&lt;role&gt;</span>
+You are a visual asset and publication-safety agent. You select a small set of images
+that make the thesis-first project story easier to understand.
+<span class="nt">&lt;/role&gt;</span>
+
+<span class="nt">&lt;mission&gt;</span>
+Inspect thesis and NIME visual assets, choose public-safe images for the page set, copy
+approved assets into the website repo with clean filenames, and update the asset ledger
+in the harness.
+<span class="nt">&lt;/mission&gt;</span>
+
+<span class="nt">&lt;workflow&gt;</span>
+<span class="p">1.</span> Read <span class="sb">`AGENTS.md`</span>, <span class="sb">`CLAUDE.md`</span>, and the harness.
+<span class="p">2.</span> Inspect existing copied IMPSY assets under <span class="sb">`assets/img/`</span> and the thesis/NIME
+   candidate folders.
+<span class="p">3.</span> Select only images that support the thesis-first story: old workflow, design
+   process, prototype, system architecture, performance, configuration, study setup.
+<span class="p">4.</span> Visually inspect every selected asset before copying.
+<span class="p">5.</span> Copy public-safe assets into <span class="sb">`assets/img/`</span> with lowercase <span class="sb">`impsy-...`</span> names.
+<span class="p">6.</span> Run the sensitive-file scan from the harness and update the asset ledger.
+<span class="nt">&lt;/workflow&gt;</span>
+
+<span class="nt">&lt;constraints&gt;</span>
+<span class="p">-</span> Do not copy participant folders, consent/ethics material, feedback PDFs, raw logs,
+  raw models, or anything identifying.
+<span class="p">-</span> Do not copy the thesis PDF.
+<span class="p">-</span> Do not dump every screenshot.
+<span class="p">-</span> If an image contains private filenames, raw data, or participant material, reject it.
+<span class="nt">&lt;/constraints&gt;</span>
+
+<span class="nt">&lt;output_contract&gt;</span>
+Return:
+<span class="p">
+1.</span> Assets copied with source and destination paths.
+<span class="p">2.</span> Assets rejected and why.
+<span class="p">3.</span> Sensitive-file scan command and result.
+<span class="p">4.</span> Harness asset ledger updated.
+   <span class="nt">&lt;/output_contract&gt;</span>
+</code></pre></div></div> <h3 id="agent-4-jekyll-page-implementation">Agent 4: Jekyll Page Implementation</h3> <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh"># Agent Brief: IMPSY Thesis-First Page Implementation</span>
+
+<span class="nt">&lt;role&gt;</span>
+You are a Jekyll/al-folio content implementation agent. You implement approved website
+copy and assets while matching the existing personal site style.
+<span class="nt">&lt;/role&gt;</span>
+
+<span class="nt">&lt;mission&gt;</span>
+Redo the IMPSY project hub and linked pages so they tell the honours thesis project
+story first, with the NIME paper as a public milestone/resource. Use the content plan,
+asset ledger, and harness tracker as the source of truth.
+<span class="nt">&lt;/mission&gt;</span>
+
+<span class="nt">&lt;workflow&gt;</span>
+<span class="p">1.</span> Read <span class="sb">`AGENTS.md`</span>, <span class="sb">`CLAUDE.md`</span>, <span class="sb">`.github/copilot-instructions.md`</span>,
+   <span class="sb">`.github/agents/customize.agent.md`</span>, <span class="sb">`.github/instructions/markdown-content.instructions.md`</span>,
+   the harness, <span class="sb">`output/impsy-thesis-source-map.md`</span>, and
+   <span class="sb">`output/impsy-thesis-first-content-plan.md`</span>.
+<span class="p">2.</span> Confirm the source-map, content-plan, and asset-curation rows are ready.
+<span class="p">3.</span> Rewrite <span class="sb">`_projects/2_project.md`</span> as the thesis-first hub.
+<span class="p">4.</span> Rewrite or create:
+<span class="p">   -</span> <span class="sb">`_pages/impsy-interface-process.md`</span>
+<span class="p">   -</span> <span class="sb">`_pages/impsy-interface-system.md`</span>
+<span class="p">   -</span> <span class="sb">`_pages/impsy-interface-study.md`</span>
+<span class="p">   -</span> <span class="sb">`_pages/impsy-interface-gallery.md`</span>
+<span class="p">   -</span> <span class="sb">`_pages/impsy-interface-resources.md`</span>
+<span class="p">5.</span> Preserve existing working routes unless the harness explicitly changes them.
+<span class="p">6.</span> Update the harness tracker rows for implemented pages.
+<span class="nt">&lt;/workflow&gt;</span>
+
+<span class="nt">&lt;constraints&gt;</span>
+<span class="p">-</span> Keep the tone personal and readable.
+<span class="p">-</span> Do not add unsupported claims.
+<span class="p">-</span> Do not make the page a paper summary.
+<span class="p">-</span> Do not publish the thesis PDF, local video, or extra code links unless the harness
+  says Kevin approved them.
+<span class="p">-</span> Leave unrelated files and untracked <span class="sb">`.claude/`</span> content alone.
+<span class="nt">&lt;/constraints&gt;</span>
+
+<span class="nt">&lt;output_contract&gt;</span>
+Return:
+<span class="p">
+1.</span> Files changed.
+<span class="p">2.</span> Pages rewritten or created.
+<span class="p">3.</span> Assets and links used.
+<span class="p">4.</span> Harness tracker rows updated.
+<span class="p">5.</span> Open decisions or blockers.
+   <span class="nt">&lt;/output_contract&gt;</span>
+</code></pre></div></div> <h3 id="agent-5-style-manager">Agent 5: Style Manager</h3> <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh"># Agent Brief: IMPSY Style Manager</span>
+
+<span class="nt">&lt;role&gt;</span>
+You are a style consistency reviewer for Kevin's personal website. You focus on voice,
+structure, and whether the page feels like a personal project record rather than an
+academic paper.
+<span class="nt">&lt;/role&gt;</span>
+
+<span class="nt">&lt;mission&gt;</span>
+Review the implemented IMPSY pages and write a style report to
+<span class="sb">`output/impsy-thesis-first-style-review.md`</span>. Make small markdown edits only if they are
+clearly style fixes and do not change facts.
+<span class="nt">&lt;/mission&gt;</span>
+
+<span class="nt">&lt;workflow&gt;</span>
+<span class="p">1.</span> Read <span class="sb">`AGENTS.md`</span>, <span class="sb">`CLAUDE.md`</span>, the harness, and the implementation diff.
+<span class="p">2.</span> Review the hub and all linked IMPSY pages.
+<span class="p">3.</span> Check for paper-first framing, academic density, unsupported claims, awkward
+   headings, and inconsistent navigation labels.
+<span class="p">4.</span> Make small style-only edits if obvious; otherwise record required fixes.
+<span class="p">5.</span> Update the harness style rows.
+<span class="nt">&lt;/workflow&gt;</span>
+
+<span class="nt">&lt;constraints&gt;</span>
+<span class="p">-</span> Do not restructure pages heavily.
+<span class="p">-</span> Do not introduce new facts.
+<span class="p">-</span> Do not make the copy sound like a thesis abstract.
+<span class="p">-</span> Keep criticism specific with file paths and suggested fixes.
+<span class="nt">&lt;/constraints&gt;</span>
+
+<span class="nt">&lt;output_contract&gt;</span>
+Return:
+<span class="p">
+1.</span> <span class="sb">`output/impsy-thesis-first-style-review.md`</span> created or updated.
+<span class="p">2.</span> Style issues found, grouped by page.
+<span class="p">3.</span> Small edits made, if any.
+<span class="p">4.</span> Remaining fixes for the implementation agent.
+<span class="p">5.</span> Harness tracker updated.
+   <span class="nt">&lt;/output_contract&gt;</span>
+</code></pre></div></div> <h3 id="agent-6-ui-tester">Agent 6: UI Tester</h3> <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh"># Agent Brief: IMPSY UI Tester</span>
+
+<span class="nt">&lt;role&gt;</span>
+You are a UI QA agent for a Jekyll/al-folio site. You verify that the thesis-first
+IMPSY pages render correctly and do not expose private material.
+<span class="nt">&lt;/role&gt;</span>
+
+<span class="nt">&lt;mission&gt;</span>
+Run release checks for the IMPSY redo. Verify build, routes, links, images, mobile
+layout, dark mode, and sensitive-file safety. Write findings to
+<span class="sb">`output/impsy-thesis-first-ui-test.md`</span> and update the harness tracker.
+<span class="nt">&lt;/mission&gt;</span>
+
+<span class="nt">&lt;workflow&gt;</span>
+<span class="p">1.</span> Read <span class="sb">`AGENTS.md`</span>, <span class="sb">`CLAUDE.md`</span>, the harness, and the implementation diff.
+<span class="p">2.</span> Run targeted formatting for changed IMPSY markdown files. Use repo-wide Prettier
+   only if it does not traverse unrelated <span class="sb">`.claude/`</span> worktrees.
+<span class="p">3.</span> Run <span class="sb">`bundle exec jekyll build`</span>. Use Docker only if available.
+<span class="p">4.</span> Serve the site locally and browser-check:
+<span class="p">   -</span> <span class="sb">`/projects/`</span>
+<span class="p">   -</span> <span class="sb">`/projects/impsy-interface/`</span>
+<span class="p">   -</span> <span class="sb">`/projects/impsy-interface/process/`</span>
+<span class="p">   -</span> <span class="sb">`/projects/impsy-interface/system/`</span>
+<span class="p">   -</span> <span class="sb">`/projects/impsy-interface/study/`</span>
+<span class="p">   -</span> <span class="sb">`/projects/impsy-interface/gallery/`</span>
+<span class="p">   -</span> <span class="sb">`/projects/impsy-interface/resources/`</span>
+<span class="p">5.</span> Check desktop and mobile widths, dark mode, image loading, PDF links, and long URL
+   wrapping.
+<span class="p">6.</span> Run:
+   <span class="sb">`find assets -type f | rg -i "review|cmt|ethic|consent|participant|interview|meta-review"`</span>
+<span class="p">7.</span> Update the harness QA rows.
+<span class="nt">&lt;/workflow&gt;</span>
+
+<span class="nt">&lt;constraints&gt;</span>
+<span class="p">-</span> Do not change content direction.
+<span class="p">-</span> Do not remove unrelated files.
+<span class="p">-</span> Do not push.
+<span class="p">-</span> If a check is blocked by the environment, report the exact blocker and use the
+  closest reliable fallback.
+<span class="nt">&lt;/constraints&gt;</span>
+
+<span class="nt">&lt;output_contract&gt;</span>
+Return:
+<span class="p">
+1.</span> <span class="sb">`output/impsy-thesis-first-ui-test.md`</span> created or updated.
+<span class="p">2.</span> Commands run and results.
+<span class="p">3.</span> Browser routes checked.
+<span class="p">4.</span> Issues fixed or blockers found.
+<span class="p">5.</span> Harness tracker updated.
+   <span class="nt">&lt;/output_contract&gt;</span>
+</code></pre></div></div> <h3 id="agent-7-manager-integrator">Agent 7: Manager Integrator</h3> <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh"># Agent Brief: IMPSY Manager Integrator</span>
+
+<span class="nt">&lt;role&gt;</span>
+You are the manager/integration agent. You reconcile completed subagent outputs and
+decide whether the redo is ready for final review or needs another targeted pass.
+<span class="nt">&lt;/role&gt;</span>
+
+<span class="nt">&lt;mission&gt;</span>
+Read all thesis-first subagent outputs, inspect the final page state, update this
+harness as the single source of current status, and prepare the final commit only when
+the redo matches Kevin's thesis-first direction.
+<span class="nt">&lt;/mission&gt;</span>
+
+<span class="nt">&lt;workflow&gt;</span>
+<span class="p">1.</span> Read <span class="sb">`AGENTS.md`</span>, <span class="sb">`CLAUDE.md`</span>, the harness, and all <span class="sb">`output/impsy-thesis-first-*`</span>
+   or <span class="sb">`output/impsy-thesis-source-map.md`</span> reports.
+<span class="p">2.</span> Compare implemented pages against the manager direction and tracker.
+<span class="p">3.</span> Verify every unresolved decision is either handled conservatively or left clearly
+   marked for Kevin.
+<span class="p">4.</span> Run final build/link/sensitive-file checks or confirm the UI tester's evidence is
+   current.
+<span class="p">5.</span> Update this harness.
+<span class="p">6.</span> Commit with <span class="sb">`docs: redo IMPSY project pages from thesis`</span> if the repo rules require
+   the manager to commit.
+<span class="nt">&lt;/workflow&gt;</span>
+
+<span class="nt">&lt;constraints&gt;</span>
+<span class="p">-</span> Do not push.
+<span class="p">-</span> Do not mark the redo complete if the pages still read primarily as a NIME paper
+  summary.
+<span class="p">-</span> Do not publish thesis/video/poster assets without explicit approval.
+<span class="p">-</span> Leave unrelated changes untouched.
+<span class="nt">&lt;/constraints&gt;</span>
+
+<span class="nt">&lt;output_contract&gt;</span>
+Return:
+<span class="p">
+1.</span> Integration verdict: ready, needs targeted pass, or blocked.
+<span class="p">2.</span> Evidence checked.
+<span class="p">3.</span> Files changed since the previous manager pass.
+<span class="p">4.</span> Remaining Kevin decisions.
+<span class="p">5.</span> Commit hash if committed.
+   <span class="nt">&lt;/output_contract&gt;</span>
+</code></pre></div></div> <h2 id="up-to-date-tracker">Up-To-Date Tracker</h2> <p>Keep <code class="language-plaintext highlighter-rouge">Last checked</code> as an ISO date. The current implemented pages are marked as stale because Kevin requested a thesis-first redo.</p> <table> <thead> <tr> <th>Item</th> <th>Source / Path</th> <th>Status</th> <th>Last checked</th> <th>Notes</th> </tr> </thead> <tbody> <tr> <td>Project instructions</td> <td> <code class="language-plaintext highlighter-rouge">AGENTS.md</code>, <code class="language-plaintext highlighter-rouge">CLAUDE.md</code> </td> <td>Checked</td> <td>2026-06-25</td> <td> <code class="language-plaintext highlighter-rouge">CLAUDE.md</code> points to <code class="language-plaintext highlighter-rouge">AGENTS.md</code>.</td> </tr> <tr> <td>Current IMPSY hub</td> <td><code class="language-plaintext highlighter-rouge">_projects/2_project.md</code></td> <td>Implemented</td> <td>2026-06-26</td> <td>Expanded with HCI + systems framing, implemented screen areas, user perspectives, and contribution framing. Overview keeps project-level side arrows.</td> </tr> <tr> <td>Process page</td> <td><code class="language-plaintext highlighter-rouge">_pages/impsy-interface-process.md</code></td> <td>Implemented</td> <td>2026-06-26</td> <td>Expanded with Double Diamond framing, old-interface baseline, user-story role, and interface specs. Side arrows link overview/system.</td> </tr> <tr> <td>System page</td> <td><code class="language-plaintext highlighter-rouge">_pages/impsy-interface-system.md</code></td> <td>Implemented</td> <td>2026-06-26</td> <td>Expanded with architecture, interaction modes, log-to-model flow, model traceability, and distinct workflow images.</td> </tr> <tr> <td>Study page</td> <td><code class="language-plaintext highlighter-rouge">_pages/impsy-interface-study.md</code></td> <td>Implemented</td> <td>2026-06-26</td> <td>Expanded with method, SUS interpretation, themes, limits, future work, and study-specific images.</td> </tr> <tr> <td>Gallery page</td> <td><code class="language-plaintext highlighter-rouge">_pages/impsy-interface-gallery.md</code></td> <td>Implemented</td> <td>2026-06-26</td> <td>Main design archive; side arrows link study/resources.</td> </tr> <tr> <td>Resources page</td> <td><code class="language-plaintext highlighter-rouge">_pages/impsy-interface-resources.md</code></td> <td>Implemented</td> <td>2026-06-26</td> <td>Expanded with thesis-vs-NIME framing, public-safety boundary, and asset allocation. Side arrows link gallery/overview.</td> </tr> <tr> <td>Thesis Source Mapper</td> <td><code class="language-plaintext highlighter-rouge">output/impsy-thesis-source-map.md</code></td> <td>Checked</td> <td>2026-06-25</td> <td>Agent 1 produced thesis-first page/source map; use before content implementation.</td> </tr> <tr> <td>Content Architect</td> <td><code class="language-plaintext highlighter-rouge">output/impsy-thesis-first-content-plan.md</code></td> <td>Checked</td> <td>2026-06-25</td> <td>Agent 2 produced thesis-first hierarchy, draft copy, asset placement, and implementation checklist.</td> </tr> <tr> <td>Asset Curator</td> <td><code class="language-plaintext highlighter-rouge">output/impsy-thesis-asset-curation.md</code></td> <td>Checked</td> <td>2026-06-25</td> <td>Earlier subset expanded on Kevin’s request to include the original design image archive.</td> </tr> <tr> <td>Navigation/content pass</td> <td><code class="language-plaintext highlighter-rouge">output/impsy-navigation-content-pass.md</code></td> <td>Checked</td> <td>2026-06-26</td> <td>Replaced in-page button nav with layout-level side-arrow routing for IMPSY subpages. Expanded pages remain public-safe.</td> </tr> <tr> <td>Page Implementation</td> <td>IMPSY Jekyll pages</td> <td>Implemented</td> <td>2026-06-25</td> <td>Agent 4 updated the hub, five linked pages, copied selected assets, and left commit/push untouched.</td> </tr> <tr> <td>Style Manager</td> <td><code class="language-plaintext highlighter-rouge">output/impsy-thesis-first-style-review.md</code></td> <td>Checked</td> <td>2026-06-25</td> <td>Agent 5 reviewed voice/consistency and made small style-only wording edits.</td> </tr> <tr> <td>UI Tester</td> <td><code class="language-plaintext highlighter-rouge">output/impsy-thesis-first-ui-test.md</code></td> <td>Checked</td> <td>2026-06-25</td> <td>Agent 6 verified build, routes, desktop/mobile layout, images, PDF links, public scans, and caveats.</td> </tr> <tr> <td>Manager Integrator</td> <td>This harness</td> <td>Not started</td> <td> </td> <td>Assign Agent 7 last.</td> </tr> <tr> <td>Official NIME paper page</td> <td><code class="language-plaintext highlighter-rouge">https://nime2026.org/proceedings/196.html</code></td> <td>Checked</td> <td>2026-06-23</td> <td>Recheck if publication facts are edited.</td> </tr> <tr> <td>Official NIME PDF</td> <td><code class="language-plaintext highlighter-rouge">https://nime.org/proceedings/2026/nime2026_102.pdf</code></td> <td>Checked</td> <td>2026-06-23</td> <td>Keep as public source of truth for paper.</td> </tr> <tr> <td>Thesis PDF</td> <td><code class="language-plaintext highlighter-rouge">COMP4550_Kevin_Zhu.pdf</code></td> <td>Needs Kevin decision</td> <td>2026-06-25</td> <td>Do not publish by default.</td> </tr> <tr> <td>Upstream IMPSY repo</td> <td><code class="language-plaintext highlighter-rouge">https://github.com/cpmpercussion/impsy</code></td> <td>Checked</td> <td>2026-06-23</td> <td>Keep unless a public web-interface repo is verified.</td> </tr> <tr> <td>Paper PDF local copy</td> <td><code class="language-plaintext highlighter-rouge">assets/pdf/impsy-nime-2026-paper.pdf</code></td> <td>Existing</td> <td>2026-06-25</td> <td>Safe to keep, but should not dominate resources.</td> </tr> <tr> <td>Sensitive file scan</td> <td><code class="language-plaintext highlighter-rouge">find assets ... rg ...</code></td> <td>Checked</td> <td>2026-06-25</td> <td>Agent 6 repeated broad/scoped scans; no IMPSY private-material leaks found.</td> </tr> <tr> <td>Local Jekyll build</td> <td><code class="language-plaintext highlighter-rouge">bundle exec jekyll build</code></td> <td>Checked</td> <td>2026-06-25</td> <td>Passed during Agent 6 UI testing.</td> </tr> <tr> <td>Commit</td> <td><code class="language-plaintext highlighter-rouge">docs: redo IMPSY project pages from thesis</code></td> <td>Not started</td> <td> </td> <td>Do not push.</td> </tr> </tbody> </table> <p>Status values:</p> <ul> <li> <code class="language-plaintext highlighter-rouge">Not started</code>: no work done for the redo.</li> <li> <code class="language-plaintext highlighter-rouge">Checked</code>: source inspected and current enough for this redo.</li> <li> <code class="language-plaintext highlighter-rouge">Existing</code>: already present from previous pass.</li> <li> <code class="language-plaintext highlighter-rouge">Needs thesis-first redo</code>: implemented but misaligned with Kevin’s updated direction.</li> <li> <code class="language-plaintext highlighter-rouge">Needs asset recheck</code>: implemented but needs a fresh visual/safety pass.</li> <li> <code class="language-plaintext highlighter-rouge">Selected</code>: approved for inclusion.</li> <li> <code class="language-plaintext highlighter-rouge">Selected with caution</code>: useful candidate, but must be cropped or visually checked before copying.</li> <li> <code class="language-plaintext highlighter-rouge">Copied</code>: copied into website assets.</li> <li> <code class="language-plaintext highlighter-rouge">Implemented</code>: page/content updated for the thesis-first redo.</li> <li> <code class="language-plaintext highlighter-rouge">Skipped</code>: deliberately not included; explain why.</li> <li> <code class="language-plaintext highlighter-rouge">Needs Kevin decision</code>: do not proceed without approval.</li> <li> <code class="language-plaintext highlighter-rouge">Blocked</code>: cannot continue; explain exact blocker.</li> </ul> <h2 id="asset-ledger">Asset Ledger</h2> <p>Record every copied source and destination. Existing assets may be reused if they serve the thesis-first story, but the asset curator must actively re-evaluate thesis visuals.</p> <table> <thead> <tr> <th>Source file</th> <th>Destination file</th> <th>Status</th> <th>Intended use</th> <th>Notes</th> </tr> </thead> <tbody> <tr> <td><code class="language-plaintext highlighter-rouge">.../IMPSY_Web_Interface_NIME_2026/images/zhu-web-interface-1000.jpg</code></td> <td><code class="language-plaintext highlighter-rouge">assets/img/impsy-web-interface-teaser.jpg</code></td> <td>Existing</td> <td>Hub / thumbnail</td> <td>Good NIME asset, but should not be the only project visual.</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">.../IMPSY_Web_Interface_NIME_2026/images/new-impsy-improvisation.jpg</code></td> <td><code class="language-plaintext highlighter-rouge">assets/img/impsy-improvisation-visualisation.jpg</code></td> <td>Existing</td> <td>Hub</td> <td>Kept as the hub’s live-performance overview image.</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">.../IMPSY_Web_Interface_NIME_2026/images/configuration.jpg</code></td> <td><code class="language-plaintext highlighter-rouge">assets/img/impsy-configuration.jpg</code></td> <td>Existing</td> <td>Gallery / archive</td> <td>Removed from study/system pages to avoid repeated subpage imagery.</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">.../IMPSY_Web_Interface_NIME_2026/images/dataflow.png</code></td> <td><code class="language-plaintext highlighter-rouge">assets/img/impsy-dataflow.png</code></td> <td>Existing</td> <td>Gallery / archive</td> <td>Kept in gallery after duplicate system-design image was removed.</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">.../IMPSY_Web_Interface_NIME_2026/images/minilab3.jpg</code></td> <td><code class="language-plaintext highlighter-rouge">assets/img/impsy-minilab-controller.jpg</code></td> <td>Existing</td> <td>Optional gallery</td> <td>Keep optional.</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">.../figures/old-impsy/old-impsy-home.jpg</code></td> <td><code class="language-plaintext highlighter-rouge">assets/img/impsy-old-workflow-home.jpg</code></td> <td>Copied</td> <td>Design process/gallery</td> <td>Cropped to top workflow menu to avoid lower machine/project metadata.</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">.../figures/prototype/draw-wireframe.jpg</code></td> <td><code class="language-plaintext highlighter-rouge">assets/img/impsy-wireframe-sketch.jpg</code></td> <td>Copied</td> <td>Design process/gallery</td> <td>Strong thesis-first process visual.</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">.../figures/prototype/figma-prototype.jpg</code></td> <td><code class="language-plaintext highlighter-rouge">assets/img/impsy-figma-prototype-flow.jpg</code></td> <td>Copied</td> <td>Design process/gallery</td> <td>Strong thesis-first prototype visual.</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">.../IMPSY_Web_Interface_NIME_2026/images/interaction-flow.jpg</code></td> <td><code class="language-plaintext highlighter-rouge">assets/img/impsy-interaction-flow.jpg</code></td> <td>Copied</td> <td>System walkthrough</td> <td>Visually checked before copying; used for navigation/workflow story.</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">.../figures/double-diamond.png</code></td> <td><code class="language-plaintext highlighter-rouge">assets/img/impsy-design-double-diamond.png</code></td> <td>Optional</td> <td>Design process</td> <td>Safe but generic; use only if it helps the story.</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">.../figures/user-stories/user1-storymap.png</code></td> <td><code class="language-plaintext highlighter-rouge">assets/img/impsy-design-user1-storymap.png</code></td> <td>Copied</td> <td>Gallery / story maps</td> <td>Included in compact grid as part of the original design space.</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">.../figures/user-stories/user2-storymap.png</code></td> <td><code class="language-plaintext highlighter-rouge">assets/img/impsy-design-user2-storymap.png</code></td> <td>Copied</td> <td>Gallery / story maps</td> <td>Included in compact grid as part of the original design space.</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">.../figures/user-stories/user3-storymap.png</code></td> <td><code class="language-plaintext highlighter-rouge">assets/img/impsy-design-user3-storymap.png</code></td> <td>Copied</td> <td>Gallery / story maps</td> <td>Included in compact grid as part of the original design space.</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">.../figures/system-design.jpg</code></td> <td><code class="language-plaintext highlighter-rouge">assets/img/impsy-system-design.jpg</code></td> <td>Skipped</td> <td>Gallery / system</td> <td>Removed on 2026-06-25 because it duplicated the dataflow diagram.</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">.../figures/old-impsy/old-impsy-config.jpg</code></td> <td><code class="language-plaintext highlighter-rouge">assets/img/impsy-old-config.jpg</code></td> <td>Copied</td> <td>Gallery / old workflow</td> <td>Included as historical UI; avoid using as hero image.</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">.../figures/old-impsy/old-impsy-dataset.jpg</code></td> <td><code class="language-plaintext highlighter-rouge">assets/img/impsy-old-dataset.jpg</code></td> <td>Copied</td> <td>Gallery / old workflow</td> <td>Included as historical UI; avoid using as hero image.</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">.../figures/old-impsy/old-impsy-log.jpg</code></td> <td><code class="language-plaintext highlighter-rouge">assets/img/impsy-old-log.jpg</code></td> <td>Copied</td> <td>Gallery / old workflow</td> <td>Included as historical UI; avoid using as hero image.</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">.../figures/old-impsy/old-impsy-model.jpg</code></td> <td><code class="language-plaintext highlighter-rouge">assets/img/impsy-old-model.jpg</code></td> <td>Copied</td> <td>Gallery / old workflow</td> <td>Included as historical UI; avoid using as hero image.</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">.../figures/new-impsy/*.jpg</code></td> <td><code class="language-plaintext highlighter-rouge">assets/img/impsy-new-*.jpg</code></td> <td>Copied</td> <td>Gallery / screen set</td> <td>Full thesis design-screen set copied for compact responsive archive.</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">.../figures/new-impsy/new-impsy-home.jpg</code></td> <td><code class="language-plaintext highlighter-rouge">assets/img/impsy-new-home.jpg</code></td> <td>Copied</td> <td>System walkthrough</td> <td>Used as the connect/start image.</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">.../figures/new-impsy/new-impsy-improvisation.jpg</code></td> <td><code class="language-plaintext highlighter-rouge">assets/img/impsy-new-improvisation.jpg</code></td> <td>Copied</td> <td>System walkthrough</td> <td>Used instead of repeating the hub’s NIME improvisation image.</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">.../figures/new-impsy/new-impsy-logvis-combined.jpg</code></td> <td><code class="language-plaintext highlighter-rouge">assets/img/impsy-new-logvis-combined.jpg</code></td> <td>Copied</td> <td>System walkthrough</td> <td>Used for inspect-recorded-data section.</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">.../figures/new-impsy/new-impsy-training.jpg</code></td> <td><code class="language-plaintext highlighter-rouge">assets/img/impsy-new-training.jpg</code></td> <td>Copied</td> <td>System walkthrough</td> <td>Used for train/choose-model section.</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">.../figures/new-impsy/new-impsy-model-detail.jpg</code></td> <td><code class="language-plaintext highlighter-rouge">assets/img/impsy-new-model-detail.jpg</code></td> <td>Copied</td> <td>System walkthrough</td> <td>Used for model-detail/return-to-performance section.</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">.../figures/study-preparation/configuration.jpg</code></td> <td><code class="language-plaintext highlighter-rouge">assets/img/impsy-study-session-setup.jpg</code></td> <td>Copied</td> <td>Study page</td> <td>Public-safe setup image with browser, controller, and audio context.</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">.../figures/data-collection/quantitative/sus_avg_scores_bar.png</code></td> <td><code class="language-plaintext highlighter-rouge">assets/img/impsy-study-sus-average.png</code></td> <td>Copied</td> <td>Study page</td> <td>Used as public-safe SUS summary signal.</td> </tr> </tbody> </table> <h2 id="link-ledger">Link Ledger</h2> <table> <thead> <tr> <th>Link text</th> <th>URL / path</th> <th>Status</th> <th>Where used</th> <th>Notes</th> </tr> </thead> <tbody> <tr> <td>Official NIME paper page</td> <td><code class="language-plaintext highlighter-rouge">https://nime2026.org/proceedings/196.html</code></td> <td>Existing</td> <td>Resources</td> <td>Keep as publication milestone.</td> </tr> <tr> <td>Official NIME PDF</td> <td><code class="language-plaintext highlighter-rouge">https://nime.org/proceedings/2026/nime2026_102.pdf</code></td> <td>Existing</td> <td>Resources</td> <td>Keep.</td> </tr> <tr> <td>Local final paper PDF</td> <td><code class="language-plaintext highlighter-rouge">/assets/pdf/impsy-nime-2026-paper.pdf</code></td> <td>Existing</td> <td>Resources</td> <td>Keep if desired, but official PDF should remain source of truth.</td> </tr> <tr> <td>IMPSY upstream repo</td> <td><code class="language-plaintext highlighter-rouge">https://github.com/cpmpercussion/impsy</code></td> <td>Existing</td> <td>Resources</td> <td>Keep unless better code links are verified.</td> </tr> <tr> <td>Honours thesis PDF</td> <td>TBD</td> <td>Needs Kevin decision</td> <td>Resources</td> <td>Do not add without approval.</td> </tr> <tr> <td>Web interface repo</td> <td>TBD</td> <td>Needs verification</td> <td>Resources</td> <td>User asked why thesis repo was missed earlier; verify exact public repo before linking.</td> </tr> </tbody> </table> <h2 id="decisions-needed-from-kevin">Decisions Needed From Kevin</h2> <table> <thead> <tr> <th>Decision</th> <th>Default if no answer</th> <th>Why it matters</th> </tr> </thead> <tbody> <tr> <td>Should the honours thesis PDF be public on the website?</td> <td>Do not publish.</td> <td>Thesis may contain material not intended for public release.</td> </tr> <tr> <td>Which repo should represent Kevin’s thesis/web-interface work publicly?</td> <td>Link only upstream IMPSY.</td> <td>Avoid exposing private or stale code.</td> </tr> <tr> <td>Should the lightning talk MP4 be hosted locally or linked externally?</td> <td>Do not host until checked.</td> <td>Local video affects repo size and page loading.</td> </tr> <tr> <td>Should the poster PDF be hosted locally?</td> <td>Do not host until checked.</td> <td>Poster may be public-safe, but approval is cleaner.</td> </tr> <tr> <td>How much SUS detail should the public study page include?</td> <td>Keep mostly qualitative.</td> <td>Avoid making the personal site feel like an evaluation report.</td> </tr> </tbody> </table> <h2 id="handoff-notes">Handoff Notes</h2> <ul> <li>This harness was rewritten on 2026-06-25 because Kevin said the current content refers too much to the paper and should include the thesis project more fully.</li> <li>Agent 1 produced <code class="language-plaintext highlighter-rouge">output/impsy-thesis-source-map.md</code>, which maps thesis chapters to the hub, process, system, study, gallery, and resources pages.</li> <li>Agent 3 produced <code class="language-plaintext highlighter-rouge">output/impsy-thesis-asset-curation.md</code>, which selects thesis-first visual candidates and rejects raw/private study, log, model, ethics, and feedback material.</li> <li>Agent 2 produced <code class="language-plaintext highlighter-rouge">output/impsy-thesis-first-content-plan.md</code>, which gives the implementation agent page hierarchy, draft copy, current-content demotions, asset captions, and an implementation checklist.</li> <li>The previous implementation can be reused as page structure, routes, and some assets, but the narrative should be rebuilt from the thesis.</li> <li>Leave unrelated untracked <code class="language-plaintext highlighter-rouge">.claude/</code> content untouched.</li> <li>Update <code class="language-plaintext highlighter-rouge">last_edited</code> whenever this file changes.</li> </ul> </body></html>

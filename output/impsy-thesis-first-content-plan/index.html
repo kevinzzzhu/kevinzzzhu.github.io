@@ -1,0 +1,743 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd"> <html><body> <h1 id="impsy-thesis-first-content-plan">IMPSY Thesis-First Content Plan</h1> <p>Scope: content plan and draft copy only. This pass does not edit website pages, copy assets, or update the harness.</p> <p>The next rewrite should make the COMP4550 honours thesis the main project story. The NIME 2026 paper should stay visible, but as a later public milestone and resource after the visitor understands what Kevin built, why the interface was needed, how the design developed, and what the study suggested.</p> <h2 id="proposed-page-hierarchy-and-navigation-labels">Proposed Page Hierarchy And Navigation Labels</h2> <p>Use the existing hub-and-spoke route structure. Keep the route stable so any existing links keep working, but change page emphasis and navigation order.</p> <table> <thead> <tr> <th>Route</th> <th>Navigation label</th> <th>Page role</th> <th>Primary source</th> </tr> </thead> <tbody> <tr> <td><code class="language-plaintext highlighter-rouge">/projects/impsy-interface/</code></td> <td>Overview</td> <td>Main project hub. Start with Kevin’s honours project and the interface problem.</td> <td>Thesis intro, background, system design, conclusion</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">/projects/impsy-interface/process/</code></td> <td>Design process</td> <td>How the old workflow became requirements, sketches, Figma, and design goals.</td> <td>Thesis requirement analysis and appendix process material</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">/projects/impsy-interface/system/</code></td> <td>System walkthrough</td> <td>A plain-language journey through using the tool.</td> <td>Thesis system design and public-safe NIME figures</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">/projects/impsy-interface/study/</code></td> <td>Study takeaways</td> <td>Public-safe reflection on the exploratory evaluation.</td> <td>Thesis case study and conclusion</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">/projects/impsy-interface/gallery/</code></td> <td>Gallery</td> <td>Visual inspection page grouped by process, system, and study/context.</td> <td>Curated assets from thesis and NIME</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">/projects/impsy-interface/resources/</code></td> <td>Resources</td> <td>Public links, code status, and pending release decisions.</td> <td>Public NIME sources, upstream IMPSY repo, Kevin decisions</td> </tr> </tbody> </table> <p>Recommended hub link order:</p> <ol> <li>Design process</li> <li>System walkthrough</li> <li>Study takeaways</li> <li>Gallery</li> <li>Resources</li> </ol> <p>Put NIME proceedings/PDF and code links inside the resources page and a compact “Later public outcome” block on the hub. Do not lead the hub with publication links.</p> <h2 id="page-by-page-draft-copy">Page-By-Page Draft Copy</h2> <p>The copy below is written as implementation-ready draft material, but Agent 4 should still adapt it to the final page layout and available assets.</p> <h3 id="hub-overview">Hub: Overview</h3> <p>Suggested frontmatter changes:</p> <ul> <li>Keep title: <code class="language-plaintext highlighter-rouge">IMPSY Web Interface</code> </li> <li>Keep route: <code class="language-plaintext highlighter-rouge">/projects/impsy-interface/</code> </li> <li>Keep thumbnail: <code class="language-plaintext highlighter-rouge">/assets/img/impsy-web-interface-teaser.jpg</code> </li> <li>Suggested description: <code class="language-plaintext highlighter-rouge">an honours project on making musical AI easier to see, shape, and perform with</code> </li> </ul> <p>Opening draft:</p> <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>I built the IMPSY web interface for my COMP4550 honours project at ANU. IMPSY was
+already a powerful musical AI system: it could listen to performance data, train
+models, and generate responses. The problem was that too much of that workflow was
+hard to see while using it creatively.
+
+For a performer, that matters. If you cannot tell what the system heard, what data
+is being used, which model is active, or when the AI is replying, the interaction
+can feel like a black box instead of an instrument.
+
+My project was to wrap that machine-learning music loop in a browser interface. The
+interface connects performance, logs, training data, model selection, configuration,
+and real-time visual feedback so the user can move through the whole workflow
+without losing the thread.
+</code></pre></div></div> <p>Hero/teaser image:</p> <div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+
+
+
+&lt;figure
+  
+&gt;
+  &lt;picture&gt;
+    &lt;!-- Auto scaling with imagemagick --&gt;
+    &lt;!--
+      See https://www.debugbear.com/blog/responsive-images#w-descriptors-and-the-sizes-attribute and
+      https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images for info on defining 'sizes' for responsive images
+    --&gt;
+    
+      
+        &lt;source
+          class="responsive-img-srcset"
+          
+            srcset="/assets/img/impsy-web-interface-teaser-480.webp 480w,/assets/img/impsy-web-interface-teaser-800.webp 800w,/assets/img/impsy-web-interface-teaser-1400.webp 1400w,"
+            type="image/webp"
+          
+          
+            sizes="95vw"
+          
+        &gt;
+      
+    
+    &lt;img
+      src="/assets/img/impsy-web-interface-teaser.jpg"
+      
+      
+        width="100%"
+      
+      
+        height="auto"
+      
+      
+      
+        alt="The IMPSY web interface running beside a MIDI controller"
+      
+      
+      
+      
+        loading="lazy"
+      
+      onerror="this.onerror=null; $('.responsive-img-srcset').remove();"
+    &gt;
+  &lt;/picture&gt;
+
+  
+    &lt;figcaption class="caption"&gt;The project began as my honours interface for making IMPSY's performance, training, model, and configuration workflow easier to follow.&lt;/figcaption&gt;
+  
+&lt;/figure&gt;
+
+</code></pre></div></div> <p>Section: <code class="language-plaintext highlighter-rouge">What I built</code></p> <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>IMPSY is used for call-and-response musical interaction. A performer plays with a
+MIDI controller, the system records the interaction, and a model can respond using
+patterns learned from performance data.
+
+The web interface sits around that loop. It gives the user places to perform, inspect
+logs, select training material, train or choose a model, adjust configuration, and
+return to improvisation. The important shift is that the data and model steps are no
+longer hidden background work. They become part of the creative workflow.
+</code></pre></div></div> <p>Section: <code class="language-plaintext highlighter-rouge">Why I cared about this</code></p> <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>This project sat in the part of HCI I enjoy most: making a technical system legible
+enough that people can work with it creatively. I was not trying to pretend musical
+machine learning is simple. I wanted the interface to show enough of the system state
+that a user could make better choices while still staying close to the musical task.
+
+That meant balancing two needs: a beginner should be able to start playing without
+understanding every backend detail, while an experienced user should still be able to
+inspect data, configure the system, and shape the model.
+</code></pre></div></div> <p>Section: <code class="language-plaintext highlighter-rouge">Later public outcome</code></p> <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>The honours project later became a NIME 2026 paper with Charles Martin: <span class="ge">**</span>A Web
+Interface for Real-Time Interaction with Machine Learning in Musical Performance<span class="ge">**</span>.
+I treat the paper as the public research milestone for this work. The fuller website
+story starts earlier, with the thesis design process and the system I built.
+</code></pre></div></div> <p>Section: <code class="language-plaintext highlighter-rouge">Explore the project</code></p> <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">-</span> <span class="p">[</span><span class="nv">Design process</span><span class="p">](</span><span class="sx">/projects/impsy-interface/process/</span><span class="p">)</span> - how the project moved from
+  workflow problems to sketches, prototype screens, and design goals.
+<span class="p">-</span> <span class="p">[</span><span class="nv">System walkthrough</span><span class="p">](</span><span class="sx">/projects/impsy-interface/system/</span><span class="p">)</span> - a plain-language tour of
+  the play, inspect, train, configure, and perform loop.
+<span class="p">-</span> <span class="p">[</span><span class="nv">Study takeaways</span><span class="p">](</span><span class="sx">/projects/impsy-interface/study/</span><span class="p">)</span> - what the honours evaluation
+  suggested, without raw participant material.
+<span class="p">-</span> <span class="p">[</span><span class="nv">Gallery</span><span class="p">](</span><span class="sx">/projects/impsy-interface/gallery/</span><span class="p">)</span> - process and system visuals from the
+  thesis and public paper materials.
+<span class="p">-</span> <span class="p">[</span><span class="nv">Resources</span><span class="p">](</span><span class="sx">/projects/impsy-interface/resources/</span><span class="p">)</span> - NIME links, code links, and
+  public-release decisions.
+</code></pre></div></div> <p>Hub notes for Agent 4:</p> <ul> <li>Keep the current strong first two paragraphs from <code class="language-plaintext highlighter-rouge">_projects/2_project.md:13-21</code>, but add the explicit COMP4550 honours framing earlier.</li> <li>Move <code class="language-plaintext highlighter-rouge">_projects/2_project.md:23-27</code> into the “Later public outcome” section.</li> <li>Replace the current <code class="language-plaintext highlighter-rouge">Project links</code> block at <code class="language-plaintext highlighter-rouge">_projects/2_project.md:31-41</code> with internal project pages first. Put NIME links on resources.</li> </ul> <h3 id="design-process">Design Process</h3> <p>Suggested title: <code class="language-plaintext highlighter-rouge">IMPSY design process</code></p> <p>Suggested description: <code class="language-plaintext highlighter-rouge">How the honours project moved from workflow problems to sketches, prototypes, and design goals</code></p> <p>Opening draft:</p> <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>The interface did not start as a visual polish layer. It started from a workflow
+problem. The original IMPSY system could record performances, train models, and
+generate responses, but the user had to understand several separate technical steps
+to keep the interaction moving.
+
+For the honours project, I treated that as an HCI problem. The main question was:
+how can a musician understand and shape a musical AI system while still staying in a
+creative flow?
+</code></pre></div></div> <p>Section: <code class="language-plaintext highlighter-rouge">Understanding the old workflow</code></p> <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>The old interface exposed useful parts of IMPSY, including logs, datasets, models,
+and configuration. The issue was not that these pieces were missing. The issue was
+that the relationship between them was not easy to read during use.
+
+That gave me the first design direction: keep the whole loop visible. A user should
+be able to see how performance becomes data, how data becomes a model, and how that
+model returns to live interaction.
+</code></pre></div></div> <p>Suggested image after this section, if copied later:</p> <div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+
+
+
+&lt;figure
+  
+&gt;
+  &lt;picture&gt;
+    &lt;!-- Auto scaling with imagemagick --&gt;
+    &lt;!--
+      See https://www.debugbear.com/blog/responsive-images#w-descriptors-and-the-sizes-attribute and
+      https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images for info on defining 'sizes' for responsive images
+    --&gt;
+    
+      
+        &lt;source
+          class="responsive-img-srcset"
+          
+            srcset="/assets/img/impsy-old-workflow-home-480.webp 480w,/assets/img/impsy-old-workflow-home-800.webp 800w,/assets/img/impsy-old-workflow-home-1400.webp 1400w,"
+            type="image/webp"
+          
+          
+            sizes="95vw"
+          
+        &gt;
+      
+    
+    &lt;img
+      src="/assets/img/impsy-old-workflow-home.jpg"
+      
+      
+        width="100%"
+      
+      
+        height="auto"
+      
+      
+      
+        alt="The older IMPSY home workflow"
+      
+      
+      
+      
+        loading="lazy"
+      
+      onerror="this.onerror=null; $('.responsive-img-srcset').remove();"
+    &gt;
+  &lt;/picture&gt;
+
+  
+    &lt;figcaption class="caption"&gt;The previous workflow exposed the system's parts, but the redesign needed to make the relationship between performance, data, models, and response easier to follow.&lt;/figcaption&gt;
+  
+&lt;/figure&gt;
+
+</code></pre></div></div> <p>Section: <code class="language-plaintext highlighter-rouge">Design tools, not claims about users</code></p> <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>I used personas and user stories as design tools. They helped me avoid designing only
+for someone who already knew the backend. The useful spread was simple: a beginner
+who wants to try sound quickly, a musician who wants to shape the system through
+their own playing, and a technical creator who wants deeper control.
+
+That led to progressive disclosure. The first interaction should be playable and
+readable. Deeper controls for training, MIDI setup, and model configuration should
+still be there, but they should not block the first musical interaction.
+</code></pre></div></div> <p>Optional image:</p> <div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+
+
+
+&lt;figure
+  
+&gt;
+  &lt;picture&gt;
+    &lt;!-- Auto scaling with imagemagick --&gt;
+    &lt;!--
+      See https://www.debugbear.com/blog/responsive-images#w-descriptors-and-the-sizes-attribute and
+      https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images for info on defining 'sizes' for responsive images
+    --&gt;
+    
+      
+        &lt;source
+          class="responsive-img-srcset"
+          
+            srcset="/assets/img/impsy-user-story-beginner-480.webp 480w,/assets/img/impsy-user-story-beginner-800.webp 800w,/assets/img/impsy-user-story-beginner-1400.webp 1400w,"
+            type="image/webp"
+          
+          
+            sizes="95vw"
+          
+        &gt;
+      
+    
+    &lt;img
+      src="/assets/img/impsy-user-story-beginner.png"
+      
+      
+        width="100%"
+      
+      
+        height="auto"
+      
+      
+      
+        alt="A user story map for a beginner IMPSY user"
+      
+      
+      
+      
+        loading="lazy"
+      
+      onerror="this.onerror=null; $('.responsive-img-srcset').remove();"
+    &gt;
+  &lt;/picture&gt;
+
+  
+    &lt;figcaption class="caption"&gt;The user-story maps were design tools for thinking through different entry points, not evidence about real participant groups.&lt;/figcaption&gt;
+  
+&lt;/figure&gt;
+
+</code></pre></div></div> <p>Section: <code class="language-plaintext highlighter-rouge">Sketching the loop</code></p> <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>The paper sketch and Figma prototype were where the project became more concrete. I
+was testing how a user could move between project setup, improvisation, log
+inspection, training, model selection, and configuration without losing track of the
+creative loop.
+
+The key question was not only where the buttons should go. It was how the interface
+could show the relationship between performance data, model behaviour, and musical
+response.
+</code></pre></div></div> <p>Suggested images:</p> <div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+
+
+
+&lt;figure
+  
+&gt;
+  &lt;picture&gt;
+    &lt;!-- Auto scaling with imagemagick --&gt;
+    &lt;!--
+      See https://www.debugbear.com/blog/responsive-images#w-descriptors-and-the-sizes-attribute and
+      https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images for info on defining 'sizes' for responsive images
+    --&gt;
+    
+      
+        &lt;source
+          class="responsive-img-srcset"
+          
+            srcset="/assets/img/impsy-wireframe-sketch-480.webp 480w,/assets/img/impsy-wireframe-sketch-800.webp 800w,/assets/img/impsy-wireframe-sketch-1400.webp 1400w,"
+            type="image/webp"
+          
+          
+            sizes="95vw"
+          
+        &gt;
+      
+    
+    &lt;img
+      src="/assets/img/impsy-wireframe-sketch.jpg"
+      
+      
+        width="100%"
+      
+      
+        height="auto"
+      
+      
+      
+        alt="Early hand-drawn wireframe for the IMPSY interface"
+      
+      
+      
+      
+        loading="lazy"
+      
+      onerror="this.onerror=null; $('.responsive-img-srcset').remove();"
+    &gt;
+  &lt;/picture&gt;
+
+  
+    &lt;figcaption class="caption"&gt;The hand sketch explored how the main workflow areas could sit together before the interface became a polished prototype.&lt;/figcaption&gt;
+  
+&lt;/figure&gt;
+
+
+
+
+
+
+&lt;figure
+  
+&gt;
+  &lt;picture&gt;
+    &lt;!-- Auto scaling with imagemagick --&gt;
+    &lt;!--
+      See https://www.debugbear.com/blog/responsive-images#w-descriptors-and-the-sizes-attribute and
+      https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images for info on defining 'sizes' for responsive images
+    --&gt;
+    
+      
+        &lt;source
+          class="responsive-img-srcset"
+          
+            srcset="/assets/img/impsy-figma-prototype-flow-480.webp 480w,/assets/img/impsy-figma-prototype-flow-800.webp 800w,/assets/img/impsy-figma-prototype-flow-1400.webp 1400w,"
+            type="image/webp"
+          
+          
+            sizes="95vw"
+          
+        &gt;
+      
+    
+    &lt;img
+      src="/assets/img/impsy-figma-prototype-flow.jpg"
+      
+      
+        width="100%"
+      
+      
+        height="auto"
+      
+      
+      
+        alt="Figma prototype flow for the IMPSY web interface"
+      
+      
+      
+      
+        loading="lazy"
+      
+      onerror="this.onerror=null; $('.responsive-img-srcset').remove();"
+    &gt;
+  &lt;/picture&gt;
+
+  
+    &lt;figcaption class="caption"&gt;The Figma prototype turned the rough workflow into connected screens for performance, logs, training, models, and configuration.&lt;/figcaption&gt;
+  
+&lt;/figure&gt;
+
+</code></pre></div></div> <p>Section: <code class="language-plaintext highlighter-rouge">Design goals</code></p> <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>The design settled around four practical goals:
+<span class="p">
+-</span> make the system approachable without hiding important complexity
+<span class="p">-</span> show immediate feedback during live interaction
+<span class="p">-</span> make recorded logs and training material inspectable
+<span class="p">-</span> keep advanced controls available when users need them
+
+Those goals shaped the final interface more than the publication framing did. The
+NIME paper came later, after the thesis had already worked through the design story.
+</code></pre></div></div> <p>Design process notes for Agent 4:</p> <ul> <li>Reuse the current framing at <code class="language-plaintext highlighter-rouge">_pages/impsy-interface-process.md:15-39</code>.</li> <li>Replace the current single configuration figure at <code class="language-plaintext highlighter-rouge">_pages/impsy-interface-process.md:55</code> with process visuals after they are copied.</li> <li>Rename or rewrite the frontmatter description at <code class="language-plaintext highlighter-rouge">_pages/impsy-interface-process.md:5</code>; it currently points toward the NIME paper.</li> <li>Keep the “From thesis to NIME” idea from <code class="language-plaintext highlighter-rouge">_pages/impsy-interface-process.md:70-81</code>, but shorten it and move it after the thesis process material.</li> </ul> <h3 id="system-walkthrough">System Walkthrough</h3> <p>Suggested title: <code class="language-plaintext highlighter-rouge">IMPSY system walkthrough</code></p> <p>Suggested description: <code class="language-plaintext highlighter-rouge">A plain-language tour of the performance, data, model, and configuration loop</code></p> <p>Opening draft:</p> <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>The system is easiest to understand as a loop: play, inspect, train, configure, and
+return to performance.
+
+The browser interface handles the visible workflow. The Python backend handles IMPSY's
+musical AI logic, MIDI communication, logging, and timing-sensitive response. The page
+does not need to explain every backend detail first. It should start with what a user
+does.
+</code></pre></div></div> <p>Section: <code class="language-plaintext highlighter-rouge">1. Connect and play</code></p> <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>A performer starts with a MIDI controller and the browser interface. The first job of
+the interface is to make the system state visible: is the controller connected, is the
+system receiving input, and is the performance being recorded?
+
+This matters because the user's playing is not only sound. It is also data that can be
+reviewed, selected, and used for later model training.
+</code></pre></div></div> <p>Suggested image:</p> <div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+
+
+
+&lt;figure
+  
+&gt;
+  &lt;picture&gt;
+    &lt;!-- Auto scaling with imagemagick --&gt;
+    &lt;!--
+      See https://www.debugbear.com/blog/responsive-images#w-descriptors-and-the-sizes-attribute and
+      https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images for info on defining 'sizes' for responsive images
+    --&gt;
+    
+      
+        &lt;source
+          class="responsive-img-srcset"
+          
+            srcset="/assets/img/impsy-minilab-controller-480.webp 480w,/assets/img/impsy-minilab-controller-800.webp 800w,/assets/img/impsy-minilab-controller-1400.webp 1400w,"
+            type="image/webp"
+          
+          
+            sizes="95vw"
+          
+        &gt;
+      
+    
+    &lt;img
+      src="/assets/img/impsy-minilab-controller.jpg"
+      
+      
+        width="100%"
+      
+      
+        height="auto"
+      
+      
+      
+        alt="A compact MIDI controller used with the IMPSY interface"
+      
+      
+      
+      
+        loading="lazy"
+      
+      onerror="this.onerror=null; $('.responsive-img-srcset').remove();"
+    &gt;
+  &lt;/picture&gt;
+
+  
+    &lt;figcaption class="caption"&gt;The project used a compact controller-and-browser setup so the workflow stayed close to a small-studio performance context.&lt;/figcaption&gt;
+  
+&lt;/figure&gt;
+
+</code></pre></div></div> <p>Section: <code class="language-plaintext highlighter-rouge">2. See the AI respond</code></p> <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>IMPSY supports call-and-response interaction. The performer plays, the system listens,
+and the model can generate a musical response.
+
+The live view separates human input and AI output so the exchange is easier to read.
+The visualisation is not meant to replace listening. It gives the performer a second
+way to understand when the system is receiving input and when the model is acting.
+</code></pre></div></div> <p>Suggested image:</p> <div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+
+
+
+&lt;figure
+  
+&gt;
+  &lt;picture&gt;
+    &lt;!-- Auto scaling with imagemagick --&gt;
+    &lt;!--
+      See https://www.debugbear.com/blog/responsive-images#w-descriptors-and-the-sizes-attribute and
+      https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images for info on defining 'sizes' for responsive images
+    --&gt;
+    
+      
+        &lt;source
+          class="responsive-img-srcset"
+          
+            srcset="/assets/img/impsy-improvisation-visualisation-480.webp 480w,/assets/img/impsy-improvisation-visualisation-800.webp 800w,/assets/img/impsy-improvisation-visualisation-1400.webp 1400w,"
+            type="image/webp"
+          
+          
+            sizes="95vw"
+          
+        &gt;
+      
+    
+    &lt;img
+      src="/assets/img/impsy-improvisation-visualisation.jpg"
+      
+      
+        width="100%"
+      
+      
+        height="auto"
+      
+      
+      
+        alt="IMPSY improvisation view with human input and AI output visualisation"
+      
+      
+      
+      
+        loading="lazy"
+      
+      onerror="this.onerror=null; $('.responsive-img-srcset').remove();"
+    &gt;
+  &lt;/picture&gt;
+
+  
+    &lt;figcaption class="caption"&gt;The live view separates performer input from AI output so the call-and-response interaction is visible while it happens.&lt;/figcaption&gt;
+  
+&lt;/figure&gt;
+
+</code></pre></div></div> <p>Section: <code class="language-plaintext highlighter-rouge">3. Inspect recorded data</code></p> <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>After playing, the user can inspect logs. This is where the interface connects
+performance with machine-learning material.
+
+Instead of treating recordings as hidden files, the interface makes them part of the
+workflow. A user can review what was recorded and make a more informed decision about
+what should become training data.
+</code></pre></div></div> <p>Do not use raw log screenshots unless redacted. The approved current plan does not include a log screenshot because several candidates expose filenames or numeric data.</p> <p>Section: <code class="language-plaintext highlighter-rouge">4. Train or choose a model</code></p> <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>The user can train from selected material or choose an existing model. Training is
+still conceptually difficult, especially in a short creative session, but the interface
+can make the step more visible by keeping data, model state, and progress close to the
+rest of the workflow.
+
+The project is not claiming that interface design makes model training easy. It shows
+where the user's performance data goes and how that data connects to later AI
+responses.
+</code></pre></div></div> <p>Section: <code class="language-plaintext highlighter-rouge">5. Configure and return to performance</code></p> <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Configuration stays in the browser workflow so setup is not detached from performance.
+Once the user has selected settings and a model, they return to improvisation and the
+loop starts again.
+
+That repeated loop is the heart of the project. The interface lets the user move
+between musical action and machine-learning state without treating the model as a
+separate technical object.
+</code></pre></div></div> <p>Suggested images:</p> <div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+
+
+
+&lt;figure
+  
+&gt;
+  &lt;picture&gt;
+    &lt;!-- Auto scaling with imagemagick --&gt;
+    &lt;!--
+      See https://www.debugbear.com/blog/responsive-images#w-descriptors-and-the-sizes-attribute and
+      https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images for info on defining 'sizes' for responsive images
+    --&gt;
+    
+      
+        &lt;source
+          class="responsive-img-srcset"
+          
+            srcset="/assets/img/impsy-configuration-480.webp 480w,/assets/img/impsy-configuration-800.webp 800w,/assets/img/impsy-configuration-1400.webp 1400w,"
+            type="image/webp"
+          
+          
+            sizes="95vw"
+          
+        &gt;
+      
+    
+    &lt;img
+      src="/assets/img/impsy-configuration.jpg"
+      
+      
+        width="100%"
+      
+      
+        height="auto"
+      
+      
+      
+        alt="IMPSY configuration interface"
+      
+      
+      
+      
+        loading="lazy"
+      
+      onerror="this.onerror=null; $('.responsive-img-srcset').remove();"
+    &gt;
+  &lt;/picture&gt;
+
+  
+    &lt;figcaption class="caption"&gt;Configuration stays visible in the browser workflow so setup decisions remain connected to performance.&lt;/figcaption&gt;
+  
+&lt;/figure&gt;
+
+
+
+
+
+
+&lt;figure
+  
+&gt;
+  &lt;picture&gt;
+    &lt;!-- Auto scaling with imagemagick --&gt;
+    &lt;!--
+      See https://www.debugbear.com/blog/responsive-images#w-descriptors-and-the-sizes-attribute and
+      https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images for info on defining 'sizes' for responsive images
+    --&gt;
+    
+      
+        &lt;source
+          class="responsive-img-srcset"
+          
+            srcset="/assets/img/impsy-dataflow-480.webp 480w,/assets/img/impsy-dataflow-800.webp 800w,/assets/img/impsy-dataflow-1400.webp 1400w,"
+            type="image/webp"
+          
+          
+            sizes="95vw"
+          
+        &gt;
+      
+    
+    &lt;img
+      src="/assets/img/impsy-dataflow.png"
+      
+      
+        width="100%"
+      
+      
+        height="auto"
+      
+      
+      
+        alt="IMPSY dataflow diagram"
+      
+      
+      
+      
+        loading="lazy"
+      
+      onerror="this.onerror=null; $('.responsive-img-srcset').remove();"
+    &gt;
+  &lt;/picture&gt;
+
+  
+    &lt;figcaption class="caption"&gt;The system links MIDI hardware, the Python backend, logs, models, browser visualisation, and real-time communication.&lt;/figcaption&gt;
+  
+&lt;/figure&gt;
+
+
+
+
+
+
+&lt;figure
+  
+&gt;
+  &lt;picture&gt;
+    &lt;!-- Auto scaling with imagemagick --&gt;
+    &lt;!--
+      See https://www.debugbear.com/blog/responsive-images#w-descriptors-and-the-sizes-attribute and
+      https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images for info on defining 'sizes' for responsive images
+    --&gt;
+    
+      
+        &lt;source
+          class="responsive-img-srcset"
+          
+            srcset="/assets/img/impsy-interaction-flow-480.webp 480w,/assets/img/impsy-interaction-flow-800.webp 800w,/assets/img/impsy-interaction-flow-1400.webp 1400w,"
+            type="image/webp"
+          
+          
+            sizes="95vw"
+          
+        &gt;
+      
+    
+    &lt;img
+      src="/assets/img/impsy-interaction-flow.jpg"
+      
+      
+        width="100%"
+      
+      
+        height="auto"
+      
+      
+      
+        alt="IMPSY interaction flow diagram"
+      
+      
+      
+      
+        loading="lazy"
+      
+      onerror="this.onerror=null; $('.responsive-img-srcset').remove();"
+    &gt;
+  &lt;/picture&gt;
+
+  
+    &lt;figcaption class="caption"&gt;The interaction flow shows how the interface connects project setup, performance, logs, training, models, and configuration.&lt;/figcaption&gt;
+  
+&lt;/figure&gt;
+
+</code></pre></div></div> <p>Section: <code class="language-plaintext highlighter-rouge">Technical snapshot</code></p> <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>The interface uses React for the browser views and D3.js for visualisation. The
+backend is Python-based and builds on IMPSY's musical AI system, including recurrent
+neural network model behaviour. MIDI carries musical control messages, WebSockets
+support real-time updates, and HTTP endpoints handle slower configuration and training
+tasks.
+
+The stack matters because it supports the user-facing loop: record, inspect, train,
+configure, perform, and understand.
+</code></pre></div></div> <p>System notes for Agent 4:</p> <ul> <li>Reuse most of <code class="language-plaintext highlighter-rouge">_pages/impsy-interface-system.md:15-84</code>; the structure is already close to the intended walkthrough.</li> <li>Add a clearer configuration step. Current system page jumps from model building to return-to-performance at <code class="language-plaintext highlighter-rouge">_pages/impsy-interface-system.md:55-72</code>.</li> <li>Add the new interaction-flow asset if it passes final zoom-level safety review.</li> <li>Avoid adding training-log screenshots unless redacted.</li> </ul> <h3 id="study-takeaways">Study Takeaways</h3> <p>Suggested title: <code class="language-plaintext highlighter-rouge">IMPSY study takeaways</code></p> <p>Suggested description: <code class="language-plaintext highlighter-rouge">What the honours evaluation suggested about visibility, learning curve, and creative control</code></p> <p>Opening draft:</p> <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>I evaluated the interface through a small exploratory honours study. The goal was not
+to prove that the system solved musical AI interaction. It was to understand how
+people made sense of the workflow, where visual feedback helped, and where the
+learning curve stayed visible.
+
+This page only summarises public-safe takeaways. It does not include raw participant
+quotes, identifying details, consent material, interview material, or study documents.
+</code></pre></div></div> <p>Section: <code class="language-plaintext highlighter-rouge">What the session involved</code></p> <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Five participants used the system in a structured session. They were introduced to the
+interface and controller, explored the system through improvisation, worked with model
+behaviour, and then completed post-session feedback.
+
+For the website, the important detail is the shape of the task: people had to move
+through both musical interaction and machine-learning workflow steps. That is exactly
+where interface visibility matters.
+</code></pre></div></div> <p>Section: <code class="language-plaintext highlighter-rouge">What seemed to help</code></p> <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>The clearest strength was real-time feedback. Visualisation helped people see when the
+system was receiving input and when the AI was responding.
+
+The browser workflow also made the prototype less intimidating than a purely technical
+machine-learning tool. Views for performance, logs, models, and configuration gave the
+system a more understandable shape, even though the underlying model behaviour was
+still complex.
+</code></pre></div></div> <p>Section: <code class="language-plaintext highlighter-rouge">What was still hard</code></p> <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Training and expectation-setting remained difficult. A model trained quickly from a
+small amount of performance data may not produce the response a user imagines. That
+can make the AI feel unpredictable even when the interface is accurately showing what
+is happening.
+
+This was one of the most useful lessons from the project: transparency helps, but it
+does not remove the learning curve. A better interface should help users understand
+the relationship between their data and the AI's response instead of hiding it.
+</code></pre></div></div> <p>Optional small metric note:</p> <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>The thesis and NIME paper report a System Usability Scale mean of 62.50. I would use
+that as a design signal, not as a headline. It says the interface had useful
+direction, but still needed stronger onboarding and learnability.
+</code></pre></div></div> <p>Section: <code class="language-plaintext highlighter-rouge">What I would improve next</code></p> <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>The next version should make onboarding clearer, explain the data-to-model
+relationship more directly, support useful presets or pretrained starting points, and
+make MIDI mapping easier to understand. I would also make the visual feedback more
+explicit about what the model knows, what it is doing, and why a response may sound
+the way it does.
+</code></pre></div></div> <p>Study notes for Agent 4:</p> <ul> <li>Reuse the public-safety disclaimer at <code class="language-plaintext highlighter-rouge">_pages/impsy-interface-study.md:20-25</code>.</li> <li>Keep the qualitative takeaway structure from <code class="language-plaintext highlighter-rouge">_pages/impsy-interface-study.md:36-78</code>.</li> <li>Demote the SUS metric at <code class="language-plaintext highlighter-rouge">_pages/impsy-interface-study.md:55-58</code> to an optional note, or remove it if Kevin wants a less academic study page.</li> <li>Do not add participant photos, raw quotes, qualitative coding screenshots, consent forms, recruitment material, or raw study files.</li> </ul> <h3 id="gallery">Gallery</h3> <p>Suggested title: <code class="language-plaintext highlighter-rouge">IMPSY gallery</code></p> <p>Suggested description: <code class="language-plaintext highlighter-rouge">Selected process and system visuals from the IMPSY honours project</code></p> <p>Opening draft:</p> <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>This gallery collects public-safe visuals from the IMPSY honours project and later
+NIME materials. I want it to show more than the polished final interface: the old
+workflow, early design thinking, prototype structure, system architecture, and final
+performance setup.
+</code></pre></div></div> <p>Recommended grouping:</p> <h4 id="process">Process</h4> <ol> <li> <code class="language-plaintext highlighter-rouge">assets/img/impsy-old-workflow-home.jpg</code> <ul> <li>Caption: <code class="language-plaintext highlighter-rouge">The previous IMPSY workflow exposed important system pieces, but the redesign needed to make the creative loop easier to follow.</code> </li> <li>Use only after final crop/redaction check.</li> </ul> </li> <li> <code class="language-plaintext highlighter-rouge">assets/img/impsy-wireframe-sketch.jpg</code> <ul> <li>Caption: <code class="language-plaintext highlighter-rouge">The early sketch explored how performance, logs, training, models, and configuration could become one connected workflow.</code> </li> </ul> </li> <li> <code class="language-plaintext highlighter-rouge">assets/img/impsy-figma-prototype-flow.jpg</code> <ul> <li>Caption: <code class="language-plaintext highlighter-rouge">The Figma prototype turned the rough workflow into connected screens before implementation.</code> </li> </ul> </li> <li>Optional <code class="language-plaintext highlighter-rouge">assets/img/impsy-user-story-beginner.png</code> <ul> <li>Caption: <code class="language-plaintext highlighter-rouge">The story maps were design tools for checking how different users might enter the system.</code> </li> </ul> </li> </ol> <h4 id="system">System</h4> <ol> <li> <code class="language-plaintext highlighter-rouge">assets/img/impsy-dataflow.png</code> <ul> <li>Caption: <code class="language-plaintext highlighter-rouge">The dataflow diagram shows how MIDI hardware, the Python backend, logs, models, browser visualisation, and real-time communication fit together.</code> </li> </ul> </li> <li> <code class="language-plaintext highlighter-rouge">assets/img/impsy-interaction-flow.jpg</code> <ul> <li>Caption: <code class="language-plaintext highlighter-rouge">The interaction flow shows how setup, performance, logs, training, models, and configuration connect in use.</code> </li> </ul> </li> <li> <code class="language-plaintext highlighter-rouge">assets/img/impsy-improvisation-visualisation.jpg</code> <ul> <li>Caption: <code class="language-plaintext highlighter-rouge">The improvisation view separates performer input from AI output so the call-and-response exchange is visible.</code> </li> </ul> </li> <li> <code class="language-plaintext highlighter-rouge">assets/img/impsy-configuration.jpg</code> <ul> <li>Caption: <code class="language-plaintext highlighter-rouge">Configuration remains in the browser workflow so setup decisions stay close to performance.</code> </li> </ul> </li> </ol> <h4 id="context">Context</h4> <ol> <li> <code class="language-plaintext highlighter-rouge">assets/img/impsy-web-interface-teaser.jpg</code> <ul> <li>Caption: <code class="language-plaintext highlighter-rouge">The final interface running beside MIDI hardware, showing the project as both a design and performance system.</code> </li> </ul> </li> <li> <code class="language-plaintext highlighter-rouge">assets/img/impsy-minilab-controller.jpg</code> <ul> <li>Caption: <code class="language-plaintext highlighter-rouge">The compact controller setup reflects the small-studio context used for testing and demonstration.</code> </li> </ul> </li> </ol> <p>Gallery notes for Agent 4:</p> <ul> <li>Replace the current gallery’s final-only emphasis at <code class="language-plaintext highlighter-rouge">_pages/impsy-interface-gallery.md:15-27</code>.</li> <li>Add headings or short sections so visitors can scan process, system, and context.</li> <li>Keep the existing NIME/site assets, but add the thesis process visuals once copied.</li> <li>Do not include raw participant material, study posters, quote/coding images, or log/model screenshots with readable filenames.</li> </ul> <h3 id="resources">Resources</h3> <p>Suggested title: <code class="language-plaintext highlighter-rouge">IMPSY resources</code></p> <p>Suggested description: <code class="language-plaintext highlighter-rouge">Public links and release decisions for the IMPSY honours project and NIME paper</code></p> <p>Opening draft:</p> <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>This page collects the public materials for the IMPSY web interface project. The
+project began as my COMP4550 honours work at ANU and later became a NIME 2026 paper.
+Some thesis-era materials are not linked here because they include private study
+context or still need a public-release decision.
+</code></pre></div></div> <p>Section: <code class="language-plaintext highlighter-rouge">Project context</code></p> <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">-</span> Project: IMPSY Web Interface
+<span class="p">-</span> Original context: COMP4550 honours project at ANU
+<span class="p">-</span> Focus: a browser interface for making musical AI performance, logs, training,
+  models, and configuration easier to understand
+
+The honours thesis is used as the source for the website story, but the thesis PDF is
+not linked unless Kevin approves a public release.
+</code></pre></div></div> <p>Section: <code class="language-plaintext highlighter-rouge">Publication</code></p> <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="ge">**</span>A Web Interface for Real-Time Interaction with Machine Learning in Musical
+Performance<span class="ge">**</span>  
+Hongzhe Zhu and Charles Martin, NIME 2026, June 23-26, 2026, London and online.
+<span class="p">
+-</span> <span class="p">[</span><span class="nv">Official NIME proceedings page</span><span class="p">](</span><span class="sx">https://nime2026.org/proceedings/196.html</span><span class="p">)</span>
+<span class="p">-</span> <span class="p">[</span><span class="nv">Official NIME PDF</span><span class="p">](</span><span class="sx">https://nime.org/proceedings/2026/nime2026_102.pdf</span><span class="p">)</span>
+<span class="p">-</span> <span class="p">[</span><span class="nv">Local final paper PDF</span><span class="p">](</span><span class="sx">/assets/pdf/impsy-nime-2026-paper.pdf</span><span class="p">)</span>
+</code></pre></div></div> <p>Section: <code class="language-plaintext highlighter-rouge">Code</code></p> <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">-</span> <span class="p">[</span><span class="nv">Upstream IMPSY repository</span><span class="p">](</span><span class="sx">https://github.com/cpmpercussion/impsy</span><span class="p">)</span>
+
+I am linking the upstream IMPSY repository because it is the confirmed public code
+source. A separate thesis/web-interface repository should only be linked after Kevin
+verifies that it is public-safe and is the right repository to show.
+</code></pre></div></div> <p>Section: <code class="language-plaintext highlighter-rouge">Website assets</code></p> <p>List assets actually used after implementation. Do not list planned assets until they have been copied.</p> <p>Section: <code class="language-plaintext highlighter-rouge">Pending public decisions</code></p> <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">-</span> Whether to publish or link the honours thesis PDF.
+<span class="p">-</span> Whether to link Kevin's thesis/web-interface repository.
+<span class="p">-</span> Whether to host a poster, talk video, or demo video.
+<span class="p">-</span> Whether to show the SUS mean on the public study page.
+</code></pre></div></div> <p>Resources notes for Agent 4:</p> <ul> <li>Replace the <code class="language-plaintext highlighter-rouge">## Paper</code>-first structure at <code class="language-plaintext highlighter-rouge">_pages/impsy-interface-resources.md:17-25</code>.</li> <li>Keep official NIME links and local PDF link, but place them after project context.</li> <li>Keep the upstream repo note at <code class="language-plaintext highlighter-rouge">_pages/impsy-interface-resources.md:27-33</code>.</li> <li>Keep the pending-public-materials structure at <code class="language-plaintext highlighter-rouge">_pages/impsy-interface-resources.md:47-55</code>.</li> </ul> <h2 id="current-content-to-remove-reuse-or-demote">Current Content To Remove, Reuse, Or Demote</h2> <table> <thead> <tr> <th>Current file reference</th> <th>Action</th> <th>Reason</th> </tr> </thead> <tbody> <tr> <td><code class="language-plaintext highlighter-rouge">_projects/2_project.md:13-21</code></td> <td>Reuse with small expansion</td> <td>Strong thesis-first problem framing. Add explicit “COMP4550 honours project” earlier.</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">_projects/2_project.md:23-27</code></td> <td>Demote</td> <td>Correct public fact, but it currently appears before the project has fully established the thesis story. Move to “Later public outcome”.</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">_projects/2_project.md:31-41</code></td> <td>Replace</td> <td>Current order leads with NIME links. Internal project pages should come first; publication links should live mainly on resources.</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">_projects/2_project.md:43-61</code></td> <td>Reuse</td> <td>Good plain-language explanation of what the interface does and why visual feedback matters.</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">_projects/2_project.md:63-73</code></td> <td>Reuse</td> <td>Good personal contribution framing. Keep close to hub.</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">_projects/2_project.md:75-88</code></td> <td>Reuse</td> <td>Good “why it mattered” framing. It supports the thesis-first story.</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">_projects/2_project.md:90-103</code></td> <td>Reuse and shorten</td> <td>Useful learning reflection, but avoid making the hub too long once study page carries detail.</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">_projects/2_project.md:105-117</code></td> <td>Reuse after reordering</td> <td>Keep as “Explore the project”, with resources last.</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">_pages/impsy-interface-process.md:5</code></td> <td>Replace</td> <td>Description frames the page as moving toward a public NIME paper. It should frame the honours design process.</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">_pages/impsy-interface-process.md:15-39</code></td> <td>Reuse</td> <td>Good practical workflow and progressive-disclosure framing.</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">_pages/impsy-interface-process.md:41-55</code></td> <td>Reuse and expand</td> <td>Good prototype framing, but needs sketch/Figma/process visuals rather than only configuration.</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">_pages/impsy-interface-process.md:57-68</code></td> <td>Reuse</td> <td>Clear design goals. Keep and maybe make them the page’s anchor.</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">_pages/impsy-interface-process.md:70-81</code></td> <td>Demote</td> <td>Keep a short version after process material. Do not make NIME the destination of the page.</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">_pages/impsy-interface-system.md:15-84</code></td> <td>Reuse with additions</td> <td>Walkthrough is already close. Add clearer configuration and interaction-flow asset placement.</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">_pages/impsy-interface-study.md:15-25</code></td> <td>Reuse</td> <td>Good public-safe framing and disclaimer.</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">_pages/impsy-interface-study.md:27-48</code></td> <td>Reuse</td> <td>Good study question and “what helped” framing.</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">_pages/impsy-interface-study.md:55-58</code></td> <td>Demote or remove</td> <td>SUS metric is source-backed but too paper-like as a main paragraph. Use as an optional note.</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">_pages/impsy-interface-study.md:65-78</code></td> <td>Reuse</td> <td>Good personal reflection and future-work direction.</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">_pages/impsy-interface-gallery.md:15-27</code></td> <td>Replace structure, reuse assets</td> <td>Existing assets are useful, but the page needs process/system/context grouping and thesis process visuals.</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">_pages/impsy-interface-resources.md:15-25</code></td> <td>Replace order</td> <td>Resources should start with project context, not paper. Keep publication details below.</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">_pages/impsy-interface-resources.md:27-33</code></td> <td>Reuse</td> <td>Clear and cautious code-link policy.</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">_pages/impsy-interface-resources.md:35-45</code></td> <td>Update after implementation</td> <td>Asset list must match copied/used assets.</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">_pages/impsy-interface-resources.md:47-55</code></td> <td>Reuse and expand</td> <td>Pending decisions are useful and should stay visible.</td> </tr> </tbody> </table> <h2 id="asset-placement-and-captions">Asset Placement And Captions</h2> <table> <thead> <tr> <th>Asset</th> <th>Page placement</th> <th>Caption</th> </tr> </thead> <tbody> <tr> <td><code class="language-plaintext highlighter-rouge">assets/img/impsy-web-interface-teaser.jpg</code></td> <td>Hub hero; gallery context</td> <td><code class="language-plaintext highlighter-rouge">The project began as my honours interface for making IMPSY's performance, training, model, and configuration workflow easier to follow.</code></td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">assets/img/impsy-improvisation-visualisation.jpg</code></td> <td>Hub “What I built”; system step 2; gallery system</td> <td><code class="language-plaintext highlighter-rouge">The live view separates performer input from AI output so the call-and-response interaction is visible while it happens.</code></td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">assets/img/impsy-configuration.jpg</code></td> <td>System configuration step; gallery system</td> <td><code class="language-plaintext highlighter-rouge">Configuration stays visible in the browser workflow so setup decisions remain connected to performance.</code></td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">assets/img/impsy-dataflow.png</code></td> <td>System walkthrough; gallery system</td> <td><code class="language-plaintext highlighter-rouge">The system links MIDI hardware, the Python backend, logs, models, browser visualisation, and real-time communication.</code></td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">assets/img/impsy-minilab-controller.jpg</code></td> <td>System connect/play step; gallery context</td> <td><code class="language-plaintext highlighter-rouge">The compact controller setup reflects the small-studio context used for testing and demonstration.</code></td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">assets/img/impsy-old-workflow-home.jpg</code></td> <td>Design process “old workflow”; gallery process</td> <td><code class="language-plaintext highlighter-rouge">The previous IMPSY workflow exposed important system pieces, but the redesign needed to make the creative loop easier to follow.</code></td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">assets/img/impsy-wireframe-sketch.jpg</code></td> <td>Design process sketch section; gallery process</td> <td><code class="language-plaintext highlighter-rouge">The early sketch explored how performance, logs, training, models, and configuration could become one connected workflow.</code></td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">assets/img/impsy-figma-prototype-flow.jpg</code></td> <td>Design process prototype section; gallery process</td> <td><code class="language-plaintext highlighter-rouge">The Figma prototype turned the rough workflow into connected screens before implementation.</code></td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">assets/img/impsy-interaction-flow.jpg</code></td> <td>System walkthrough after dataflow; gallery system</td> <td><code class="language-plaintext highlighter-rouge">The interaction flow shows how setup, performance, logs, training, models, and configuration connect in use.</code></td> </tr> <tr> <td>Optional <code class="language-plaintext highlighter-rouge">assets/img/impsy-user-story-beginner.png</code> </td> <td>Design process, after personas/user stories</td> <td><code class="language-plaintext highlighter-rouge">The story maps were design tools for checking how different users might enter the system.</code></td> </tr> <tr> <td>Optional <code class="language-plaintext highlighter-rouge">assets/img/impsy-design-double-diamond.png</code> </td> <td>Design process intro if layout needs a process anchor</td> <td><code class="language-plaintext highlighter-rouge">The thesis used a design-process structure to move from workflow research into prototyping and implementation.</code></td> </tr> </tbody> </table> <p>Asset cautions:</p> <ul> <li>Do not copy new assets in this pass.</li> <li>Final implementation should copy only the asset-curator-approved subset.</li> <li> <code class="language-plaintext highlighter-rouge">impsy-old-workflow-home.jpg</code> and <code class="language-plaintext highlighter-rouge">impsy-interaction-flow.jpg</code> need a final zoom-level privacy/readability check.</li> <li>Do not publish screenshots showing raw <code class="language-plaintext highlighter-rouge">.log</code>, <code class="language-plaintext highlighter-rouge">.npz</code>, <code class="language-plaintext highlighter-rouge">.keras</code>, <code class="language-plaintext highlighter-rouge">.tflite</code>, <code class="language-plaintext highlighter-rouge">.h5</code>, or timestamped filenames.</li> <li>Do not publish study participant photos, consent material, recruitment material, qualitative coding images, feedback PDFs, or raw quotes.</li> </ul> <h2 id="open-decisions-for-kevin">Open Decisions For Kevin</h2> <table> <thead> <tr> <th>Decision</th> <th>Recommended default</th> <th>Why it matters</th> </tr> </thead> <tbody> <tr> <td>Should the honours thesis PDF be linked publicly?</td> <td>No for this implementation pass.</td> <td>It may include or point to study material that needs a separate privacy review.</td> </tr> <tr> <td>Should Kevin’s thesis/web-interface repository be linked?</td> <td>Wait until Kevin verifies the exact public repo.</td> <td>The source map notes a possible repo, but the harness only confirms upstream IMPSY.</td> </tr> <tr> <td>Should the study page show the SUS mean?</td> <td>Optional, but demoted.</td> <td>It is valid, but it can make the page feel more like a paper than a personal project record.</td> </tr> <tr> <td>Should the old IMPSY home screenshot be cropped/redacted?</td> <td>Yes, final crop/redaction check before publishing.</td> <td>It helps the before/after story, but older UI screenshots can expose project metadata.</td> </tr> <tr> <td>Should the user-story map be included?</td> <td>Optional.</td> <td>It supports process, but may be text-heavy and less immediately useful than sketch/Figma assets.</td> </tr> <tr> <td>Should the Double Diamond diagram be included?</td> <td>Optional.</td> <td>It is safe, but generic. Use only if the process page needs a simple visual anchor.</td> </tr> <tr> <td>Should a poster or video be hosted?</td> <td>Not yet.</td> <td>Release status, size, and public-safety status need explicit approval.</td> </tr> <tr> <td>Should the resources page keep a local NIME PDF link?</td> <td>Yes, but below official links and project context.</td> <td>Useful backup, but it should not make the paper feel like the whole project.</td> </tr> </tbody> </table> <h2 id="implementation-checklist-for-agent-4">Implementation Checklist For Agent 4</h2> <ol> <li>Update only the IMPSY website pages and approved assets; do not modify output reports unless the manager asks.</li> <li>Preserve existing routes: <ul> <li><code class="language-plaintext highlighter-rouge">/projects/impsy-interface/</code></li> <li><code class="language-plaintext highlighter-rouge">/projects/impsy-interface/process/</code></li> <li><code class="language-plaintext highlighter-rouge">/projects/impsy-interface/system/</code></li> <li><code class="language-plaintext highlighter-rouge">/projects/impsy-interface/study/</code></li> <li><code class="language-plaintext highlighter-rouge">/projects/impsy-interface/gallery/</code></li> <li><code class="language-plaintext highlighter-rouge">/projects/impsy-interface/resources/</code></li> </ul> </li> <li>Copy only approved assets from <code class="language-plaintext highlighter-rouge">output/impsy-thesis-asset-curation.md</code> after final visual safety checks.</li> <li>Rewrite the hub so it starts with the COMP4550 honours project and interface problem, not NIME.</li> <li>Reorder hub links so internal story pages come before publication/resource links.</li> <li>Expand the design process page with old workflow, user story, sketch, and Figma prototype material.</li> <li>Keep the system page as a user journey: connect/play, AI response, inspect logs, train/select model, configure, return to performance.</li> <li>Keep the study page public-safe and reflective. Do not include raw participant quotes or private study details.</li> <li>Rebuild the gallery around process, system, and context groups.</li> <li>Rework resources so it starts with project context, then publication, code, website assets, and pending decisions.</li> <li>Run the asset/text private-material scans listed in <code class="language-plaintext highlighter-rouge">output/impsy-thesis-asset-curation.md</code>.</li> <li>Run targeted Prettier on changed IMPSY pages/assets only if repo-wide formatting is noisy.</li> <li>Run <code class="language-plaintext highlighter-rouge">bundle exec jekyll build</code> as the fallback build check if Docker is not available.</li> <li>Browser-check the six IMPSY routes on desktop and mobile widths.</li> <li>Confirm that the NIME paper is visible but no longer the main narrative.</li> </ol> </body></html>
