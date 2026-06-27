@@ -1,18 +1,22 @@
 cv:
   name: Hongzhe (Kevin) Zhu
-  label: ANU Computing Student
-  email: kevin.zhu@anu.edu.au
+  label: Human-Centred Computing & Software Development
+  email: kevinzzzhu@gmail.com
+  website: https://kevinzzzhu.github.io
   location: Canberra, ACT, Australia
   image: ""
+  summary: "ANU Computing student specialising in Human-Centred Computing, Software Development, Computer Vision, and Machine Learning. Skilled in C, C++, C#, Java, JavaScript, TypeScript, Dart, and Python, with experience across frontend and backend development. Focused on integrating technological advancements with human needs, and on enhancing user interaction and accessibility through cutting-edge solutions."
 
   social_networks:
     - network: GitHub
+      username: kevinzzzhu
+    - network: LinkedIn
       username: kevinzzzhu
 
   address:
     city: Canberra
     region: ACT
-    postalCode: "2611"
+    postalCode: "2601"
     countryCode: AU
 
   sections:
@@ -23,6 +27,11 @@ cv:
         studyType: Master of Computing (Advanced)
         start_date: 2025-07
         end_date: present
+        courses:
+          - COMP8535 Engineering Data Analytics — group research project on ordinal collaborative filtering (MovieLens)
+          - COMP8280/ENGN8280 Responsible Practice, Innovation and Leadership — CSS StudentHub digital hub prototype
+          - COMP8430/3430 Data Wrangling
+          - COMP8539/ENGN8501 Advanced Topics in Computer Vision — fMRI-to-image reconstruction research project
 
       - institution: Australian National University
         location: Canberra, Australia
@@ -30,9 +39,37 @@ cv:
         studyType: Bachelor of Advanced Computing (Honours)
         start_date: 2021-07
         end_date: 2025-06
-        score: "Distinction average: 76/100, honours project mark: 86"
+        score: "Distinction average: 76/100, GPA: 6.3, honours project mark: 86"
         highlights:
-          - Completed honours project in interactive machine learning interface design.
+          - Completed honours project in interactive machine learning interface design (IMPSY), accepted to NIME 2026.
+        courses:
+          - COMP1100 Introduction to Programming and Algorithms
+          - COMP1720 Art of Multimedia Programming
+          - COMP1730 Programming for Scientists
+          - MATH1013 Mathematics and Applications 1
+          - COMP1110 Structured Programming
+          - COMP2300 Computer Systems
+          - COMP2420 Data Management, Analysis and Security
+          - MATH1005 Discrete Mathematical Models
+          - COMP1600 Foundations of Computing
+          - COMP2100/6442 Software Engineering Studio (Software Construction)
+          - COMP2310 Concurrent and Distributed Systems
+          - COMP2400 Relational Databases
+          - COMP2620/6262 Logic
+          - COMP3425 Data Mining
+          - COMP4350 Sound and Music Computing
+          - COMP2120 Version Control and Software Engineering Project
+          - COMP3540 Game Engines and Game Programming
+          - COMP3600 Algorithms
+          - COMP3900/6390 Human-Centred Interaction
+          - COMP1710 Web Authoring
+          - COMP3620 Artificial Intelligence
+          - COMP4450 Computing Research Methods (VSLAM/AR research proposal)
+          - COMP4610 Advanced Computer Graphics
+          - COMP3500 TechLauncher
+          - COMP3670 Introduction to Machine Learning
+          - COMP4550 Honours Research Project
+          - COMP4528 Computer Vision
 
       - institution: Shenzhen Oriental English College
         location: Shenzhen, China
@@ -44,63 +81,135 @@ cv:
 
     Experience:
       - company: Australian National University
-        position: Casual Sessional Academic
+        position: Academic Casual Sessional
         location: Canberra, Australia
         start_date: 2025-07
         end_date: Present
-        summary: Tutored COMP3900/6390 Human-Centred Interaction, COMP2100 Software Construction, and COMP7710 Programming Fundamentals.
+        summary: Tutoring COMP3900/6390 Human-Centred Interaction (2025 S2), COMP7710 Programming Fundamentals (2026 S1), and COMP2100/6442 Software Construction (2026 S1).
         highlights:
-          - Delivered tutorial support for undergraduate and postgraduate students.
-          - Provided consistent assessment feedback across course tasks.
+          - Assisted in designing course materials.
+          - Tutored two tutorial sessions per week and marked assignments.
 
-      - company: Yarn Speech (TechLauncher)
+      - company: Yarn Speech
         position: Software Developer Intern
         location: Canberra, Australia
         start_date: 2024-07
         end_date: 2025-06
-        summary: Delivered software features with a focus on product functionality and user interaction.
+        summary: Leading a development internship project using Dart, Flutter, and the Flame framework to build gaming software that helps children learn speech pathology skills.
         highlights:
-          - Developed with Dart, Flutter, and the Flame framework.
-          - Collaborated with client stakeholders and refined user flows using Figma.
+          - Collaboratively designed and refined product functionalities and user interfaces through HCI concepts.
+          - Used collaborative tools such as Figma, Canva, and Miro to ensure alignment with client requirements and user expectations.
 
       - company: Plenty Health
-        position: Full-Stack Developer Intern
-        location: Shenzhen, China
+        position: MERN Stack Software Developer Intern
+        location: Shenzhen, Guangdong
         start_date: 2024-10
         end_date: 2025-02
-        summary: Major developer in a collaboration project with The Seventh Affiliated Hospital of Sun Yat-sen University Therapy Clinic.
+        summary: Developed and maintained a rehabilitation management system for the Seventh Affiliated Hospital of Sun Yat-sen University using the MERN stack.
         highlights:
-          - Built patient and therapist management workflows for an internal clinical management platform.
-          - Implemented treatment scheduling and clinical evaluation features.
-          - Used Node.js, Express.js, MongoDB, React.js (Ant Design), and Taro.js for WeChat mini-program delivery.
-
-      - company: SAIEP (QTank Digital Marketing Project)
-        position: Student Consultant
-        location: Remote
-        start_date: 2024-06
-        end_date: 2024-07
-        summary: Worked in a cross-disciplinary consulting team to strengthen brand visibility and digital strategy.
-        highlights:
-          - Conducted competitor and industry analysis.
-          - Produced social media and communication recommendations across health, beauty, and lifestyle domains.
+          - Designed efficient RESTful APIs and managed MongoDB databases to ensure data security and performance.
+          - Optimised user interfaces with React and Redux to streamline patient record management, appointment scheduling, and rehabilitation progress tracking.
     # Publications:
+
+    Projects:
+      - name: CSS StudentHub Digital Hub Prototype (COMP8280)
+        url: https://kevinzzzhu.github.io/projects/28_project/
+        start_date: 2026-02
+        end_date: 2026-06
+        summary: Designed and implemented a navigable HTML/CSS/JavaScript prototype for a hybrid CSS Student Hub, with role-aware entry, an interactive Hub map, event filters, detail panels, subscriptions, and an event proposal flow.
+        highlights:
+          - Translated research insights into user journeys for students, staff, partners, researchers, and future students.
+          - Presented the concept through a poster and client-facing presentation to CSS stakeholders, including the client and Dean of CSS.
+          - Applied HCI methods such as affinity mapping, personas, storyboarding, and iterative refinement.
+
+      - name: "PickNPlay: UX Design, Implementation and Evaluation for a Social Choice Board Game App"
+        url: https://kevinzzzhu.github.io/projects/1_project/
+        start_date: 2025-07
+        end_date: present
+        summary: Master's advanced individual research project researching and developing a web-based board game selection system that combines HCI evaluation with machine-learning-supported recommendation and decision-making workflows.
+        highlights:
+          - Building the system with a React front end, Python backend components, and computer-vision-supported interaction flows for capturing board game information and supporting user choice.
+          - Focused on iterative UX evaluation, accessible interaction design, and making recommendation results understandable to non-technical users.
+
+      - name: IMPSY Interactive Machine Learning Interface
+        url: https://kevinzzzhu.github.io/projects/impsy-interface/
+        start_date: 2024-07
+        end_date: present
+        summary: Honours individual research project developing a user-centred web interface for the interactive machine learning tool IMPSY, improving how musicians and researchers inspect, compare, and work with model outputs.
+        highlights:
+          - Built using React, Flask, and D3.js, with a focus on responsive UI behaviour, interactive data visualisation, and clear user journeys for complex ML concepts.
+          - Project output accepted to the NIME 2026 Conference.
 
     Skills:
       - name: Programming
         icon: fa-solid fa-code
-        keywords: "Haskell, C, C++, C#, Java, JavaScript, Dart, Python, TypeScript"
+        keywords:
+          - Haskell
+          - C
+          - C++
+          - C#
+          - Java
+          - JavaScript
+          - TypeScript
+          - Dart
+          - Python
 
       - name: Web and App Development
         icon: fa-solid fa-laptop-code
-        keywords: "React, Node.js, Express.js, Flask, MongoDB, Firebase, Flutter, Taro.js, D3.js"
+        keywords:
+          - React
+          - Node.js
+          - Express.js
+          - Flask
+          - MongoDB
+          - Firebase
+          - Flutter
+          - Taro.js
+          - D3.js
 
-      - name: Human-Computer Interaction
+      - name: Human-Computer Interaction & UX Design
         icon: fa-solid fa-user-group
-        keywords: "UI/UX design, usability testing, iterative prototyping, interaction design"
+        keywords:
+          - Double Diamond
+          - personas
+          - user stories
+          - scenario simulation
+          - affinity mapping
+          - storyboarding
+          - usability testing
+          - iterative UI refinement
+          - responsible innovation (AREA approach)
+
+      - name: Collaboration & Leadership
+        icon: fa-solid fa-people-group
+        keywords:
+          - Interdisciplinary teamwork
+          - stakeholder communication
+          - client-facing presentation
+          - project representative/spokesperson roles
+
+      - name: Software Engineering Practice
+        icon: fa-solid fa-gears
+        keywords:
+          - Agile development
+          - Git version control
+          - CI/CD pipelines
+          - code review
+
+      - name: Coding with AI
+        icon: fa-solid fa-robot
+        keywords:
+          - AI-assisted scaffolding, refactoring, and debugging
+          - test generation and validation harnesses
+          - manual review and Git-based change control
 
       - name: Teaching and Communication
         icon: fa-solid fa-chalkboard-user
-        keywords: "Tutoring, technical explanation, assessment feedback, stakeholder communication"
+        keywords:
+          - Tutoring
+          - technical explanation
+          - assessment feedback
+          - stakeholder communication
 
     Languages:
       - name: English
