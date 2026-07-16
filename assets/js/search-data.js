@@ -107,9 +107,9 @@ ninja.data = [{
           description: "from social choice theory to real board game decisions",
           section: "Projects",handler: () => {
               window.location.href = "/projects/1_project/";
-            },},{id: "projects-structured-programming-rust-assignments",
-          title: 'Structured Programming Rust Assignments',
-          description: "type-driven program design and a strategy game AI in rust",
+            },},{id: "projects-arboretum-java-group-board-game",
+          title: 'Arboretum — Java Group Board Game',
+          description: "implementing a two-to-four-player card game in java and javafx as a group project",
           section: "Projects",handler: () => {
               window.location.href = "/projects/20_project/";
             },},{id: "projects-programming-for-scientists-project-assignment",
