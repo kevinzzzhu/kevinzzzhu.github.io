@@ -26,7 +26,8 @@ cv:
         area: Human Centred and Creative Computing
         studyType: Master of Computing (Advanced)
         start_date: 2025-07
-        end_date: present
+        end_date: 2026-07
+        score: "Commendation average: 80/100, master's project mark: 82"
         courses:
           - COMP8535 Engineering Data Analytics — group research project on ordinal collaborative filtering (MovieLens)
           - COMP8280/ENGN8280 Responsible Practice, Innovation and Leadership — CSS StudentHub digital hub prototype
@@ -125,7 +126,7 @@ cv:
       - name: "PickNPlay: UX Design, Implementation and Evaluation for a Social Choice Board Game App"
         url: https://kevinzzzhu.github.io/projects/1_project/
         start_date: 2025-07
-        end_date: present
+        end_date: 2026-07
         summary: Master's advanced individual research project researching and developing a web-based board game selection system that combines HCI evaluation with machine-learning-supported recommendation and decision-making workflows.
         highlights:
           - Building the system with a React front end, Python backend components, and computer-vision-supported interaction flows for capturing board game information and supporting user choice.
@@ -134,7 +135,7 @@ cv:
       - name: IMPSY Interactive Machine Learning Interface
         url: https://kevinzzzhu.github.io/projects/impsy-interface/
         start_date: 2024-07
-        end_date: present
+        end_date: 2025-06
         summary: Honours individual research project developing a user-centred web interface for the interactive machine learning tool IMPSY, improving how musicians and researchers inspect, compare, and work with model outputs.
         highlights:
           - Built using React, Flask, and D3.js, with a focus on responsive UI behaviour, interactive data visualisation, and clear user journeys for complex ML concepts.
