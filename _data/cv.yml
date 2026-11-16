@@ -5,7 +5,7 @@ cv:
   website: https://kevinzzzhu.github.io
   location: Canberra, ACT, Australia
   image: ""
-  summary: "ANU Computing student specialising in Human-Centred Computing, Software Development, Computer Vision, and Machine Learning. Skilled in C, C++, C#, Java, JavaScript, TypeScript, Dart, and Python, with experience across frontend and backend development. Focused on integrating technological advancements with human needs, and on enhancing user interaction and accessibility through cutting-edge solutions."
+  summary: "ANU Computing graduate (Master of Computing, Advanced) specialising in Human-Centred Computing, Software Development, Computer Vision, and Machine Learning. Skilled in C, C++, C#, Java, JavaScript, TypeScript, Dart, and Python, with experience across frontend and backend development. Focused on integrating technological advancements with human needs, and on enhancing user interaction and accessibility through cutting-edge solutions."
 
   social_networks:
     - network: GitHub
@@ -42,7 +42,7 @@ cv:
         end_date: 2025-06
         score: "Distinction average: 76/100, GPA: 6.3, honours project mark: 86"
         highlights:
-          - Completed honours project in interactive machine learning interface design (IMPSY), accepted to NIME 2026.
+          - Completed honours project in interactive machine learning interface design (IMPSY), published at NIME 2026.
         courses:
           - COMP1100 Introduction to Programming and Algorithms
           - COMP1720 Art of Multimedia Programming
@@ -86,10 +86,11 @@ cv:
         location: Canberra, Australia
         start_date: 2025-07
         end_date: Present
-        summary: Tutoring COMP3900/6390 Human-Centred Interaction (2025 S2), COMP7710 Programming Fundamentals (2026 S1), and COMP2100/6442 Software Construction (2026 S1).
+        summary: Tutoring COMP3900/6390 Human-Centred Interaction (2025 S2 and 2026 S2), COMP7710 Programming Fundamentals (2026 S1 and S2), and COMP2100/6442 Software Construction (2026 S1).
         highlights:
           - Assisted in designing course materials.
           - Tutored two tutorial sessions per week and marked assignments.
+          - Averaged 4.9/5.0 in student (SELT) feedback.
 
       - company: Yarn Speech
         position: Software Developer Intern
@@ -110,7 +111,12 @@ cv:
         highlights:
           - Designed efficient RESTful APIs and managed MongoDB databases to ensure data security and performance.
           - Optimised user interfaces with React and Redux to streamline patient record management, appointment scheduling, and rehabilitation progress tracking.
-    # Publications:
+    Publications:
+      - title: A Web Interface for Real-Time Interaction with Machine Learning in Musical Performance
+        publisher: Proceedings of the International Conference on New Interfaces for Musical Expression (NIME 2026)
+        date: "2026-06"
+        url: https://doi.org/10.5281/zenodo.20784312
+        summary: Hongzhe Zhu and Charles Martin.
 
     Projects:
       - name: CSS StudentHub Digital Hub Prototype (COMP8280)
@@ -129,8 +135,9 @@ cv:
         end_date: 2026-07
         summary: Master's advanced individual research project researching and developing a web-based board game selection system that combines HCI evaluation with machine-learning-supported recommendation and decision-making workflows.
         highlights:
-          - Building the system with a React front end, Python backend components, and computer-vision-supported interaction flows for capturing board game information and supporting user choice.
+          - Built the system with a React front end, Python backend components, and computer-vision-supported interaction flows for capturing board game information and supporting user choice.
           - Focused on iterative UX evaluation, accessible interaction design, and making recommendation results understandable to non-technical users.
+          - Paper based on the project now under review for CHI 2027.
 
       - name: IMPSY Interactive Machine Learning Interface
         url: https://kevinzzzhu.github.io/projects/impsy-interface/
@@ -139,7 +146,7 @@ cv:
         summary: Honours individual research project developing a user-centred web interface for the interactive machine learning tool IMPSY, improving how musicians and researchers inspect, compare, and work with model outputs.
         highlights:
           - Built using React, Flask, and D3.js, with a focus on responsive UI behaviour, interactive data visualisation, and clear user journeys for complex ML concepts.
-          - Project output accepted to the NIME 2026 Conference.
+          - Project output published at the NIME 2026 Conference.
 
     Skills:
       - name: Programming

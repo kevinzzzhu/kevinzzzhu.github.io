@@ -53,7 +53,7 @@ Current research questions include:
 
 ## Project structure
 
-The work is currently organised as:
+The thesis is organised as:
 
 1. Background and related work (social choice, fair allocation, visualisation, human-centred AI)
 2. Requirement analysis and overall system concept
@@ -63,4 +63,4 @@ The work is currently organised as:
 
 ## Current status
 
-This is an ongoing thesis project. The core idea and framework are stable, and the next big milestone is tightening the prototype and running deeper evaluation with users in realistic group scenarios.
+The thesis was completed in mid 2026 as my Master's advanced research project. A paper based on it is now under review for CHI 2027.

@@ -30,6 +30,8 @@ social: true # includes social icons at the bottom of the page
 
 Hi, I am Hongzhe Zhu (朱宏哲), or just call me Kevin in short.
 
-I am currently an ANU student undertaking my Master degree. I completed my Bachelor Honours degree right here in ANU as well. At the same time I am tutoring as an casual seasonal academic for courses including HCI, Programming Fundamentals, and Software Construction.
+I graduated from ANU with my Master of Computing (Advanced) in 2026. I completed my Bachelor Honours degree right here in ANU as well, capping five years at ANU in total. Since 2025 I have been tutoring as a casual sessional academic for courses including HCI, Programming Fundamentals, and Software Construction.
+
+My honours work on the [IMPSY web interface](/projects/impsy-interface/) was published at NIME 2026, and a paper from my Master's project [PickNPlay](/projects/1_project/) is now under review for CHI 2027.
 
 My passion and interest lies in the area of Human Computer Interaction, Sound and Art Computing, Interaction/Interface Design, UX Design, Social Choice Problems, and Artificial Intelligence.
