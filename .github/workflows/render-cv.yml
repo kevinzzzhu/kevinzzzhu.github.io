@@ -1,14 +1,7 @@
 name: Render a CV
+# Automatic push trigger disabled: _data/cv.yml uses RenderCV 1.x keys (also read by
+# _layouts/cv.liquid) and fails validation under RenderCV 2.x. Run manually if needed.
 on:
-  push:
-    branches:
-      - main
-      - master
-    paths:
-      - "_data/cv.yml"
-      - "assets/rendercv/design.yaml"
-      - "assets/rendercv/locale.yaml"
-      - "assets/rendercv/settings.yaml"
   workflow_call:
   workflow_dispatch:
 permissions:

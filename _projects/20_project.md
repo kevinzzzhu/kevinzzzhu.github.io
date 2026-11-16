@@ -9,8 +9,7 @@ related_publications: false
 last_edited: 2026-07-16
 ---
 
-I completed this coursework for COMP1110 (Structured Programming) at ANU in Semester 2,
-2022. The unit teaches structured software design in Java, covering object-oriented
+I completed this coursework for COMP1110 (Structured Programming) at ANU in Semester 2, 2022. The unit teaches structured software design in Java, covering object-oriented
 design, group collaboration, version control, and building graphical applications with
 JavaFX.
 
